@@ -1,0 +1,64 @@
+import React from 'react';
+import {useRouter} from "next/router";
+
+import FormLayout from "@/widgets/FormLayout/FormLayout";
+import CourseForm from "@/features/CourseForm/CourseForm";
+
+import {useCourseByIdByAdmin, useCourseEdit, useCourseRemove} from "@/entities/Course/Course.module";
+import {notification} from "antd";
+
+const Id = () => {
+  const router = useRouter();
+  const id: any = router.query?.id;
+
+  const onError = () => {
+    router.push({
+      pathname: "/admin/courses",
+    });
+  }
+  const {data, isFetching, isLoading} = useCourseByIdByAdmin({courseId: id, onError});
+
+  const onSuccess = (key: string) => {
+    router.push("/admin/courses");
+
+    if (key === "course-remove") {
+      notification.success({message: "Курс успешно удален"})
+      return
+    }
+
+    notification.success({message: "Курс успешно обновлен"})
+  }
+  const editMutate = useCourseEdit({onSuccess})
+  const removeMutate = useCourseRemove({onSuccess})
+
+  const onSubmit = (data: any) => {
+    editMutate.mutate({
+      id: parseInt(id),
+      tags: data.values.tags,
+      title: data.values.title,
+      description: data.values.description,
+      status: data?.checked ? "ACTIVE" : "NOT_ACTIVE",
+      image: data?.image,
+      lessons: (data?.lessons || []).map((item: any, idx: number) => ({...item, lessonNumber: idx + 1})),
+    })
+  }
+  const onRemove = () => {
+    removeMutate.mutate(id)
+  }
+
+  return (
+    <>
+      <FormLayout>
+        <CourseForm
+          data={data?.data}
+          isLoading={isLoading}
+          isFetching={isFetching || editMutate.isLoading || removeMutate.isLoading}
+          onRemove={onRemove}
+          onSubmit={onSubmit}
+        />
+      </FormLayout>
+    </>
+  );
+};
+
+export default Id;

@@ -1,0 +1,9 @@
+.Field {
+    @apply h-[44px] rounded-lg border border-solid border-gray-200 placeholder:text-gray-600 py-2.5 px-3.5;
+    &Wrap {
+        @apply relative;
+    }
+}
+.Label {
+    @apply text-sm text-dark-500 inline-block mb-1;
+}

@@ -1,0 +1,19 @@
+export const courseStatus = {
+  active: "ACTIVE",
+  notActive: "NOT_ACTIVE",
+}
+export const lessonStatus = {
+  active: "ACTIVE",
+  started: "STARTED",
+  completed: "COMPLETED",
+}
+export const testStatus = {
+  active: "ACTIVE",
+  notActive: "NOT_ACTIVE",
+  completed: "COMPLETED",
+}
+export const forumStatus = {
+  created: "Created",
+  approved: "Approved",
+  revoked: "Revoked",
+}

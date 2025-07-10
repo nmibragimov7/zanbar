@@ -1,0 +1,61 @@
+.ant-breadcrumb a,
+.ant-breadcrumb-separator {
+  color: #535862 !important;
+}
+.ant-breadcrumb span {
+  color: #535862 !important;
+}
+.test .ant-pagination-item {
+  @apply !w-10 !h-10 !rounded-lg !border-none !text-sm !font-medium !text-gray-600;
+}
+.test .ant-pagination-item-link {
+  @apply !w-10 !h-10 !rounded-lg !border-none;
+}
+.ant-skeleton-title {
+  height: 100% !important;
+}
+.ant-notification-notice-message {
+  margin: 0 0 0 32px !important;
+}
+.settings .ant-upload-select {
+  width: auto !important;
+  height: auto !important;
+  border: none !important;
+}
+.settings .ant-upload-list-item-container {
+  display: none !important;
+}
+.ant-table-thead >tr>th {
+  color: #535862 !important;
+  font-weight: 400 !important;
+  font-size: 12px !important;
+  background-color: #FFF !important;
+}
+.auth .ant-modal {
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+.auth .ant-modal-content {
+  padding: 0 !important;
+}
+.ant-select-selection-placeholder {
+  color: #717680 !important;
+}
+.ant-switch.ant-switch-checked {
+  background: #12B76A !important;
+}
+.ant-select-selection-wrap {
+  height: 40px !important;
+}
+.ant-form-item-label {
+  padding: 0 0 4px !important;
+  line-height: 20px !important;
+}
+.course .ant-upload-list-item {
+  display: none !important;
+}
+@media screen and (min-width: 768px) {
+  .auth .ant-modal {
+    width: fit-content !important;
+  }
+}

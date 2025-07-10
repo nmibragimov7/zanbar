@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  @apply font-inter font-normal text-black text-base bg-white overflow-x-hidden p-0 m-0;
+}
+
+* {
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    @apply bg-white rounded-lg;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-primary;
+  }
+}
+
+.background {
+  background:
+    url("../../shared/assets/images/png/row_2.png") no-repeat 0% -10%,
+    url("../../shared/assets/images/png/row_1.png") no-repeat 0% 70%;
+  background-size: 100% 50%;
+  background-color: #EAF2D9;
+}
+
+.theme {
+  position: relative;
+  display: inline-block;
+}
+
+.theme::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 100%;
+  width: 190px;
+  height: 24px;
+  background: url("../../shared/assets/images/svg/avatars.svg") no-repeat center/contain;
+}
+
+.scroll {
+  &::-webkit-scrollbar {
+    @apply w-0 h-0;
+  }
+}
