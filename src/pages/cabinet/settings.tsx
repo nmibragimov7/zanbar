@@ -16,6 +16,8 @@ import {
 
 import {useAuth} from "@/shared/hooks/useAuth";
 
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
+
 import {validation} from "@/shared/constants/validation";
 
 import plusIcon from "@/shared/assets/images/svg/plus.svg";
@@ -228,3 +230,4 @@ const Settings = () => {
 };
 
 export default Settings;
+export const getStaticProps = getDefaultStaticProps;

@@ -8,6 +8,8 @@ import Lawyer from "@/shared/ui/Lawyer/Lawyer";
 
 import {useLawyers} from "@/entities/Lawyer/Lawyer.module";
 
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
+
 const Index = () => {
   const router = useRouter();
   const {data, isFetching} = useLawyers();
@@ -65,3 +67,4 @@ const Index = () => {
 };
 
 export default Index;
+export const getStaticProps = getDefaultStaticProps;

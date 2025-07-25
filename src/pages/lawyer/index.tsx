@@ -5,7 +5,8 @@ import {Button} from "antd";
 
 import MainLayout from "@/widgets/MainLayout/MainLayout";
 import Status from "@/shared/ui/Status/Status";
-import Faq from "@/shared/ui/Faq/Faq";
+
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
 
 import logoIcon from "@/shared/assets/images/png/logo.png";
 import fineIcon from "@/shared/assets/images/svg/fine.svg";
@@ -118,3 +119,4 @@ const Index = () => {
 };
 
 export default Index;
+export const getStaticProps = getDefaultStaticProps;

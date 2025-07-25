@@ -1,4 +1,7 @@
 import React from 'react';
+import Link from "next/link";
+import Image from "next/image";
+import {Button, Pagination, Skeleton} from "antd";
 
 import MainLayout from "@/widgets/MainLayout/MainLayout";
 
@@ -6,14 +9,11 @@ import {useNotifications} from "@/entities/Request/Request.module";
 
 import {useAuth} from "@/shared/hooks/useAuth";
 
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
+import {classNames} from "@/shared/lib/classNames";
+
 import approvedIcon from "@/shared/assets/images/svg/notification_approved.svg";
 import revokedIcon from "@/shared/assets/images/svg/notification_revoked.svg";
-import {Button, Pagination, Skeleton} from "antd";
-import Card from "@/shared/ui/Card/Card";
-import Image from "next/image";
-import aiIcon from "@/shared/assets/images/svg/ai_white.svg";
-import Link from "next/link";
-import {classNames} from "@/shared/lib/classNames";
 
 const Notifications = () => {
   const {isAuth} = useAuth();
@@ -123,3 +123,4 @@ const Notifications = () => {
 };
 
 export default Notifications;
+export const getStaticProps = getDefaultStaticProps;

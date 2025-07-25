@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {useRouter} from "next/router";
+import {Pagination, Skeleton} from "antd";
 
 import CabinetLayout from "@/widgets/CabinetLayout/CabinetLayout";
 import Answer from "@/shared/ui/Answer/Answer";
@@ -8,7 +9,8 @@ import NotStarted from "@/widgets/NotStarted/NotStarted";
 import {useAnswersHistory} from "@/entities/Forum/Forum.module";
 
 import {useAuth} from "@/shared/hooks/useAuth";
-import {Pagination, Skeleton} from "antd";
+
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
 
 const Answers = () => {
   const router = useRouter();
@@ -74,3 +76,4 @@ const Answers = () => {
 };
 
 export default Answers;
+export const getStaticProps = getDefaultStaticProps;

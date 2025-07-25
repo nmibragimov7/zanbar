@@ -5,6 +5,8 @@ import {Breadcrumb} from "antd";
 
 import MainLayout from "@/widgets/MainLayout/MainLayout";
 
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
+
 import writeIcon from "@/shared/assets/images/svg/request_by_write.svg";
 import findIcon from "@/shared/assets/images/svg/request_by_find.svg";
 
@@ -67,3 +69,4 @@ const Index = () => {
 };
 
 export default Index;
+export const getStaticProps = getDefaultStaticProps;

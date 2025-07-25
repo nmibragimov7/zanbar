@@ -60,16 +60,20 @@ export default function Index() {
           <div className={"w-full max-w-[790px] px-3 md:px-5"}>
             {/*{t('index.title')}*/}
             <div className={"scroll overflow-x-auto flex flex-nowrap md:grid grid-cols-2 gap-4 mb-8"}>
-              <div
-                className={"shrink-0 w-1/2 md:w-auto h-[140px] flex flex-col justify-between bg-gray--100 rounded-2xl font-medium py-5 px-4"}>
+              <Link
+                href={"/application"}
+                className={"shrink-0 w-1/2 md:w-auto h-[140px] flex flex-col justify-between bg-gray--100 transition-all hover:bg-purple-200 rounded-2xl font-medium py-5 px-4"}
+              >
                 <Image src={searchIcon} alt={""} className={"w-5 h-5 object-contain"}/>
                 <p>Узнайте о нашем приложении</p>
-              </div>
-              <div
-                className={"shrink-0 w-1/2 md:w-auto h-[140px] flex flex-col justify-between bg-gray--100 rounded-2xl font-medium py-5 px-4"}>
+              </Link>
+              <Link
+                href={"/instruction"}
+                className={"shrink-0 w-1/2 md:w-auto h-[140px] flex flex-col justify-between bg-gray--100 transition-all hover:bg-purple-200 rounded-2xl font-medium py-5 px-4"}
+              >
                 <Image src={juristIcon} alt={""} className={"w-5 h-5 object-cover"}/>
                 <p>Как стать юристом в приложении?</p>
-              </div>
+              </Link>
             </div>
           </div>
           <div className={"w-full max-w-xl px-3 md:px-5"}>

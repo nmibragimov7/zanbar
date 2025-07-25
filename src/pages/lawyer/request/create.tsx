@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
 import Image from "next/image";
 import Link from "next/link";
-import {Breadcrumb, Button, Input, notification} from "antd";
+import {Breadcrumb, Button, Input} from "antd";
 
 import MainLayout from "@/widgets/MainLayout/MainLayout";
 import Field from "@/shared/ui/Field/Field";
 
 import {useRequestCreate} from "@/entities/Request/Request.module";
 
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
 import {classNames} from "@/shared/lib/classNames";
 
 import categoryIcon from "@/shared/assets/images/svg/request_category.svg";
@@ -343,3 +344,4 @@ const Create = () => {
 };
 
 export default Create;
+export const getStaticProps = getDefaultStaticProps;

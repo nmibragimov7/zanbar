@@ -10,6 +10,8 @@ import {useQuestionsHistory} from "@/entities/Forum/Forum.module";
 
 import {useAuth} from "@/shared/hooks/useAuth";
 
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
+
 const Questions = () => {
   const router = useRouter();
   const {user} = useAuth();
@@ -74,3 +76,4 @@ const Questions = () => {
 };
 
 export default Questions;
+export const getStaticProps = getDefaultStaticProps;

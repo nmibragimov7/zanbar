@@ -72,8 +72,8 @@ const Login = () => {
                 rules={[{required: true, message: validation.REQUIRED}]}
               >
                 <Field
-                  label={"Эл.почта"}
-                  placeholder={"Введите почту"}
+                  label={t('login.form.username.label')}
+                  placeholder={t('login.form.username.placeholder')}
                 />
               </Form.Item>
               <Form.Item
@@ -82,9 +82,9 @@ const Login = () => {
                 rules={[{required: true, message: validation.REQUIRED}]}
               >
                 <Field
-                  label={"Пароль"}
+                  label={t('login.form.password.label')}
+                  placeholder={t('login.form.password.placeholder')}
                   inputType={"password"}
-                  placeholder={"Введите пароль"}
                   autoComplete={"new-password"}
                 />
               </Form.Item>
@@ -95,7 +95,7 @@ const Login = () => {
                   className={"w-full !h-[44px] shadow-none bg-purple-1000 text-white !rounded-lg disabled:bg-gray-600 disabled:text-white transition-all"}
                   disabled={loginMutate.isLoading || profileMutate.isLoading}
                 >
-                  Войти
+                  {t('login.form.button.0')}
                 </Button>
               </Form.Item>
               {/*<Button*/}
@@ -106,7 +106,7 @@ const Login = () => {
               {/*  <span>Продолжить с Google</span>*/}
               {/*</Button>*/}
               <div className={"text-sm text-center"}>
-                <span className={"text-dark-400"}>У вас нет аккаунта?</span> <span className={"cursor-pointer transition-all font-semibold text-dark-600 hover:opacity-70"} onClick={onRegister}>Зарегистрироваться</span>
+                <span className={"text-dark-400"}>{t('login.form.text.0')}</span> <span className={"cursor-pointer transition-all font-semibold text-dark-600 hover:opacity-70"} onClick={onRegister}>{t('login.form.text.1')}</span>
               </div>
             </Form>
           </div>

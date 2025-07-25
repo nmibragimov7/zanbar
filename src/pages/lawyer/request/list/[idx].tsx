@@ -2,12 +2,22 @@ import React, {useMemo} from 'react';
 import Link from "next/link";
 import {Breadcrumb, Skeleton} from "antd";
 import {useRouter} from "next/router";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 import MainLayout from "@/widgets/MainLayout/MainLayout";
 import Status from "@/shared/ui/Status/Status";
 import Navigate from "@/shared/ui/Navigate/Navigate";
 
 import {useLawyers} from "@/entities/Lawyer/Lawyer.module";
+
+export async function getServerSideProps(context: any) {
+  const {locale} = context;
+  return {
+    props: {
+      ...(await serverSideTranslations(locale || 'ru')),
+    }
+  }
+}
 
 const Idx = () => {
   const router = useRouter();

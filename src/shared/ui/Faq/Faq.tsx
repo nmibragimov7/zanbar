@@ -32,8 +32,6 @@ const Faq: React.FC<FaqProps> = ({question, answer, className, classNameHeader, 
         </div>
         {open ? (
           <>
-
-
             <div
               dangerouslySetInnerHTML={{__html: answer}}
               className={classNames("text-sm transition-all p-8", classNameBody)}

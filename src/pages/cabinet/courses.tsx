@@ -10,6 +10,8 @@ import {useCoursesHistory} from "@/entities/Course/Course.module";
 
 import {useAuth} from "@/shared/hooks/useAuth";
 
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
+
 const Courses = () => {
   const router = useRouter();
   const {user} = useAuth();
@@ -76,3 +78,4 @@ const Courses = () => {
 };
 
 export default Courses;
+export const getStaticProps = getDefaultStaticProps;

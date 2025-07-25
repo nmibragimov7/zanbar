@@ -2,23 +2,33 @@ import React, {useMemo} from 'react';
 import Link from "next/link";
 import {Breadcrumb, Button, Skeleton} from "antd";
 import {useRouter} from "next/router";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 import MainLayout from "@/widgets/MainLayout/MainLayout";
 import Tag from "@/shared/ui/Tag/Tag";
 import Status from "@/shared/ui/Status/Status";
+import ProgressBar from "@/shared/ui/ProgressBar/ProgressBar";
 
 import {useCourseById, useCourseStart, useLessonFinish, useLessonStart} from "@/entities/Course/Course.module";
 
 import {classNames} from "@/shared/lib/classNames";
 
 import {lessonStatus, testStatus} from "@/shared/constants/status";
-import ProgressBar from "@/shared/ui/ProgressBar/ProgressBar";
 
 const order = {
   [lessonStatus.completed]: 0,
   [lessonStatus.started]: 1,
   [lessonStatus.active]: 2
 };
+
+export async function getServerSideProps(context: any) {
+  const {locale} = context;
+  return {
+    props: {
+      ...(await serverSideTranslations(locale || 'ru')),
+    }
+  }
+}
 
 const Id = () => {
   const router = useRouter();

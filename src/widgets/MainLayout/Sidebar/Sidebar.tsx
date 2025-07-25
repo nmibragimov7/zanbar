@@ -2,9 +2,11 @@ import React, {useRef} from 'react';
 import Image from "next/image";
 import Link from "next/link";
 import {useRouter} from "next/router";
+import {useTranslation} from "next-i18next";
 
 import AuthDenied from "@/widgets/AuthDenied/AuthDenied";
 import Logo from "@/shared/ui/Logo/Logo";
+import Locale from "@/features/Locale/Locale";
 
 import {useAuth} from "@/shared/hooks/useAuth";
 import {useClickOutside} from "@/shared/hooks/useClickOutside";
@@ -22,56 +24,55 @@ import searchIcon from "@/shared/assets/images/svg/search_black.svg";
 import aiIcon from "@/shared/assets/images/svg/ai_black.svg";
 import bellIcon from "@/shared/assets/images/svg/bell.svg";
 import logoutIcon from "@/shared/assets/images/svg/logout.svg";
-import Locale from "@/features/Locale/Locale";
 
 const menu = [
   {
     pathname: "/",
-    title: "Главная",
+    title: "menu.0",
     icon: homeIcon,
   },
   {
     pathname: "/courses",
-    title: "Курсы",
+    title: "menu.1",
     icon: courseIcon,
     isAuth: true,
   },
   {
     pathname: "/tests",
-    title: "Тесты",
+    title: "menu.2",
     icon: checkIcon,
     isAuth: true,
   },
   {
     pathname: "/forum",
-    title: "Форум",
+    title: "menu.3",
     icon: forumIcon,
     isAuth: true,
   },
   {
     pathname: "/knowledge",
-    title: "База знаний",
+    title: "menu.4",
     icon: knowledgeIcon,
   },
   {
     pathname: "/forecasting",
-    title: "Прогнозирование",
+    title: "menu.5",
     icon: legislatorIcon,
   },
   {
     pathname: "/faq",
-    title: "FAQ",
+    title: "menu.6",
     icon: faqIcon,
   },
   {
     pathname: "/lawyer",
-    title: "Найти юриста",
+    title: "menu.7",
     icon: searchIcon,
     isAuth: true,
   },
   {
     pathname: "/notifications",
-    title: "Уведомления",
+    title: "menu.8",
     icon: bellIcon,
     isAuth: true,
   },
@@ -85,6 +86,8 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({visible, setVisible}) => {
   const router = useRouter();
   const {isAuth, onLogout} = useAuth();
+  const {t} = useTranslation();
+
   const ref = useRef<HTMLDivElement | null>(null);
 
   useClickOutside(ref, () => setVisible(false));
@@ -127,7 +130,7 @@ const Sidebar: React.FC<SidebarProps> = ({visible, setVisible}) => {
                 onClick={() => onNavigate(item)}
               >
                 <Image src={item?.icon} alt={""} className={"w-4 h-4 object-contain"}/>
-                <span>{item?.title}</span>
+                <span>{t(item?.title)}</span>
               </span>
             ))}
             <Link
@@ -140,7 +143,7 @@ const Sidebar: React.FC<SidebarProps> = ({visible, setVisible}) => {
               }
             >
               <Image src={aiIcon} alt={""} className={"w-4 h-4 object-contain"}/>
-              <span>AI правовой консультант</span>
+              <span>{t('menu.9')}</span>
             </Link>
 
             <div className={"grid gap-2 border-t border-gray-300 pt-2"}>
@@ -159,7 +162,7 @@ const Sidebar: React.FC<SidebarProps> = ({visible, setVisible}) => {
                   }}
                 >
                   <Image src={logoutIcon} alt={""} className={"w-4 h-4"}/>
-                  <span>Выйти</span>
+                  <span>{t('menu.10')}</span>
                 </div>
               ) : null}
             </div>

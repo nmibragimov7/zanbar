@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import {Breadcrumb, Button, Pagination, Skeleton} from "antd";
 import {useRouter} from "next/router";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 import MainLayout from "@/widgets/MainLayout/MainLayout";
 import Question from "@/shared/ui/Question/Question";
@@ -10,6 +11,15 @@ import Question from "@/shared/ui/Question/Question";
 import {useCategories, useQuestionsByCategory} from "@/entities/Forum/Forum.module";
 
 import chatIcon from "@/shared/assets/images/svg/chat_black.svg";
+
+export async function getServerSideProps(context: any) {
+  const {locale} = context;
+  return {
+    props: {
+      ...(await serverSideTranslations(locale || 'ru')),
+    }
+  }
+}
 
 const Id = () => {
   const router = useRouter();

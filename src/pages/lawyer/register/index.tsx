@@ -17,7 +17,9 @@ import Status from "@/shared/ui/Status/Status";
 
 import {useDictionaries, useLawyerCreate} from "@/entities/Lawyer/Lawyer.module";
 
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
 import {classNames} from "@/shared/lib/classNames";
+
 import {validation} from "@/shared/constants/validation";
 
 import registerIcon from "@/shared/assets/images/svg/lawyer_register.svg";
@@ -539,3 +541,4 @@ const Index = () => {
 };
 
 export default Index;
+export const getStaticProps = getDefaultStaticProps;

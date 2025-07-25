@@ -10,6 +10,8 @@ import {useTests} from "@/entities/Test/Test.module";
 
 import {useAuth} from "@/shared/hooks/useAuth";
 
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
+
 import {testStatus} from "@/shared/constants/status";
 
 const tabs = [
@@ -114,3 +116,4 @@ const Index = () => {
 };
 
 export default Index;
+export const getStaticProps = getDefaultStaticProps;

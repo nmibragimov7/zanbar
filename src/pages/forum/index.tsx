@@ -8,6 +8,8 @@ import Question from "@/shared/ui/Question/Question";
 
 import {useCategories, useQuestions} from "@/entities/Forum/Forum.module";
 
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
+
 const tabs = [
   {
     label: "Популярные",
@@ -108,3 +110,4 @@ const Forum = () => {
 };
 
 export default Forum;
+export const getStaticProps = getDefaultStaticProps;

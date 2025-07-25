@@ -9,6 +9,8 @@ import {useCourses} from "@/entities/Course/Course.module";
 
 import {useAuth} from "@/shared/hooks/useAuth";
 
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
+
 const tabs = [
   {
     label: "Все",
@@ -111,3 +113,4 @@ const Index = () => {
 };
 
 export default Index;
+export const getStaticProps = getDefaultStaticProps;

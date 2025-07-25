@@ -3,9 +3,11 @@ import Link from "next/link";
 import Image from "next/image";
 import {Breadcrumb, Button, Pagination, Skeleton} from "antd";
 import {useRouter} from "next/router";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 import MainLayout from "@/widgets/MainLayout/MainLayout"
 import TestDenied from "@/widgets/TestDenied/TestDenied";
+import ProgressBar from "@/shared/ui/ProgressBar/ProgressBar";
 
 import {useTestById, useTestFinish, useTestStart} from "@/entities/Test/Test.module";
 
@@ -13,10 +15,18 @@ import {useAuth} from "@/shared/hooks/useAuth";
 
 import {classNames} from "@/shared/lib/classNames";
 
-import {lessonStatus, testStatus} from "@/shared/constants/status";
+import {testStatus} from "@/shared/constants/status";
 
 import checkboxIcon from "@/shared/assets/images/svg/checkbox.svg";
-import ProgressBar from "@/shared/ui/ProgressBar/ProgressBar";
+
+export async function getServerSideProps(context: any) {
+  const {locale} = context;
+  return {
+    props: {
+      ...(await serverSideTranslations(locale || 'ru')),
+    }
+  }
+}
 
 const Id = () => {
   const router = useRouter();

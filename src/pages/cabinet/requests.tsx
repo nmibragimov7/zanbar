@@ -10,6 +10,8 @@ import {useRequests} from "@/entities/Request/Request.module";
 
 import {useAuth} from "@/shared/hooks/useAuth";
 
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
+
 const Requests = () => {
   const router = useRouter();
   const {user} = useAuth();
@@ -59,3 +61,4 @@ const Requests = () => {
 };
 
 export default Requests;
+export const getStaticProps = getDefaultStaticProps;

@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import {Breadcrumb, Button, Form, Input, Skeleton} from "antd";
 import {useRouter} from "next/router";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 import MainLayout from "@/widgets/MainLayout/MainLayout";
 import Answer from "@/shared/ui/Answer/Answer";
@@ -18,6 +19,15 @@ import chatIcon from "@/shared/assets/images/svg/chat.svg";
 import likeIcon from "@/shared/assets/images/svg/like.svg";
 import chatBlackIcon from "@/shared/assets/images/svg/chat_black.svg";
 import sendIcon from "@/shared/assets/images/svg/send.svg";
+
+export async function getServerSideProps(context: any) {
+  const {locale} = context;
+  return {
+    props: {
+      ...(await serverSideTranslations(locale || 'ru')),
+    }
+  }
+}
 
 const Id = () => {
   const router = useRouter();

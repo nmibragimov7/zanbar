@@ -1,11 +1,14 @@
 import React from 'react';
 import {Button, Form, notification} from "antd";
 import {useRouter} from "next/router";
+import {useTranslation} from "next-i18next";
 
 import Field from "@/shared/ui/Field/Field";
 import Logo from "@/shared/ui/Logo/Logo";
 
 import {TRegister, useRegister, useVerify} from "@/entities/Auth/Auth.module";
+
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
 
 import {validation} from "@/shared/constants/validation";
 
@@ -14,6 +17,7 @@ import googleIcon from "@/shared/assets/images/svg/google.svg";
 
 const Register = () => {
   const router = useRouter();
+  const {t} = useTranslation();
 
   const [step, setStep] = React.useState(1);
 
@@ -29,11 +33,11 @@ const Register = () => {
   const onSuccess = async (key: string, response: any) => {
     if (key === "register") {
       setStep(2);
-      notification.info({message: response?.message || "Код для подтверждения отправлен на вашу почту"});
+      notification.info({message: t('register.form.notification.0')});
       return;
     }
 
-    notification.success({message: response?.message || "Код успешно подтвержден"});
+    notification.success({message: t('register.form.notification.1')});
     await router.push("/login");
   }
   const registerMutate = useRegister({onSuccess});
@@ -68,8 +72,7 @@ const Register = () => {
           <div className={"w-full md:max-w-[360px] px-3 md:px-0"}>
             <div className={"flex justify-between mb-8"}>
               <div>
-                <h1 className={"text-3xl font-semibold mb-4"}>Регистрация</h1>
-                <p className={"text-dark-400"}>Пройдите регистрацию</p>
+                <h1 className={"text-3xl font-semibold mb-4"}>{t('register.title')}</h1>
               </div>
               <Logo/>
             </div>
@@ -87,8 +90,8 @@ const Register = () => {
                 rules={[{required: true, message: validation.REQUIRED}]}
               >
                 <Field
-                  label={"Имя"}
-                  placeholder={"Введите имя"}
+                  label={t('register.form.name.label')}
+                  placeholder={t('register.form.name.placeholder')}
                 />
               </Form.Item>
               <Form.Item
@@ -97,8 +100,8 @@ const Register = () => {
                 rules={[{required: true, message: validation.REQUIRED}]}
               >
                 <Field
-                  label={"Эл.почта"}
-                  placeholder={"Введите почту"}
+                  label={t('register.form.username.label')}
+                  placeholder={t('register.form.username.placeholder')}
                 />
               </Form.Item>
               <Form.Item
@@ -107,22 +110,22 @@ const Register = () => {
                 rules={[{required: true, message: validation.REQUIRED}]}
               >
                 <Field
-                  label={"Пароль"}
+                  label={t('register.form.password.label')}
+                  placeholder={t('register.form.password.placeholder')}
                   inputType={"password"}
-                  placeholder={"Придумайте пароль"}
                   autoComplete={"new-password"}
                 />
               </Form.Item>
-              <p className={"text-dark-400 mb-4"}>Минимум 8, заглавная, строчная и спецсимвол</p>
+              <p className={"text-dark-400 mb-4"}>{t('register.form.text.0')}</p>
               <Form.Item
                 name="repeat_password"
                 className={"mb-6"}
                 rules={[{required: true, message: validation.REQUIRED}]}
               >
                 <Field
-                  label={"Повторите пароль"}
+                  label={t('register.form.repeat_password.label')}
+                  placeholder={t('register.form.repeat_password.placeholder')}
                   inputType={"password"}
-                  placeholder={"Введите пароль"}
                   autoComplete={"new-password"}
                 />
               </Form.Item>
@@ -133,8 +136,8 @@ const Register = () => {
                   rules={[{required: true, message: validation.REQUIRED}]}
                 >
                   <Field
-                    label={"Код подтверждения"}
-                    placeholder={"Введите код"}
+                    label={t('register.form.otp.label')}
+                    placeholder={t('register.form.otp.placeholder')}
                   />
                 </Form.Item>
               ) : null}
@@ -145,7 +148,7 @@ const Register = () => {
                   className={"w-full !h-[44px] shadow-none bg-purple-1000 text-white !rounded-lg disabled:bg-gray-600 disabled:text-white transition-all"}
                   disabled={registerMutate.isLoading || verifyMutate.isLoading}
                 >
-                  {step === 1 ? "Создать аккаунт" : "Отправить код"}
+                  {step === 1 ? t('register.form.button.0') : t('register.form.button.1')}
                 </Button>
               </Form.Item>
               {/*<Button*/}
@@ -156,9 +159,9 @@ const Register = () => {
               {/*  <span>Продолжить с Google</span>*/}
               {/*</Button>*/}
               <div className={"text-sm text-center"}>
-                <span className={"text-dark-400"}>У вас есть аккаунт?</span> <span
+                <span className={"text-dark-400"}>{t('register.form.text.1')}</span> <span
                 className={"cursor-pointer transition-all font-semibold text-dark-600 hover:opacity-70"}
-                onClick={onLogin}>Войти</span>
+                onClick={onLogin}>{t('register.form.text.2')}</span>
               </div>
             </Form>
           </div>
@@ -177,3 +180,4 @@ const Register = () => {
 };
 
 export default Register;
+export const getStaticProps = getDefaultStaticProps;

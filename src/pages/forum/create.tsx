@@ -10,6 +10,8 @@ import Field from "@/shared/ui/Field/Field";
 
 import {TForum, useCategories, useQuestionCreate} from "@/entities/Forum/Forum.module";
 
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
+
 import {validation} from "@/shared/constants/validation";
 
 import uploadIcon from "@/shared/assets/images/svg/upload.svg";
@@ -187,3 +189,4 @@ const Create = () => {
 };
 
 export default Create;
+export const getStaticProps = getDefaultStaticProps;

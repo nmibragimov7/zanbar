@@ -1,14 +1,17 @@
 import React, {useState} from 'react';
 import {useRouter} from "next/router";
+import {Pagination, Skeleton} from "antd";
 
 import CabinetLayout from "@/widgets/CabinetLayout/CabinetLayout";
 import NotStarted from "@/widgets/NotStarted/NotStarted";
+import Card from "@/shared/ui/Card/Card";
 
 import {useTestsHistory} from "@/entities/Test/Test.module";
 
 import {useAuth} from "@/shared/hooks/useAuth";
-import {Pagination, Skeleton} from "antd";
-import Card from "@/shared/ui/Card/Card";
+
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
+
 import {testStatus} from "@/shared/constants/status";
 
 const Tests = () => {
@@ -77,3 +80,4 @@ const Tests = () => {
 };
 
 export default Tests;
+export const getStaticProps = getDefaultStaticProps;
