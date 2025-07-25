@@ -13,9 +13,10 @@ import {useAuth} from "@/shared/hooks/useAuth";
 
 import {classNames} from "@/shared/lib/classNames";
 
-import {testStatus} from "@/shared/constants/status";
+import {lessonStatus, testStatus} from "@/shared/constants/status";
 
 import checkboxIcon from "@/shared/assets/images/svg/checkbox.svg";
+import ProgressBar from "@/shared/ui/ProgressBar/ProgressBar";
 
 const Id = () => {
   const router = useRouter();
@@ -61,6 +62,13 @@ const Id = () => {
   const isQuestionsCompleted = useMemo(() => {
     return questions.every((q: any) => q?.answers.length);
   }, [questions]);
+  const isSuccess = useMemo(() => {
+    if (questions.length) {
+      return correct / questions.length > 0.75;
+    }
+
+    return false;
+  }, [correct, questions]);
 
   const onStart = async () => {
     if (data?.data?.state === testStatus.active) {
@@ -143,7 +151,7 @@ const Id = () => {
                   >
                     <>
                       {!active ? (
-                        <>
+                        <div className={"text-blue-900"}>
                           <h1 className={"text-3xl md:text-5xl leading-20 font-medium mb-8"}>
                             {data?.data?.title}
                           </h1>
@@ -157,7 +165,7 @@ const Id = () => {
                           >
                             Начать тест
                           </Button>
-                        </>
+                        </div>
                       ) : (
                         <>
                           <div className={"flex items-center justify-center gap-1.5 mb-10"}>
@@ -178,8 +186,8 @@ const Id = () => {
                                       className={
                                         classNames(
                                           "shrink-0 flex items-center justify-center w-10 h-10 rounded-lg border border-gray-100 bg-gray-100 text-gray-600 text-sm",
-                                          {"!text-primary !border-primary": active?.idx === page},
-                                          {"!text-green-900 !border-green-200 !bg-green-200": type === 'page' && !!questions[page - 1]?.answers.length},
+                                          {"!text-purple-1000 !border-purple-1000/50": active?.idx === page},
+                                          {"!text-purple-1000 !border-purple-1000/20 !bg-purple-1000/20": type === 'page' && !!questions[page - 1]?.answers.length},
                                         )
                                       }
                                     >
@@ -193,8 +201,8 @@ const Id = () => {
                               onChange={onChange}
                             />
                           </div>
-                          <div className={"rounded-2xl border border-gray-300 p-6 mb-10"}>
-                            <p className={"text-dark-400 mb-4"}>Вопрос {active?.questionNumber}</p>
+                          <div className={"text-blue-900 rounded-2xl bg-gray--100 p-6 mb-10"}>
+                            <p className={"mb-4"}>Вопрос {active?.questionNumber}</p>
                             <p className={"text-lg font-semibold mb-6"}>{active?.text}</p>
                             <div>
                               {active?.variants ? (
@@ -202,11 +210,12 @@ const Id = () => {
                                   {active?.variants.map((variant: any, idx: number) => (
                                     <div
                                       key={idx}
-                                      className={"cursor-pointer transition-all hover:opacity-70 flex items-center gap-3 text-dark-500 text-sm font-medium"}
+                                      className={"cursor-pointer transition-all hover:opacity-70 flex items-center gap-3 text-blue-900 text-sm font-medium"}
                                       onClick={() => onSelect(variant?.id)}
                                     >
                                       <div
-                                        className={"shrink-0 w-4 h-4 flex items-center justify-center rounded bg-green-100 border border-green-800"}>
+                                        className={"shrink-0 w-4 h-4 flex items-center justify-center rounded bg-purple-1000/10 border border-purple-1000"}
+                                      >
                                         {active?.answers.includes(variant?.id) ? <Image src={checkboxIcon} alt={""}/> : null}
                                       </div>
                                       <span>{variant?.text}</span>
@@ -251,26 +260,64 @@ const Id = () => {
             </div>
           ) : (
             <>
-              <div className={"flex justify-center text-center bg-green-100 p-10 mb-10"}>
-                <div className={"w-full max-w-[770px] flex flex-col items-center"}>
-                  <p className={"text-sm md:text-base text-green-900 font-semibold mb-6"}>ВАШ РЕЗУЛЬТАТ</p>
-                  <h1 className={"text-3xl md:text-5xl font-medium mb-6"}>{correct} из {questions.length}</h1>
-                  <p className={"text-dark-400 text-base md:text-xl"}>
-                    Поздравляем! {user?.firstname || "Пользователь"}, вы успешно прошли
-                    <br/>
-                    <br/>
-                    Основной тест по “{data?.data?.title}”
+              <div className={"flex justify-center text-center text-blue-900 bg-gray-100 p-10 mb-5 md:mb-10"}>
+                <div className={"w-full max-w-[790px] flex flex-col items-center px-3 md:px-5"}>
+                  <p className={"text-sm md:text-base text-black font-semibold mb-6"}>
+                    Окончание тестирования
                   </p>
+                  <h1 className={"text-2xl mb-4"}>
+                    {isSuccess ? "Поздравляем!" : "У Вас всё ещё есть возможность!"}
+                  </h1>
+                  <p className={"text-2xl mb-6"}>
+                    {
+                      isSuccess
+                        ? "Вы успешно прошли тестирование по курсу “Адвокатская этика и работа с клиентами” "
+                        : "Вы не смогли набрать достаточное количество баллов на тестировании по курсу “Адвокатская этика и работа с клиентами” "
+                    }
+                  </p>
+                  <div className={"flex justify-center"}>
+                    <ProgressBar
+                      current={correct}
+                      total={questions.length}
+                      color={isSuccess ? "#32D583" : "#F97066"}
+                    >
+                      <div>
+                        <p className={"text-xs mb-1"}>Ваш результат</p>
+                        <p className={"font-semibold"}><span className={"text-3xl"}>{correct}</span> <span className={"text-base"}>/ {questions.length}</span></p>
+                      </div>
+                    </ProgressBar>
+                  </div>
                 </div>
               </div>
               <div className={"flex justify-center"}>
-                <Link href={"/tests"}>
-                  <Button
-                    className={"text-sm h-[44px] md:!h-9 shadow-none border border-gray-200 !rounded-lg text-dark-500"}
-                  >
-                    Перейти к тестам
-                  </Button>
-                </Link>
+                <div className={"w-full max-w-xl px-3 md:px-5"}>
+                  {isSuccess ? (
+                    <div className={"w-full"}>
+                      <Button
+                        className={"w-full !h-[44px] shadow-none bg-green-400 text-white !rounded-[100px] transition-all"}
+                      >
+                        Получить сертификат
+                      </Button>
+                    </div>
+                  ) : (
+                    <div className={"w-full flex items-center gap-2"}>
+                      <Button
+                        className={"w-full text-sm !h-[44px] shadow-none border border-gray-200 !rounded-lg text-dark-500"}
+                        onClick={() => setFinished(false)}
+                      >
+                        Пересдача
+                      </Button>
+                      <Link href={"/"} className={"w-full"}>
+                        <Button
+                          type={"primary"}
+                          className={"w-full !h-[44px] shadow-none bg-purple-1000 text-white !rounded-lg transition-all"}
+                        >
+                          На главную
+                        </Button>
+                      </Link>
+                    </div>
+                  )}
+                </div>
               </div>
             </>
           )}

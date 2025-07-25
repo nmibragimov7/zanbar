@@ -17,3 +17,13 @@ export const forumStatus = {
   approved: "Approved",
   revoked: "Revoked",
 }
+export const requestStatus = {
+  created: "Created",
+  approved: "Approved",
+  revoked: "Revoked",
+}
+export const lawyerRequestStatus = {
+  created: "Created",
+  approved: "Approved",
+  revoked: "Revoked",
+}

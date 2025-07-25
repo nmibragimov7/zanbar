@@ -6,6 +6,10 @@ import Tabs from "@/shared/ui/Tabs/Tabs";
 
 const tabs = [
   {
+    label: "Заявки",
+    value: "/admin/requests",
+  },
+  {
     label: "Курсы",
     value: "/admin/courses",
   },

@@ -1,20 +1,20 @@
 import {useMutation} from "@tanstack/react-query";
 import {notification} from "antd";
 
-import {requestService} from "@/entities/Request/Request.module";
+import {lawyerService} from "@/entities/Lawyer/Lawyer.module";
 
 import {getErrorMessage} from "@/shared/lib/getErrorMessage";
 
-interface useRequestCreateProps {
+interface useLawyerCreateProps {
   onSuccess: (key: string) => void;
 }
 
-export const useRequestCreate = (argument: useRequestCreateProps) => {
+export const useLawyerCreate = (argument: useLawyerCreateProps) => {
   return useMutation({
-    mutationFn: requestService.create,
+    mutationFn: lawyerService.create,
     onSuccess(response: any) {
       if (response.data) {
-        argument.onSuccess("request-create");
+        argument.onSuccess("lawyer-create");
       }
     },
     onError(error: any) {

@@ -11,9 +11,9 @@ const MainLayout: React.FC<PropsWithChildren> = ({children}) => {
     <>
       <div className={"min-h-screen flex"}>
         <Sidebar visible={visible} setVisible={setVisible}/>
-        <div className={"w-full flex flex-col relative md:ml-[312px]"}>
+        <div className={"w-full flex flex-col relative md:ml-[312px] overflow-x-auto"}>
           <Header setVisible={setVisible}/>
-          <div className={"grow mt-[98px] md:mt-[88px]"}>
+          <div className={"grow mt-[68px] md:mt-[90px]"}>
             {children}
           </div>
           <Footer/>

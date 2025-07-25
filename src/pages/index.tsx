@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {Button, Skeleton} from "antd";
 import {useRouter} from "next/router";
+import {useTranslation} from "next-i18next";
 
 import MainLayout from "@/widgets/MainLayout/MainLayout";
 import Card from "@/shared/ui/Card/Card";
@@ -14,6 +15,8 @@ import {useQuestions} from "@/entities/Forum/Forum.module";
 
 import {useAuth} from "@/shared/hooks/useAuth";
 
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
+
 import courseIcon from "@/shared/assets/images/svg/course.svg";
 import forumIcon from "@/shared/assets/images/svg/forum.svg";
 import searchIcon from "@/shared/assets/images/svg/search.svg";
@@ -24,9 +27,10 @@ import aiIcon from "@/shared/assets/images/svg/ai_white.svg";
 import listIcon from "@/shared/assets/images/svg/list.svg";
 import juristIcon from "@/shared/assets/images/svg/jurist.svg";
 
-const Index = () => {
+export default function Index() {
   const router = useRouter();
   const {isAuth} = useAuth();
+  const {t} = useTranslation();
 
   const [visible, setVisible] = React.useState(false);
 
@@ -52,58 +56,71 @@ const Index = () => {
   return (
     <>
       <MainLayout>
-        <div className={"flex justify-center font-medium text-sm md:text-base bg-gray-100 py-10 mb-10 md:mb-20"}>
-          <div className={"w-full md:w-1/2 px-3 md:px-5"}>
-            <div className={"scroll overflow-x-auto flex flex-nowrap md:grid grid-cols-3 gap-4 mb-8"}>
-              <div className={"shrink-0 w-[45%] md:w-auto h-[140px] flex flex-col justify-between bg-gray--100 rounded-2xl font-medium py-5 px-4"}>
+        <div className={"flex flex-col items-center font-medium text-sm md:text-base bg-gray-100 py-10 mb-10 md:mb-20"}>
+          <div className={"w-full max-w-[790px] px-3 md:px-5"}>
+            {/*{t('index.title')}*/}
+            <div className={"scroll overflow-x-auto flex flex-nowrap md:grid grid-cols-2 gap-4 mb-8"}>
+              <div
+                className={"shrink-0 w-1/2 md:w-auto h-[140px] flex flex-col justify-between bg-gray--100 rounded-2xl font-medium py-5 px-4"}>
                 <Image src={searchIcon} alt={""} className={"w-5 h-5 object-contain"}/>
                 <p>Узнайте о нашем приложении</p>
               </div>
-              <div className={"shrink-0 w-[45%] md:w-auto h-[140px] flex flex-col justify-between bg-gray--100 rounded-2xl font-medium py-5 px-4"}>
-                <Image src={listIcon} alt={""} className={"w-5 h-5 object-contain"}/>
-                <p>Проверяйте свои знания</p>
-              </div>
-              <div className={"shrink-0 w-[45%] md:w-auto h-[140px] flex flex-col justify-between bg-gray--100 rounded-2xl font-medium py-5 px-4"}>
-                <Image src={juristIcon} alt={""} className={"w-5 h-5 object-contain"}/>
+              <div
+                className={"shrink-0 w-1/2 md:w-auto h-[140px] flex flex-col justify-between bg-gray--100 rounded-2xl font-medium py-5 px-4"}>
+                <Image src={juristIcon} alt={""} className={"w-5 h-5 object-cover"}/>
                 <p>Как стать юристом в приложении?</p>
               </div>
             </div>
+          </div>
+          <div className={"w-full max-w-xl px-3 md:px-5"}>
             <div className={"grid grid-cols-3 gap-4 md:gap-y-8 mb-8"}>
-              <Link href={"/courses"} className={"flex flex-col items-center transition-all md:hover:text-purple-1000"}>
-              <Image src={courseIcon} alt={""} className={"w-8 h-8 object-contain mb-2"}/>
+              <div
+                onClick={() => onNavigate("/courses")}
+                className={"cursor-pointer flex flex-col items-center transition-all md:hover:text-purple-1000"}
+              >
+                <Image src={courseIcon} alt={""} className={"w-7 h-7 object-contain mb-2"}/>
                 <span>Курсы</span>
-              </Link>
-              <Link href={"/forum"} className={"flex flex-col items-center transition-all md:hover:text-purple-1000"}>
-                <Image src={forumIcon} alt={""} className={"w-8 h-8 object-contain mb-2"}/>
+              </div>
+              <div
+                onClick={() => onNavigate("/forum")}
+                className={"cursor-pointer flex flex-col items-center transition-all md:hover:text-purple-1000"
+              }>
+                <Image src={forumIcon} alt={""} className={"w-7 h-7 object-contain mb-2"}/>
                 <span>Форум</span>
-              </Link>
-              <Link href={"/search"} className={"flex flex-col items-center transition-all md:hover:text-purple-1000"}>
-                <Image src={searchIcon} alt={""} className={"w-8 h-8 object-contain mb-2"}/>
+              </div>
+              <div
+                onClick={() => onNavigate("/lawyer")}
+                className={"cursor-pointer flex flex-col items-center transition-all md:hover:text-purple-1000"}
+              >
+                <Image src={searchIcon} alt={""} className={"w-7 h-7 object-contain mb-2"}/>
                 <span>Найти юриста</span>
-              </Link>
-              <Link href={"/knowledge"}
-                    className={"flex flex-col items-center transition-all md:hover:text-purple-1000"}>
-                <Image src={knowledgeIcon} alt={""} className={"w-8 h-8 object-contain mb-2"}/>
+              </div>
+              <Link
+                href={"/knowledge"}
+                className={"flex flex-col items-center transition-all md:hover:text-purple-1000"}
+              >
+                <Image src={knowledgeIcon} alt={""} className={"w-7 h-7 object-contain mb-2"}/>
                 <span>База знаний</span>
               </Link>
-              <Link href={"/legislator"}
-                    className={"flex flex-col items-center transition-all md:hover:text-purple-1000"}>
-                <Image src={legislatorIcon} alt={""} className={"w-8 h-8 object-contain mb-2"}/>
-                <span>Закон и право</span>
+              <Link
+                href={"/forecasting"}
+                className={"flex flex-col items-center transition-all md:hover:text-purple-1000"}
+              >
+                <Image src={legislatorIcon} alt={""} className={"w-7 h-7 object-contain mb-2"}/>
+                <span>Прогнозирование</span>
               </Link>
               <Link href={"/faq"} className={"flex flex-col items-center transition-all md:hover:text-purple-1000"}>
-                <Image src={faqIcon} alt={""} className={"w-8 h-8 object-contain mb-2"}/>
+                <Image src={faqIcon} alt={""} className={"w-7 h-7 object-contain mb-2"}/>
                 <span>FAQ</span>
               </Link>
             </div>
             <div className={"flex justify-center"}>
-              <Link href={"https://t.me/zan_aibot"} target={"_blank"} className={"w-full md:w-[300px]"}>
+              <Link href={"https://t.me/zan_aibot"} target={"_blank"} className={"w-full"}>
                 <Button
-                  type={"primary"}
                   className={"w-full !h-[44px] shadow-none bg-purple-1000 text-white !rounded-[100px] transition-all flex items-center gap-2"}
                 >
                   <Image src={aiIcon} alt={""}/>
-                  <span>AI консультант</span>
+                  <span>AI правовой консультант</span>
                 </Button>
               </Link>
             </div>
@@ -113,7 +130,10 @@ const Index = () => {
           <div className={"pb-[5vh] md:pb-[10vh]"}>
             <div className={"flex items-center justify-between gap-4 mb-8"}>
               <h2 className={"font-semibold text-2xl"}>Популярные курсы</h2>
-              <Link href={"/courses"} className={"whitespace-nowrap text-purple-1000 transition-all md:hover:text-primary"}>Посмотреть все</Link>
+              <span
+                className={"cursor-pointer whitespace-nowrap text-purple-1000 transition-all md:hover:text-primary"}
+                onClick={() => onNavigate("/courses")}
+              >Посмотреть все</span>
             </div>
             <div className={"grid md:grid-cols-4 gap-5"}>
               {isFetchingCourses ? (
@@ -162,7 +182,10 @@ const Index = () => {
           <div className={"pb-[5vh] md:pb-[10vh]"}>
             <div className={"flex items-center justify-between mb-8"}>
               <h2 className={"font-semibold text-2xl"}>Популярные темы на форуме</h2>
-              <Link href={"/forum"} className={"whitespace-nowrap text-purple-1000 transition-all md:hover:text-primary"}>Посмотреть все</Link>
+              <span
+                className={"cursor-pointer whitespace-nowrap text-purple-1000 transition-all md:hover:text-primary"}
+                onClick={() => onNavigate("/forum")}
+              >Посмотреть все</span>
             </div>
             <div className={"grid md:grid-cols-3 gap-5"}>
               {isFetchingForum ? (
@@ -206,5 +229,4 @@ const Index = () => {
     </>
   )
 }
-
-export default Index;
+export const getStaticProps = getDefaultStaticProps;

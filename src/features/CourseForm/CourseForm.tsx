@@ -105,7 +105,7 @@ const CourseForm: React.FC<CourseFormProps> = ({data, isFetching, isLoading, onS
       return
     }
 
-    if (lessons.some((item: any) => !item?.title || !item?.bodyText)) {
+    if (lessons.some((item: any) => !item?.title || (!item?.bodyText && !item?.videoUrl))) {
       notification.warning({message: "Заполните обязательные поля уроков: Наименование и Полное описание"})
       return
     }
@@ -263,8 +263,8 @@ const CourseForm: React.FC<CourseFormProps> = ({data, isFetching, isLoading, onS
                 className={"course"}
                 onChange={({file, fileList}) => {
                   if (file?.status !== "removed") {
-                    if (file.size && file.size > 1500000) { // 1,5mb
-                      notification.warning({message: "Файл не должен превышать 1.5 мб"});
+                    if (file.size && file.size > 2600000) { // 2,5mb
+                      notification.warning({message: "Файл не должен превышать 2.5 мб"});
                       return
                     }
 

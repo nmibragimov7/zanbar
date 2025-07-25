@@ -24,7 +24,7 @@ const Tabs: React.FC<TabsProps> = ({className, activeTab, tabs, onToggle}) => {
 
   return (
     <>
-      <div className={classNames("flex items-center justify-center gap-4", className)}>
+      <div className={classNames("flex items-center md:justify-center gap-4", className)}>
         {tabs.map((tab, idx: number) => (
           <div
             key={idx}

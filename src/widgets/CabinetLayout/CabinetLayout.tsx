@@ -8,19 +8,23 @@ import {useAuth} from "@/shared/hooks/useAuth";
 
 const tabs = [
   {
-    label: "Мои курсы",
+    label: "Ваши заявки",
+    value: "/cabinet/requests"
+  },
+  {
+    label: "Курсы",
     value: "/cabinet/courses",
   },
   {
-    label: "Мои тесты",
+    label: "Тесты",
     value: "/cabinet/tests",
   },
   {
-    label: "Мои вопросы",
+    label: "Форум",
     value: "/cabinet/questions",
   },
   {
-    label: "Мои ответы",
+    label: "Ответы",
     value: "/cabinet/answers",
   },
   {

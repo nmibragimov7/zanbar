@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from "next/image";
+import Link from "next/link";
 
 import {classNames} from "@/shared/lib/classNames";
 
@@ -7,22 +8,23 @@ import arrowIcon from "@/shared/assets/images/svg/arrow.svg";
 
 interface NavigateProps {
   title: string;
+  href: string;
   className?: string;
-  onClick?: () => void;
 }
 
-const Navigate: React.FC<NavigateProps> = ({title, className, onClick}) => {
+const Navigate: React.FC<NavigateProps> = ({title, href, className}) => {
   return (
     <>
-      <span
+      <Link
+        href={href}
+        target={"_blank"}
         className={
-          classNames("cursor-pointer w-9 h-9 md:w-full md:h-auto max-w-[180px] transition-all hover:border-primary inline-flex items-center justify-center gap-3 border border-gray-200 rounded-lg md:py-2 md:px-4", className)
+          classNames("cursor-pointer transition-all hover:opacity-70 text-purple-1000 flex items-center gap-3", className)
         }
-        onClick={onClick}
       >
-        <span className={"hidden md:block"}>{title}</span>
+        <span className={"text-purple-1000 text-sm"}>{title}</span>
         <Image src={arrowIcon} alt={""}/>
-      </span>
+      </Link>
     </>
   );
 };

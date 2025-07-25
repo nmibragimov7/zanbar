@@ -1,9 +1,6 @@
 import {useQuery} from "@tanstack/react-query";
-import {notification} from "antd";
 
 import {courseService} from "@/entities/Course/Course.module";
-
-import {getErrorMessage} from "@/shared/lib/getErrorMessage";
 
 interface useCoursesProps {
   isAuth: boolean;
@@ -16,9 +13,6 @@ export const useCourses = (argument: useCoursesProps) => {
     queryKey: [courseService.COURSES, argument.page],
     onError(error: any) {
       console.dir(error);
-      notification.error({
-        message: getErrorMessage(error),
-      });
     },
     queryFn: () => {
       return argument.isAuth ? courseService.coursesWithAuth(argument.page, argument.size) : courseService.courses(argument.page, argument.size);

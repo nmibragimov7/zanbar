@@ -8,16 +8,19 @@ import arrowIcon from "@/shared/assets/images/svg/arrow_right.svg";
 interface FaqProps {
   question: string;
   answer: string;
+  className?: string;
+  classNameHeader?: string;
+  classNameBody?: string;
 }
 
-const Faq: React.FC<FaqProps> = ({question, answer}) => {
+const Faq: React.FC<FaqProps> = ({question, answer, className, classNameHeader, classNameBody}) => {
   const [open, setOpen] = React.useState(false);
 
   return (
     <>
-      <div className={"border-b border-black/10"}>
+      <div className={classNames("border-b border-black/10", className)}>
         <div
-          className={"cursor-pointer transition-all hover:opacity-70 flex items-center justify-between p-4"}
+          className={classNames("cursor-pointer transition-all hover:opacity-70 flex items-center justify-between p-4", classNameHeader)}
           onClick={() => setOpen(!open)}
         >
           <p className={"font-semibold"}>{question}</p>
@@ -28,9 +31,14 @@ const Faq: React.FC<FaqProps> = ({question, answer}) => {
           />
         </div>
         {open ? (
-          <div className={"text-sm transition-all p-8"}>
-            {answer}
-          </div>
+          <>
+
+
+            <div
+              dangerouslySetInnerHTML={{__html: answer}}
+              className={classNames("text-sm transition-all p-8", classNameBody)}
+            />
+          </>
         ) : null}
       </div>
     </>

@@ -133,7 +133,7 @@ const Courses = () => {
               loading={isFetching}
               active
               paragraph={false}
-              className={"w-full h-[50vh] mb-4"}
+              className={"w-full h-[400px] mb-4"}
             >
               <div className={"w-full overflow-x-auto mb-4"}>
                 <Table

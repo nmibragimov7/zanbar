@@ -2,16 +2,24 @@ import Head from "next/head";
 import type { AppProps } from 'next/app';
 import {ConfigProvider} from "antd";
 import {QueryClientProvider} from "@tanstack/react-query";
+import {appWithTranslation} from "next-i18next";
 
 import {AuthProvider} from "@/shared/hooks/useAuth";
 
 import {queryClient} from "@/app/setup/query/queryClient";
 import {antdTheme} from "@/app/setup/theme/theme";
+import {i18n} from "../../next-i18next.config";
+
+import config from "../../next-i18next.config";
 
 import "../app/styles/globals.css";
 import "../app/styles/rewrite.css";
 
-export default function App({ Component, pageProps }: AppProps) {
+export async function generateStaticParams() {
+  return i18n.locales.map((lng) => ({lng}));
+}
+
+function App({ Component, pageProps }: AppProps) {
   return <>
     <Head>
       <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -33,3 +41,5 @@ export default function App({ Component, pageProps }: AppProps) {
     </QueryClientProvider>
   </>
 }
+
+export default appWithTranslation(App, config);

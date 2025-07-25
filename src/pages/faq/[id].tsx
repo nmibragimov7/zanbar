@@ -2,13 +2,25 @@ import React, {useMemo} from 'react';
 import Link from "next/link";
 import {Breadcrumb} from "antd";
 import {useRouter} from "next/router";
+import {useTranslation} from "next-i18next";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 import MainLayout from "@/widgets/MainLayout/MainLayout";
 import Faq from "@/shared/ui/Faq/Faq";
 
 import {faq} from "@/shared/constants/faq";
 
+export async function getServerSideProps(context: any) {
+  const {locale} = context;
+  return {
+    props: {
+      ...(await serverSideTranslations(locale || 'ru')),
+    }
+  }
+}
+
 const Id = () => {
+  const {t} = useTranslation();
   const router = useRouter();
   const id = !isNaN(Number(router.query.id)) ? Number(router.query.id) : 0;
   const item = useMemo(() => {
@@ -29,20 +41,20 @@ const Id = () => {
               title: <Link href={`/faq`}>FAQ</Link>,
             },
             {
-              title: <span>{item?.title}</span>,
+              title: <span>{t(item?.title || "")}</span>,
             },
           ]}
         />
 
-        <div className={"flex justify-center text-center mb-5 md:mb-10"}>
-          <h1 className={"text-xl md:text-3xl font-medium mb-6"}>{item?.title}</h1>
+        <div className={"flex justify-center text-center bg-gray-100 p-10 mb-5 md:mb-10"}>
+          <h1 className={"text-xl md:text-3xl font-medium"}>{t(item?.title || "")}</h1>
         </div>
         <div className={"flex justify-center mb-10"}>
           <div className={"w-full max-w-[790px] grid gap-4 px-3 md:px-5"}>
             {item?.children && item?.children.length ? (
               <>
                 {item?.children.map((f: any, idx: number) => (
-                  <Faq key={idx} question={f?.question} answer={f?.answer} />
+                  <Faq key={idx} question={t(f?.question)} answer={t(f?.answer)} />
                 ))}
               </>
             ) : null}
@@ -54,3 +66,4 @@ const Id = () => {
 };
 
 export default Id;
+// export const getStaticProps = getDefaultStaticProps;

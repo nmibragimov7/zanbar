@@ -57,7 +57,7 @@ const Index = () => {
       render: (data) =>
         <>
           {data?.status === forumStatus.created ? (
-            <>
+            <div className={"flex flex-col items-center"}>
               <Status type={"blue"} text={"На проверке"} className={"!text-xs"}/>
               <div className={"w-full flex items-center justify-center gap-6 mt-2"}>
                 <Image
@@ -73,10 +73,12 @@ const Index = () => {
                   onClick={() => approveMutate.mutate(data?.questionId)}
                 />
               </div>
-            </>
+            </div>
           ) : null}
-          {data?.status === forumStatus.approved ? <Status type={"green"} text={"Опубликован"} className={"!text-xs"}/> : null}
-          {data?.status === forumStatus.revoked ? <Status type={"orange"} text={"Недоступен"} className={"!text-xs"}/> : null}
+          <div className={"flex flex-col items-center"}>
+            {data?.status === forumStatus.approved ? <Status type={"green"} text={"Опубликован"} className={"!text-xs"}/> : null}
+            {data?.status === forumStatus.revoked ? <Status type={"orange"} text={"Недоступен"} className={"!text-xs"}/> : null}
+          </div>
         </>
     },
     {
@@ -137,7 +139,7 @@ const Index = () => {
               loading={isFetching}
               active
               paragraph={false}
-              className={"w-full h-[50vh] m-4"}
+              className={"w-full h-[400px] m-4"}
             >
               <div className={"w-full overflow-x-auto mb-4"}>
                 <Table

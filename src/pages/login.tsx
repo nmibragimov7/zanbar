@@ -1,20 +1,23 @@
 import React from 'react';
 import {Button, Form} from "antd";
 import {useRouter} from "next/router";
+import {useTranslation} from "next-i18next";
 
 import Field from "@/shared/ui/Field/Field";
 import Logo from "@/shared/ui/Logo/Logo";
 
 import {TLogin, useLogin, useProfile} from "@/entities/Auth/Auth.module";
 
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
+
 import {validation} from "@/shared/constants/validation";
 
-import logoIcon from "@/shared/assets/images/png/logo_small.png";
 import sectionIcon from "@/shared/assets/images/png/section_mobile.png";
 import googleIcon from "@/shared/assets/images/svg/google.svg";
 
 const Login = () => {
   const router = useRouter();
+  const {t} = useTranslation();
 
   const initial: TLogin = {
     username: "",
@@ -50,8 +53,8 @@ const Login = () => {
           <div className={"w-full md:max-w-[360px] px-3 md:px-0"}>
             <div className={"flex justify-between mb-8"}>
               <div>
-                <h1 className={"text-3xl font-semibold mb-4"}>Войти</h1>
-                <p className={"text-dark-400"}>Войдите на портал</p>
+                <h1 className={"text-3xl font-semibold mb-4"}>{t('login.title')}</h1>
+                <p className={"text-dark-400"}>{t('login.description')}</p>
               </div>
               <Logo/>
             </div>
@@ -113,7 +116,7 @@ const Login = () => {
             {/*<h1 className={"text-4xl font-medium text-green-1100 mb-4"}>*/}
             {/*  Title*/}
             {/*</h1>*/}
-            <p className={"text-green-1100 text-xl"}>www.zanbar.kz</p>
+            {/*<p className={"text-green-1100 text-xl"}>www.zanbar.kz</p>*/}
           </div>
         </div>
       </div>
@@ -122,3 +125,4 @@ const Login = () => {
 };
 
 export default Login;
+export const getStaticProps = getDefaultStaticProps;

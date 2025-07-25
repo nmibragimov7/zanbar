@@ -20,6 +20,9 @@ import legislatorIcon from "@/shared/assets/images/svg/law_and_right_black.svg";
 import faqIcon from "@/shared/assets/images/svg/faq_black.svg";
 import searchIcon from "@/shared/assets/images/svg/search_black.svg";
 import aiIcon from "@/shared/assets/images/svg/ai_black.svg";
+import bellIcon from "@/shared/assets/images/svg/bell.svg";
+import logoutIcon from "@/shared/assets/images/svg/logout.svg";
+import Locale from "@/features/Locale/Locale";
 
 const menu = [
   {
@@ -31,11 +34,13 @@ const menu = [
     pathname: "/courses",
     title: "Курсы",
     icon: courseIcon,
+    isAuth: true,
   },
   {
     pathname: "/tests",
     title: "Тесты",
     icon: checkIcon,
+    isAuth: true,
   },
   {
     pathname: "/forum",
@@ -49,8 +54,8 @@ const menu = [
     icon: knowledgeIcon,
   },
   {
-    pathname: "/legislator",
-    title: "Закон и право",
+    pathname: "/forecasting",
+    title: "Прогнозирование",
     icon: legislatorIcon,
   },
   {
@@ -59,9 +64,16 @@ const menu = [
     icon: faqIcon,
   },
   {
-    pathname: "/search",
+    pathname: "/lawyer",
     title: "Найти юриста",
     icon: searchIcon,
+    isAuth: true,
+  },
+  {
+    pathname: "/notifications",
+    title: "Уведомления",
+    icon: bellIcon,
+    isAuth: true,
   },
 ]
 
@@ -72,8 +84,7 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({visible, setVisible}) => {
   const router = useRouter();
-  const {isAuth} = useAuth();
-
+  const {isAuth, onLogout} = useAuth();
   const ref = useRef<HTMLDivElement | null>(null);
 
   useClickOutside(ref, () => setVisible(false));
@@ -95,7 +106,7 @@ const Sidebar: React.FC<SidebarProps> = ({visible, setVisible}) => {
         ref={ref}
         className={
           classNames(
-            "bg-white transition-all -translate-x-full md:translate-x-0 z-20 fixed top-0 bottom-0 left-0 w-[312px] h-screen flex flex-col justify-between border-r border-gray-300 py-6 px-6",
+            "bg-white transition-all -translate-x-full md:translate-x-0 z-20 fixed top-0 bottom-0 left-0 w-[312px] h-screen flex flex-col justify-between border-r border-gray-300 p-4 md:p-6",
             {"translate-x-0": visible}
           )
         }
@@ -103,7 +114,7 @@ const Sidebar: React.FC<SidebarProps> = ({visible, setVisible}) => {
         <div className={"w-full"}>
           <Logo className={"w-14 h-14 mb-6"} classNamIcon={"w-10 h-10"}/>
 
-          <div className={"grid gap-1"}>
+          <div className={"grid gap-2"}>
             {menu.map((item: any, idx: number) => (
               <span
                 key={idx}
@@ -119,21 +130,40 @@ const Sidebar: React.FC<SidebarProps> = ({visible, setVisible}) => {
                 <span>{item?.title}</span>
               </span>
             ))}
+            <Link
+              href={"https://t.me/zan_aibot"}
+              target={"_blank"}
+              className={
+                classNames(
+                  "flex items-center gap-3 font-medium text-dark-500 rounded-md cursor-pointer transition-all hover:bg-gray-100 py-2 px-2.5",
+                )
+              }
+            >
+              <Image src={aiIcon} alt={""} className={"w-4 h-4 object-contain"}/>
+              <span>AI правовой консультант</span>
+            </Link>
+
+            <div className={"grid gap-2 border-t border-gray-300 pt-2"}>
+              <Locale/>
+
+              {isAuth ? (
+                <div
+                  className={
+                    classNames(
+                      "flex items-center gap-3 font-medium text-dark-500 rounded-md cursor-pointer transition-all hover:bg-gray-100 py-2 px-2.5",
+                    )
+                  }
+                  onClick={async () => {
+                    onLogout?.();
+                    await router.push("/");
+                  }}
+                >
+                  <Image src={logoutIcon} alt={""} className={"w-4 h-4"}/>
+                  <span>Выйти</span>
+                </div>
+              ) : null}
+            </div>
           </div>
-        </div>
-        <div className={"border-t border-gray-300 pt-8 pb-2"}>
-          <Link
-            href={"https://t.me/zan_aibot"}
-            target={"_blank"}
-            className={
-              classNames(
-                "flex items-center gap-3 font-medium text-dark-500 rounded-md cursor-pointer transition-all hover:bg-gray-100 py-2 px-2.5",
-              )
-            }
-          >
-            <Image src={aiIcon} alt={""} className={"w-4 h-4 object-contain"}/>
-            <span>AI консультант</span>
-          </Link>
         </div>
       </div>
       {toggle ? (

@@ -49,7 +49,7 @@ const Id = () => {
             },
           ]}
         />
-        <div className={"mt-10 md:mt-0 px-3 md:px-5"}>
+        <div className={"px-3 md:px-5 mb-10"}>
           <div className={"flex justify-center"}>
             <div className={"w-full max-w-[790px]"}>
               <div className={"flex flex-col md:flex-row gap-4 md:items-center md:justify-between mb-6"}>
@@ -62,7 +62,7 @@ const Id = () => {
                   <span>Задать вопрос</span>
                 </Button>
               </div>
-              <div className={"grid gap-4 pb-[10vh]"}>
+              <div className={"grid gap-4"}>
                 <Skeleton
                   loading={isFetching || isFetchingCategories}
                   active
@@ -75,7 +75,7 @@ const Id = () => {
                 </Skeleton>
               </div>
               {data?.data?.totalPages && data?.data?.totalPages > 1 ? (
-                <div className={"flex items-center justify-center pb-[10vh]"}>
+                <div className={"flex items-center justify-center mt-10"}>
                   <Pagination
                     current={page}
                     total={data?.data?.totalPages * 10}

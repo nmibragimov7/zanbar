@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import {classNames} from "@/shared/lib/classNames";
 
-import logoIcon from "@/shared/assets/images/svg/logo_white.svg";
+import logoIcon from "@/shared/assets/images/png/logo.png";
 
 interface LogoProps {
   className?: string;

@@ -77,21 +77,21 @@ const Id = () => {
         />
 
         {isFetching ? (
-          <div className={"mt-10 md:mt-0 px-3 md:px-5"}>
+          <div className={"px-3 md:px-5 mb-10"}>
             <div className={"flex justify-center"}>
               <div className={"w-full max-w-[790px]"}>
                 <Skeleton
                   loading={true}
                   active
                   paragraph={false}
-                  className={"w-full h-screen mb-10"}
+                  className={"w-full h-[400px]"}
                 />
               </div>
             </div>
           </div>
         ) : (
           <>
-            <div className={"mt-10 md:mt-0 px-3 md:mx-5"}>
+            <div className={"px-3 md:mx-5 mb-10"}>
               <div className={"flex justify-center"}>
                 <div className={"w-full max-w-[790px] md:border-t border-gray-300 md:pt-6"}>
                   <div className={"flex items-center justify-between mb-10"}>
@@ -124,7 +124,7 @@ const Id = () => {
                   <p className={"text-lg mb-8"}>
                     {data?.data?.text}
                   </p>
-                  <div className={"flex items-center gap-4 mb-8"}>
+                  <div className={"flex items-center gap-4"}>
                     <Button
                       className={"flex items-center gap-2 text-sm font-medium !h-12 shadow-none border border-gray-200 !rounded-lg text-dark-500"}
                       disabled={likeMutate.isLoading}
@@ -144,11 +144,11 @@ const Id = () => {
                 </div>
               </div>
             </div>
-            <div className={"bg-gray-400 py-10 px-3 md:px-5 mb-[10vh]"}>
+            <div className={"bg-gray-400 py-10 px-3 md:px-5 mb-10"}>
               <div className={"flex justify-center"}>
                 <div className={"w-full max-w-[790px]"}>
-                  <p className={"text-xl font-semibold mb-8"}>Ответы {data?.data?.answerCount || 0}</p>
-                  <div className={"grid gap-2 mb-8"}>
+                  <p className={"text-xl font-semibold mb-4"}>Ответы {data?.data?.answerCount || 0}</p>
+                  <div className={"grid gap-2 mb-10"}>
                     {data?.data?.answerCount ? (
                       <>
                         {data?.data?.answersList.map((item: any, idx: any) => (

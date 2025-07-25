@@ -90,7 +90,7 @@ const Users = () => {
               loading={false}
               active
               paragraph={false}
-              className={"w-full h-full mb-4"}
+              className={"w-full h-[400px] mb-4"}
             >
               <div className={"w-full overflow-x-auto mb-4"}>
                 <Table

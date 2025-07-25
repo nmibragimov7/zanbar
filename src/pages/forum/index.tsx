@@ -41,13 +41,16 @@ const Forum = () => {
             <p className={"text-dark-400 text-base md:text-xl"}>Задавайте вопросы и получайте ответы</p>
           </div>
         </div>
-        <div className={"px-3 md:px-5"}>
+        <div className={"px-3 md:px-5 mb-10"}>
           <div className={"flex justify-center"}>
             <div className={"w-full max-w-[790px]"}>
               <h2
-                className={"font-medium text-2xl md:text-[30px] mb-8"}>Категории {response?.data && response?.data.length ? response?.data.length : 0}</h2>
+                className={"font-medium text-2xl md:text-[30px] mb-8"
+              }>
+                Категории {response?.data && response?.data.length ? response?.data.length : 0}
+              </h2>
 
-              <div className={"flex flex-col md:flex-row md:items-center gap-4 mb-10 md:mb-16"}>
+              <div className={"flex flex-col md:flex-row md:items-center gap-4 mb-10"}>
                 <Skeleton
                   loading={isFetchingCategories}
                   active
@@ -66,14 +69,14 @@ const Forum = () => {
                   )) : null}
                 </Skeleton>
               </div>
-              <div className={"flex items-center justify-between mb-6"}>
+              <div className={"flex items-center justify-between mb-4"}>
                 <h2 className={"font-medium text-2xl md:text-[30px]"}>Вопросы</h2>
                 <Tabs
                   tabs={tabs}
                   onToggle={(value: string) => setActive(value)}
                 />
               </div>
-              <div className={"grid gap-4 pb-[10vh]"}>
+              <div className={"grid gap-4"}>
                 <Skeleton
                   loading={isFetching}
                   active
@@ -86,7 +89,7 @@ const Forum = () => {
                 </Skeleton>
               </div>
               {data?.data?.totalPages && data?.data?.totalPages > 1 ? (
-                <div className={"flex items-center justify-center pb-[10vh]"}>
+                <div className={"flex items-center justify-center mt-10"}>
                   <Pagination
                     current={page}
                     total={data?.data?.totalPages * 10}

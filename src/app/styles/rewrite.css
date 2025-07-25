@@ -54,6 +54,19 @@
 .course .ant-upload-list-item {
   display: none !important;
 }
+.ant-input-number-handler-wrap {
+  display: none !important;
+}
+.ant-input-number-input {
+  height: 100% !important;
+  padding: 0 !important;
+}
+.ant-input-number-input-wrap {
+  height: 100% !important;
+}
+.ant-form-item-required::before {
+  display: none !important;
+}
 @media screen and (min-width: 768px) {
   .auth .ant-modal {
     width: fit-content !important;

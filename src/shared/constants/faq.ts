@@ -1,72 +1,72 @@
 export const faq = [
   {
     id: 1,
-    title: 'Топ 10 вопросов',
+    title: 'faq.top.title',
     isFavorite: true,
     children: [
       {
-        question: 'Что это за сервис?',
-        answer: '-'
+        question: 'faq.top.children.0.question',
+        answer: 'faq.top.children.0.answer'
       },
       {
-        question: 'Чем отличается от обычной юркомпании?',
-        answer: '-'
+        question: 'faq.top.children.1.question',
+        answer: 'faq.top.children.1.answer'
       },
       {
-        question: 'Нужно ли платить за размещение заявки?',
-        answer: 'Нет. Заявка размещается бесплатно.'
+        question: 'faq.top.children.2.question',
+        answer: 'faq.top.children.2.answer'
       },
       {
-        question: 'Я не знаю, как точно назвать свою проблему — что делать?',
-        answer: '-'
+        question: 'faq.top.children.3.question',
+        answer: 'faq.top.children.3.answer'
       },
     ]
   },
   {
     id: 2,
-    title: 'Как работает приложение',
+    title: 'faq.how.title',
     isFavorite: false,
     children: []
   },
   {
     id: 3,
-    title: 'Про юристов',
+    title: 'faq.about.title',
     isFavorite: false,
     children: []
   },
   {
     id: 4,
-    title: 'Коммуникация с юристом',
+    title: 'faq.communication.title',
     isFavorite: false,
     children: []
   },
   {
     id: 5,
-    title: 'Оплата и безопасность',
+    title: 'faq.payment-security.title',
     isFavorite: false,
     children: []
   },
   {
     id: 6,
-    title: 'Создание заявки',
+    title: 'faq.create.title',
     isFavorite: false,
     children: []
   },
   {
     id: 7,
-    title: 'Категории и услуги',
+    title: 'faq.category.title',
     isFavorite: false,
     children: []
   },
   {
     id: 8,
-    title: 'Мой профиль и настройки',
+    title: 'faq.profile.title',
     isFavorite: false,
     children: []
   },
   {
     id: 9,
-    title: 'Жалобы и поддержка',
+    title: 'faq.support.title',
     isFavorite: false,
     children: []
   },

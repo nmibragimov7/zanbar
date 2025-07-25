@@ -9,7 +9,6 @@ import {TRegister, useRegister, useVerify} from "@/entities/Auth/Auth.module";
 
 import {validation} from "@/shared/constants/validation";
 
-import logoIcon from "@/shared/assets/images/png/logo_small.png";
 import sectionIcon from "@/shared/assets/images/png/section_mobile.png";
 import googleIcon from "@/shared/assets/images/svg/google.svg";
 
@@ -169,7 +168,7 @@ const Register = () => {
             {/*<h1 className={"text-4xl font-medium text-green-1100 mb-4"}>*/}
             {/*  Title*/}
             {/*</h1>*/}
-            <p className={"text-green-1100 text-xl"}>www.zanbar.kz</p>
+            {/*<p className={"text-green-1100 text-xl"}>www.zanbar.kz</p>*/}
           </div>
         </div>
       </div>

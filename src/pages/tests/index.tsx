@@ -47,7 +47,7 @@ const Index = () => {
             </p>
           </div>
         </div>
-        <div className={"px-3 md:px-5"}>
+        <div className={"px-3 md:px-5 mb-10"}>
           <div className={"flex items-center justify-between mb-8"}>
             <Tabs
               tabs={tabs}
@@ -60,7 +60,7 @@ const Index = () => {
             {/*  <span>Фильтры</span>*/}
             {/*</Button>*/}
           </div>
-          <div className={"grid md:grid-cols-3 gap-6 pb-[10vh]"}>
+          <div className={"grid md:grid-cols-3 gap-6"}>
             {isFetching ? (
               <>
                 <Skeleton
@@ -96,8 +96,8 @@ const Index = () => {
               </>
             )}
           </div>
-          {data?.data?.totalPages && data?.data?.totalPages > 1 ? (
-            <div className={"flex items-center justify-center pb-[10vh]"}>
+          {!isFetching && data?.data?.totalPages && data?.data?.totalPages > 1 ? (
+            <div className={"flex items-center justify-center mt-10"}>
               <Pagination
                 current={page}
                 total={data?.data?.totalPages * 6}

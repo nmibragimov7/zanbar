@@ -12,6 +12,7 @@ const config: Config = {
       colors: {
         primary: "#181D27",
         gray: {
+          "-200": "#EFEFEF",
           "-100": "#F2F2F7",
           0: "#F9F5FF",
           100: "#FAFAFA",
@@ -30,7 +31,7 @@ const config: Config = {
           100: "#F3F8ED",
           200: "#EAF2D9",
           300: "#ECFDF3",
-          400: "#12B76A",
+          400: "#32D583",
           500: "#027A48",
           800: "#83906A",
           900: "#6D7A52",
@@ -45,6 +46,7 @@ const config: Config = {
         purple: {
           100: "rgba(105, 65, 198, 0.1)",
           200: "#F4EBFF",
+          300: "#F0ECF9",
           900: "#7F56D9",
           1000: '#6941C6',
         },
@@ -53,12 +55,21 @@ const config: Config = {
           400: "#0BA5EC",
           500: "#026AA2",
           900: "#1B2A41",
+        },
+        red: {
+          100: "#FFF6ED",
+          500: "#C4320A",
         }
       }
     },
     fontFamily: {
       inter: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont']
     },
+    boxShadow: {
+      100: "0px 0px 24px 0px #6941C626 inset",
+      200: "0px 4px 4px 0px #E9EAEB",
+      300: "0px 4px 6px -2px #0A0D1208",
+    }
   },
   plugins: [],
 }

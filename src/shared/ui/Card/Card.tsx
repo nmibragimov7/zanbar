@@ -44,7 +44,7 @@ const Card: React.FC<CardProps> = ({className, index = 0, icon, title, pathname 
     <>
       <div className={classNames("relative bg-black/50 overflow-hidden rounded-3xl", className)}>
         {icon ? (
-          <Image src={icons?.[index] ? icons?.[index] : icons?.[0]} alt={""} className={"w-full h-[240px] object-cover"}/>
+          <img src={icon} alt={""} className={"w-full h-[240px] object-cover"}/>
         ) : (
           <div className={"w-full h-[240px]"}></div>
         )}
@@ -60,8 +60,7 @@ const Card: React.FC<CardProps> = ({className, index = 0, icon, title, pathname 
             {title}
           </p>
           <Button
-            type={"primary"}
-            className={"w-full !h-9 shadow-none bg-gray-0 text-purple-1000 font-semibold !rounded-lg transition-all"}
+            className={"w-full !h-9 !border-0 !shadow-none bg-gray-0 text-purple-1000 font-semibold !rounded-lg transition-all"}
             onClick={onNavigate}
           >
             <span>Подробнее</span>
