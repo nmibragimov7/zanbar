@@ -1,5 +1,6 @@
 import React from 'react';
 import {Pagination, Skeleton} from "antd";
+import {useTranslation} from "next-i18next";
 
 import MainLayout from "@/widgets/MainLayout/MainLayout";
 import Tabs from "@/shared/ui/Tabs/Tabs";
@@ -24,6 +25,7 @@ const tabs = [
 
 const Index = () => {
   const {isAuth} = useAuth();
+  const {t} = useTranslation();
 
   const [active, setActive] = React.useState("all");
   const [page, setPage] = React.useState(1);
@@ -39,25 +41,25 @@ const Index = () => {
       <MainLayout>
         <div className={"flex justify-center text-center bg-gray-100 p-10 mb-5 md:mb-10"}>
           <div className={"w-full max-w-[640px] flex flex-col items-center"}>
-            <h1 className={"text-xl md:text-3xl font-medium mb-6"}>Курсы</h1>
+            <h1 className={"text-xl md:text-3xl font-medium mb-6"}>{t('course.title')}</h1>
             <p className={"text-dark-400 text-base md:text-xl"}>
-              Раздел содержит образовательные материалы, направленные на повышение уровня правовой грамотности населения. Здесь представлены структурированные курсы, видеолекции, инфографика и другие интерактивные ресурсы, разработанные с учётом актуального законодательства Республики Казахстан.
+              {t('course.description')}
             </p>
           </div>
         </div>
         <div className={"px-3 md:px-5 mb-10"}>
-          <div className={"flex items-center justify-between mb-8"}>
-            <Tabs
-              tabs={tabs}
-              onToggle={(value: string) => setActive(value)}
-            />
-            {/*<Button*/}
-            {/*  className={"flex items-center gap-2 text-sm font-semibold !h-10 shadow-none border border-gray-200 !rounded-lg text-dark-500"}*/}
-            {/*>*/}
-            {/*  <Image src={filterIcon} alt={""}/>*/}
-            {/*  <span>Фильтры</span>*/}
-            {/*</Button>*/}
-          </div>
+          {/*<div className={"flex items-center justify-between mb-8"}>*/}
+          {/*  <Tabs*/}
+          {/*    tabs={tabs}*/}
+          {/*    onToggle={(value: string) => setActive(value)}*/}
+          {/*  />*/}
+          {/*  <Button*/}
+          {/*    className={"flex items-center gap-2 text-sm font-semibold !h-10 shadow-none border border-gray-200 !rounded-lg text-dark-500"}*/}
+          {/*  >*/}
+          {/*    <Image src={filterIcon} alt={""}/>*/}
+          {/*    <span>Фильтры</span>*/}
+          {/*  </Button>*/}
+          {/*</div>*/}
           <div className={"grid md:grid-cols-3 gap-6"}>
             {isFetching ? (
               <>

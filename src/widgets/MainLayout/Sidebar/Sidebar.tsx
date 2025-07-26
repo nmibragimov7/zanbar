@@ -58,6 +58,7 @@ const menu = [
     pathname: "/forecasting",
     title: "menu.5",
     icon: legislatorIcon,
+    isAuth: true,
   },
   {
     pathname: "/faq",

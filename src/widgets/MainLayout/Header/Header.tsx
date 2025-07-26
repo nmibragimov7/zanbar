@@ -2,6 +2,7 @@ import React, {useMemo} from 'react';
 import Image from "next/image";
 import Link from "next/link";
 import {Button} from "antd";
+import {useTranslation} from "next-i18next";
 
 import Logo from "@/shared/ui/Logo/Logo";
 
@@ -18,6 +19,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({setVisible}) => {
   const {isAuth, user} = useAuth();
+  const {t} = useTranslation();
 
   const name = useMemo(() => {
     if (!user?.firstname) return "П";
@@ -31,12 +33,12 @@ const Header: React.FC<HeaderProps> = ({setVisible}) => {
     <>
       <div className={"z-10 fixed top-0 right-0 left-0 bg-purple-1000 text-white w-full flex items-center justify-between py-3.5 px-3 md:p-5 md:pl-[332px]"}>
         <div className={"hidden md:block w-1/2 text-xs"}>
-          Комплексная инновационная онлайн-платформа, автоматизированной системы юридической помощи и единой системы автоматизации работы юристов
+          {t('header.description')}
         </div>
 
         <div className={"flex md:hidden items-center gap-2"} onClick={() => setVisible(true)}>
           <Image src={menuIcon} alt={""}/>
-          <span className={"text-white font-semibold text-sm"}>Меню</span>
+          <span className={"text-white font-semibold text-sm"}>{t('header.button.0')}</span>
         </div>
 
         <div className={"flex md:hidden flex-col items-center gap-2"}>
@@ -91,14 +93,14 @@ const Header: React.FC<HeaderProps> = ({setVisible}) => {
                   <Button
                     className={"text-sm w-[70px] !h-9 shadow-none border border-gray-200 !rounded-lg text-dark-500"}
                   >
-                    Войти
+                    {t('header.button.1')}
                   </Button>
                 </Link>
                 <Link href={"/register"}>
                   <Button
                     className={"text-sm w-[175px] !h-9 shadow-none text-dark-500 !rounded-lg transition-all"}
                   >
-                    Зарегистрироваться
+                    {t('header.button.2')}
                   </Button>
                 </Link>
               </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import {Pagination, Skeleton} from "antd";
+import {useTranslation} from "next-i18next";
 
 import MainLayout from "@/widgets/MainLayout/MainLayout";
 import Tabs from "@/shared/ui/Tabs/Tabs";
@@ -27,6 +28,7 @@ const tabs = [
 
 const Index = () => {
   const {isAuth} = useAuth();
+  const {t} = useTranslation();
 
   const [active, setActive] = React.useState("all");
   const [page, setPage] = React.useState(1);
@@ -43,25 +45,25 @@ const Index = () => {
       <MainLayout>
         <div className={"flex justify-center text-center bg-gray-100 p-10 mb-5 md:mb-10"}>
           <div className={"w-full max-w-[640px] flex flex-col items-center"}>
-            <h1 className={"text-xl md:text-3xl font-medium mb-6"}>Тесты</h1>
+            <h1 className={"text-xl md:text-3xl font-medium mb-6"}>{t('test.title')}</h1>
             <p className={"text-dark-400 text-base md:text-xl"}>
-              В данном разделе пользователи могут пройти тестирование по ключевым темам правового обучения. Система проверок разработана для самостоятельной оценки уровня знаний, полученных в ходе обучения, и предоставляет персональные рекомендации по улучшению результатов. Доступны как базовые, так и расширенные тесты с различными форматами заданий.
+              {t('test.description')}
             </p>
           </div>
         </div>
         <div className={"px-3 md:px-5 mb-10"}>
-          <div className={"flex items-center justify-between mb-8"}>
-            <Tabs
-              tabs={tabs}
-              onToggle={(value: string) => setActive(value)}
-            />
-            {/*<Button*/}
-            {/*  className={"flex items-center gap-2 text-sm font-semibold !h-10 shadow-none border border-gray-200 !rounded-lg text-dark-500"}*/}
-            {/*>*/}
-            {/*  <Image src={filterIcon} alt={""}/>*/}
-            {/*  <span>Фильтры</span>*/}
-            {/*</Button>*/}
-          </div>
+          {/*<div className={"flex items-center justify-between mb-8"}>*/}
+          {/*  <Tabs*/}
+          {/*    tabs={tabs}*/}
+          {/*    onToggle={(value: string) => setActive(value)}*/}
+          {/*  />*/}
+          {/*  <Button*/}
+          {/*    className={"flex items-center gap-2 text-sm font-semibold !h-10 shadow-none border border-gray-200 !rounded-lg text-dark-500"}*/}
+          {/*  >*/}
+          {/*    <Image src={filterIcon} alt={""}/>*/}
+          {/*    <span>Фильтры</span>*/}
+          {/*  </Button>*/}
+          {/*</div>*/}
           <div className={"grid md:grid-cols-3 gap-6"}>
             {isFetching ? (
               <>
@@ -91,7 +93,7 @@ const Index = () => {
                     key={idx}
                     className={"!bg-black/30"}
                     pathname={`/tests/${test?.id}`}
-                    tags={test?.state && test?.state === testStatus.active ? ["Доступен"] : []}
+                    tags={test?.state && test?.state === testStatus.active ? [t('test.tag.0')] : []}
                     title={test?.title}
                   />
                 )) : null}

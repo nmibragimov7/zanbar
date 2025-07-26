@@ -2,6 +2,7 @@ import React from 'react';
 import Link from "next/link";
 import {Breadcrumb, Skeleton} from "antd";
 import {useRouter} from "next/router";
+import {useTranslation} from "next-i18next";
 
 import MainLayout from "@/widgets/MainLayout/MainLayout";
 import Lawyer from "@/shared/ui/Lawyer/Lawyer";
@@ -12,6 +13,8 @@ import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
 
 const Index = () => {
   const router = useRouter();
+  const {t} = useTranslation();
+
   const {data, isFetching} = useLawyers();
 
   const onNavigate = (idx: number) => {
@@ -26,16 +29,16 @@ const Index = () => {
           separator=">"
           items={[
             {
-              title: <Link href={"/"}>Главная</Link>,
+              title: <Link href={"/"}>{t('breadcrumb.0')}</Link>,
             },
             {
-              title: <Link href={`/lawyer`}>Найти юриста</Link>,
+              title: <Link href={`/lawyer`}>{t('breadcrumb.7')}</Link>,
             },
             {
-              title: <Link href={`/lawyer/request`}>Поиск юриста</Link>,
+              title: <Link href={`/lawyer/request`}>{t('breadcrumb.9')}</Link>,
             },
             {
-              title: <span>Список юристов</span>,
+              title: <span>{t('breadcrumb.11')}</span>,
             },
           ]}
         />

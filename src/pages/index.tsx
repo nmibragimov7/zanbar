@@ -58,21 +58,20 @@ export default function Index() {
       <MainLayout>
         <div className={"flex flex-col items-center font-medium text-sm md:text-base bg-gray-100 py-10 mb-10 md:mb-20"}>
           <div className={"w-full max-w-[790px] px-3 md:px-5"}>
-            {/*{t('index.title')}*/}
             <div className={"scroll overflow-x-auto flex flex-nowrap md:grid grid-cols-2 gap-4 mb-8"}>
               <Link
                 href={"/application"}
                 className={"shrink-0 w-1/2 md:w-auto h-[140px] flex flex-col justify-between bg-gray--100 transition-all hover:bg-purple-200 rounded-2xl font-medium py-5 px-4"}
               >
                 <Image src={searchIcon} alt={""} className={"w-5 h-5 object-contain"}/>
-                <p>Узнайте о нашем приложении</p>
+                <p>{t('index.banner.block.0')}</p>
               </Link>
               <Link
                 href={"/instruction"}
                 className={"shrink-0 w-1/2 md:w-auto h-[140px] flex flex-col justify-between bg-gray--100 transition-all hover:bg-purple-200 rounded-2xl font-medium py-5 px-4"}
               >
                 <Image src={juristIcon} alt={""} className={"w-5 h-5 object-cover"}/>
-                <p>Как стать юристом в приложении?</p>
+                <p>{t('index.banner.block.1')}</p>
               </Link>
             </div>
           </div>
@@ -83,39 +82,39 @@ export default function Index() {
                 className={"cursor-pointer flex flex-col items-center transition-all md:hover:text-purple-1000"}
               >
                 <Image src={courseIcon} alt={""} className={"w-7 h-7 object-contain mb-2"}/>
-                <span>Курсы</span>
+                <span>{t('index.banner.card.0')}</span>
               </div>
               <div
                 onClick={() => onNavigate("/forum")}
                 className={"cursor-pointer flex flex-col items-center transition-all md:hover:text-purple-1000"
               }>
                 <Image src={forumIcon} alt={""} className={"w-7 h-7 object-contain mb-2"}/>
-                <span>Форум</span>
+                <span>{t('index.banner.card.1')}</span>
               </div>
               <div
                 onClick={() => onNavigate("/lawyer")}
                 className={"cursor-pointer flex flex-col items-center transition-all md:hover:text-purple-1000"}
               >
                 <Image src={searchIcon} alt={""} className={"w-7 h-7 object-contain mb-2"}/>
-                <span>Найти юриста</span>
+                <span>{t('index.banner.card.2')}</span>
               </div>
               <Link
                 href={"/knowledge"}
                 className={"flex flex-col items-center transition-all md:hover:text-purple-1000"}
               >
                 <Image src={knowledgeIcon} alt={""} className={"w-7 h-7 object-contain mb-2"}/>
-                <span>База знаний</span>
+                <span>{t('index.banner.card.3')}</span>
               </Link>
-              <Link
-                href={"/forecasting"}
+              <div
+                onClick={() => onNavigate("/forecasting")}
                 className={"flex flex-col items-center transition-all md:hover:text-purple-1000"}
               >
                 <Image src={legislatorIcon} alt={""} className={"w-7 h-7 object-contain mb-2"}/>
-                <span>Прогнозирование</span>
-              </Link>
+                <span>{t('index.banner.card.4')}</span>
+              </div>
               <Link href={"/faq"} className={"flex flex-col items-center transition-all md:hover:text-purple-1000"}>
                 <Image src={faqIcon} alt={""} className={"w-7 h-7 object-contain mb-2"}/>
-                <span>FAQ</span>
+                <span>{t('index.banner.card.5')}</span>
               </Link>
             </div>
             <div className={"flex justify-center"}>
@@ -124,7 +123,7 @@ export default function Index() {
                   className={"w-full !h-[44px] shadow-none bg-purple-1000 text-white !rounded-[100px] transition-all flex items-center gap-2"}
                 >
                   <Image src={aiIcon} alt={""}/>
-                  <span>AI правовой консультант</span>
+                  <span>{t('index.banner.button.0')}</span>
                 </Button>
               </Link>
             </div>
@@ -133,11 +132,13 @@ export default function Index() {
         <div className={"px-3 md:px-5"}>
           <div className={"pb-[5vh] md:pb-[10vh]"}>
             <div className={"flex items-center justify-between gap-4 mb-8"}>
-              <h2 className={"font-semibold text-2xl"}>Популярные курсы</h2>
+              <h2 className={"font-semibold text-2xl"}>{t('index.card.course')}</h2>
               <span
                 className={"cursor-pointer whitespace-nowrap text-purple-1000 transition-all md:hover:text-primary"}
                 onClick={() => onNavigate("/courses")}
-              >Посмотреть все</span>
+              >
+                {t('index.card.button')}
+              </span>
             </div>
             <div className={"grid md:grid-cols-4 gap-5"}>
               {isFetchingCourses ? (
@@ -185,11 +186,13 @@ export default function Index() {
           </div>
           <div className={"pb-[5vh] md:pb-[10vh]"}>
             <div className={"flex items-center justify-between mb-8"}>
-              <h2 className={"font-semibold text-2xl"}>Популярные темы на форуме</h2>
+              <h2 className={"font-semibold text-2xl"}>{t('index.card.forum')}</h2>
               <span
                 className={"cursor-pointer whitespace-nowrap text-purple-1000 transition-all md:hover:text-primary"}
                 onClick={() => onNavigate("/forum")}
-              >Посмотреть все</span>
+              >
+                {t('index.card.button')}
+              </span>
             </div>
             <div className={"grid md:grid-cols-3 gap-5"}>
               {isFetchingForum ? (

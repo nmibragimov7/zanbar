@@ -13,6 +13,7 @@ import card1Icon from "@/shared/assets/images/png/card1.png";
 import card2Icon from "@/shared/assets/images/png/card2.png";
 import card3Icon from "@/shared/assets/images/png/card3.png";
 import card4Icon from "@/shared/assets/images/png/card4.png";
+import {useTranslation} from "next-i18next";
 
 const icons = [card1Icon, card2Icon, card3Icon, card4Icon]
 
@@ -28,6 +29,7 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({className, index = 0, icon, title, pathname = "/", tags}) => {
   const router = useRouter();
   const {isAuth} = useAuth();
+  const {t} = useTranslation();
 
   const [visible, setVisible] = React.useState(false);
 
@@ -63,7 +65,7 @@ const Card: React.FC<CardProps> = ({className, index = 0, icon, title, pathname 
             className={"w-full !h-9 !border-0 !shadow-none bg-gray-0 text-purple-1000 font-semibold !rounded-lg transition-all"}
             onClick={onNavigate}
           >
-            <span>Подробнее</span>
+            <span>{t('course.button.0')}</span>
           </Button>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from "next/image";
+import {useTranslation} from "next-i18next";
 
 import {formatDate} from "@/shared/lib/date";
 
@@ -22,6 +23,8 @@ const Answer: React.FC<AnswerProps> = ({
   user,
   forum,
 }) => {
+  const {t} = useTranslation();
+
   return (
     <>
       {type === "cabinet" ? (
@@ -32,7 +35,7 @@ const Answer: React.FC<AnswerProps> = ({
                 <img src={forum?.authorImage} alt={""} className={"w-full h-full object-contain"}/>
               ) : (
                 <div
-                  className={"bg-green-100 w-full h-full flex items-center justify-center text-green-900 font-medium text-2xl"}>A</div>
+                  className={"bg-green-100 w-full h-full flex items-center justify-center text-green-900 font-medium text-2xl"}>П</div>
               )}
             </div>
             <div>
@@ -43,7 +46,7 @@ const Answer: React.FC<AnswerProps> = ({
                     <img src={forum?.authorImage} alt={""} className={"w-full h-full object-contain"}/>
                   ) : (
                     <div
-                      className={"bg-green-100 w-full h-full flex items-center justify-center text-green-900 font-medium text-2xl"}>A</div>
+                      className={"bg-green-100 w-full h-full flex items-center justify-center text-green-900 font-medium text-2xl"}>П</div>
                   )}
                 </div>
                 <div className={"flex items-center gap-1"}>

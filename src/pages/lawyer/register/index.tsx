@@ -10,6 +10,7 @@ import {
   Skeleton,
   type UploadProps
 } from "antd";
+import {useTranslation} from "next-i18next";
 
 import MainLayout from "@/widgets/MainLayout/MainLayout";
 import Field from "@/shared/ui/Field/Field";
@@ -47,6 +48,8 @@ const initial = {
 type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
 
 const Index = () => {
+  const {t} = useTranslation();
+
   const [stage, setStage] = useState(0);
   const [files, setFiles] = useState<any>({
     udostakBase64: null,
@@ -143,13 +146,13 @@ const Index = () => {
           separator=">"
           items={[
             {
-              title: <Link href={"/"}>Главная</Link>,
+              title: <Link href={"/"}>{t('breadcrumb.0')}</Link>,
             },
             {
-              title: <Link href={`/lawyer`}>Найти юриста</Link>,
+              title: <Link href={`/lawyer`}>{t('breadcrumb.7')}</Link>,
             },
             {
-              title: <span>Регистрация юриста</span>,
+              title: <span>{t('breadcrumb.12')}</span>,
             },
           ]}
         />

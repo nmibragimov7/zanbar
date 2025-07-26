@@ -4,14 +4,13 @@ import Image from "next/image";
 import {Breadcrumb, Button, Pagination, Skeleton} from "antd";
 import {useRouter} from "next/router";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {useTranslation} from "next-i18next";
 
 import MainLayout from "@/widgets/MainLayout/MainLayout"
 import TestDenied from "@/widgets/TestDenied/TestDenied";
 import ProgressBar from "@/shared/ui/ProgressBar/ProgressBar";
 
 import {useTestById, useTestFinish, useTestStart} from "@/entities/Test/Test.module";
-
-import {useAuth} from "@/shared/hooks/useAuth";
 
 import {classNames} from "@/shared/lib/classNames";
 
@@ -30,8 +29,8 @@ export async function getServerSideProps(context: any) {
 
 const Id = () => {
   const router = useRouter();
-  const {user} = useAuth();
   const id: any = router.query?.id;
+  const {t} = useTranslation();
 
   const [questions, setQuestions] = React.useState<any[]>([]);
   const [active, setActive] = React.useState<any>(null);
@@ -138,10 +137,10 @@ const Id = () => {
           separator=">"
           items={[
             {
-              title: <Link href={"/"}>Главная</Link>,
+              title: <Link href={"/"}>{t('breadcrumb.0')}</Link>,
             },
             {
-              title: <Link href={"/tests"}>Тесты</Link>,
+              title: <Link href={"/tests"}>{t('breadcrumb.2')}</Link>,
             },
             {
               title: <span>{data?.data?.title}</span>,
@@ -173,7 +172,7 @@ const Id = () => {
                             disabled={startMutate.isLoading}
                             onClick={onStart}
                           >
-                            Начать тест
+                            {t('test.item.button.0')}
                           </Button>
                         </div>
                       ) : (
@@ -212,7 +211,7 @@ const Id = () => {
                             />
                           </div>
                           <div className={"text-blue-900 rounded-2xl bg-gray--100 p-6 mb-10"}>
-                            <p className={"mb-4"}>Вопрос {active?.questionNumber}</p>
+                            <p className={"mb-4"}>{t('test.item.number')} {active?.questionNumber}</p>
                             <p className={"text-lg font-semibold mb-6"}>{active?.text}</p>
                             <div>
                               {active?.variants ? (
@@ -241,23 +240,22 @@ const Id = () => {
                               disabled={active?.idx === 1}
                               onClick={() => onPage(-1)}
                             >
-                              Предыдущий
+                              {t('test.item.button.1')}
                             </Button>
                             {isLastQuestion ? (
                               <Button
-                                type={"primary"}
-                                className={"w-full md:w-auto text-sm h-[44px] md:!h-9 shadow-none border border-gray-200 !rounded-lg text-white"}
+                                className={"bg-primary w-full md:w-auto text-sm h-[44px] md:!h-9 shadow-none border border-gray-200 !rounded-lg text-white"}
                                 disabled={!isQuestionsCompleted || finishMutate.isLoading}
                                 onClick={onFinish}
                               >
-                                Завершить
+                                {t('test.item.button.2')}
                               </Button>
                             ) : (
                               <Button
                                 className={"w-full md:w-auto text-sm h-[44px] md:!h-9 shadow-none border border-gray-200 !rounded-lg text-dark-500"}
                                 onClick={() => onPage(1)}
                               >
-                                Следующий
+                                {t('test.item.button.3')}
                               </Button>
                             )}
                           </div>
@@ -273,16 +271,16 @@ const Id = () => {
               <div className={"flex justify-center text-center text-blue-900 bg-gray-100 p-10 mb-5 md:mb-10"}>
                 <div className={"w-full max-w-[790px] flex flex-col items-center px-3 md:px-5"}>
                   <p className={"text-sm md:text-base text-black font-semibold mb-6"}>
-                    Окончание тестирования
+                    {t('test.item.finish.header')}
                   </p>
                   <h1 className={"text-2xl mb-4"}>
-                    {isSuccess ? "Поздравляем!" : "У Вас всё ещё есть возможность!"}
+                    {isSuccess ? t('test.item.finish.title.0') : t('test.item.finish.title.1')}
                   </h1>
                   <p className={"text-2xl mb-6"}>
                     {
                       isSuccess
-                        ? "Вы успешно прошли тестирование по курсу “Адвокатская этика и работа с клиентами” "
-                        : "Вы не смогли набрать достаточное количество баллов на тестировании по курсу “Адвокатская этика и работа с клиентами” "
+                        ? t('test.item.finish.description.0')
+                        : t('test.item.finish.description.1')
                     }
                   </p>
                   <div className={"flex justify-center"}>
@@ -292,7 +290,7 @@ const Id = () => {
                       color={isSuccess ? "#32D583" : "#F97066"}
                     >
                       <div>
-                        <p className={"text-xs mb-1"}>Ваш результат</p>
+                        <p className={"text-xs mb-1"}>{t('test.item.finish.description.2')}</p>
                         <p className={"font-semibold"}><span className={"text-3xl"}>{correct}</span> <span className={"text-base"}>/ {questions.length}</span></p>
                       </div>
                     </ProgressBar>
@@ -306,7 +304,7 @@ const Id = () => {
                       <Button
                         className={"w-full !h-[44px] shadow-none bg-green-400 text-white !rounded-[100px] transition-all"}
                       >
-                        Получить сертификат
+                        {t('test.item.finish.button.0')}
                       </Button>
                     </div>
                   ) : (
@@ -315,14 +313,14 @@ const Id = () => {
                         className={"w-full text-sm !h-[44px] shadow-none border border-gray-200 !rounded-lg text-dark-500"}
                         onClick={() => setFinished(false)}
                       >
-                        Пересдача
+                        {t('test.item.finish.button.1')}
                       </Button>
                       <Link href={"/"} className={"w-full"}>
                         <Button
                           type={"primary"}
                           className={"w-full !h-[44px] shadow-none bg-purple-1000 text-white !rounded-lg transition-all"}
                         >
-                          На главную
+                          {t('test.item.finish.button.2')}
                         </Button>
                       </Link>
                     </div>

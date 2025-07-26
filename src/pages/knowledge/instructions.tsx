@@ -23,10 +23,10 @@ const Instructions = () => {
           separator=">"
           items={[
             {
-              title: <Link href={"/"}>Главная</Link>,
+              title: <Link href={"/"}>{t('breadcrumb.0')}</Link>,
             },
             {
-              title: <Link href={`/knowledge`}>База знаний</Link>,
+              title: <Link href={`/knowledge`}>{t('breadcrumb.4')}</Link>,
             },
             {
               title: <span>{t(knowledge?.title || "")}</span>,

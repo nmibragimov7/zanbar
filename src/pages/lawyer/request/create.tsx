@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Image from "next/image";
 import Link from "next/link";
 import {Breadcrumb, Button, Input} from "antd";
+import {useTranslation} from "next-i18next";
 
 import MainLayout from "@/widgets/MainLayout/MainLayout";
 import Field from "@/shared/ui/Field/Field";
@@ -18,6 +19,8 @@ import editIcon from "@/shared/assets/images/svg/edit.svg";
 import approvedIcon from "@/shared/assets/images/svg/approved.svg";
 
 const Create = () => {
+  const {t} = useTranslation();
+
   const [stage, setStage] = useState(1);
   const [request, setRequest] = React.useState({
     category: "",
@@ -55,16 +58,16 @@ const Create = () => {
           separator=">"
           items={[
             {
-              title: <Link href={"/"}>Главная</Link>,
+              title: <Link href={"/"}>{t('breadcrumb.0')}</Link>,
             },
             {
-              title: <Link href={`/lawyer`}>Найти юриста</Link>,
+              title: <Link href={`/lawyer`}>{t('breadcrumb.7')}</Link>,
             },
             {
-              title: <Link href={`/lawyer/request`}>Поиск юриста</Link>,
+              title: <Link href={`/lawyer/request`}>{t('breadcrumb.9')}</Link>,
             },
             {
-              title: <span>Написать заявку</span>,
+              title: <span>{t('breadcrumb.10')}</span>,
             },
           ]}
         />

@@ -4,6 +4,7 @@ import Image from "next/image";
 import {Breadcrumb, Button, Form, Input, notification, Select, Skeleton, Upload, UploadFile} from "antd";
 import {useRouter} from "next/router";
 import type { GetProp, UploadProps } from 'antd';
+import {useTranslation} from "next-i18next";
 
 import MainLayout from "@/widgets/MainLayout/MainLayout";
 import Field from "@/shared/ui/Field/Field";
@@ -25,6 +26,7 @@ type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
 
 const Create = () => {
   const router = useRouter();
+  const {t} = useTranslation();
 
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [image, setImage] = useState<string>("");
@@ -73,20 +75,20 @@ const Create = () => {
           separator=">"
           items={[
             {
-              title: <Link href={"/"}>Главная</Link>,
+              title: <Link href={"/"}>{t('breadcrumb.0')}</Link>,
             },
             {
-              title: <Link href={`/forum`}>Форум</Link>,
+              title: <Link href={`/forum`}>{t('breadcrumb.3')}</Link>,
             },
             {
-              title: <span>Задать вопрос</span>,
+              title: <span>{t('breadcrumb.8')}</span>,
             },
           ]}
         />
         <div className={"mt-10 md:mt-0 px-3 md:px-5"}>
           <div className={"flex justify-center"}>
             <div className={"w-full max-w-[790px]"}>
-              <h2 className={"font-medium text-[30px] mb-6"}>Задать вопрос</h2>
+              <h2 className={"font-medium text-[30px] mb-6"}>{t('forum.create-page.title')}</h2>
               <Form
                 size={"large"}
                 layout={"vertical"}
@@ -103,7 +105,7 @@ const Create = () => {
                     rules={[{required: true, message: validation.REQUIRED}]}
                   >
                     <Field
-                      placeholder={"Тема вопроса"}
+                      placeholder={t('forum.create-page.form.title.placeholder')}
                     />
                   </Form.Item>
                   <Skeleton
@@ -120,7 +122,7 @@ const Create = () => {
                       <Select
                         options={options}
                         className={"w-full !h-[44px] !rounded-none"}
-                        placeholder={"Выберите категорию"}
+                        placeholder={t('forum.create-page.form.category.placeholder')}
                       />
                     </Form.Item>
                   </Skeleton>
@@ -152,7 +154,7 @@ const Create = () => {
                     className={"flex items-center gap-2 text-base font-medium !h-12 shadow-none border border-gray-200 !rounded-lg text-dark-500 px-10"}
                   >
                     <Image src={uploadIcon} alt={""}/>
-                    <span>Добавить фото</span>
+                    <span>{t('forum.create-page.form.button.0')}</span>
                   </Button>
                 </Upload>
                 <Form.Item
@@ -161,7 +163,7 @@ const Create = () => {
                   rules={[{required: true, message: validation.REQUIRED}]}
                 >
                   <Input.TextArea
-                    placeholder={"Введите текст вопроса"}
+                    placeholder={t('forum.create-page.form.text.placeholder')}
                     rows={6}
                     maxLength={5000}
                     style={{height: 120, resize: 'none'}}
@@ -176,7 +178,7 @@ const Create = () => {
                     disabled={createMutate.isLoading}
                   >
                     <Image src={sendIcon} alt={""}/>
-                    <span>Отправить</span>
+                    <span>{t('forum.create-page.form.button.1')}</span>
                   </Button>
                 </Form.Item>
               </Form>

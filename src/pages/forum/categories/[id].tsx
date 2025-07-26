@@ -4,6 +4,7 @@ import Image from "next/image";
 import {Breadcrumb, Button, Pagination, Skeleton} from "antd";
 import {useRouter} from "next/router";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {useTranslation} from "next-i18next";
 
 import MainLayout from "@/widgets/MainLayout/MainLayout";
 import Question from "@/shared/ui/Question/Question";
@@ -24,6 +25,7 @@ export async function getServerSideProps(context: any) {
 const Id = () => {
   const router = useRouter();
   const id: any = router.query?.id;
+  const {t} = useTranslation();
 
   const [page, setPage] = React.useState(1);
 
@@ -49,10 +51,10 @@ const Id = () => {
           separator=">"
           items={[
             {
-              title: <Link href={"/"}>Главная</Link>,
+              title: <Link href={"/"}>{t('breadcrumb.0')}</Link>,
             },
             {
-              title: <Link href={`/forum`}>Форум</Link>,
+              title: <Link href={`/forum`}>{t('breadcrumb.3')}</Link>,
             },
             {
               title: <span>{category?.categoryName}</span>,
@@ -69,7 +71,7 @@ const Id = () => {
                   onClick={() => router.push("/forum/create")}
                 >
                   <Image src={chatIcon} alt={""}/>
-                  <span>Задать вопрос</span>
+                  <span>{t('forum.category-page.button.0')}</span>
                 </Button>
               </div>
               <div className={"grid gap-4"}>

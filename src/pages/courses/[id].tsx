@@ -3,6 +3,7 @@ import Link from "next/link";
 import {Breadcrumb, Button, Skeleton} from "antd";
 import {useRouter} from "next/router";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {useTranslation} from "next-i18next";
 
 import MainLayout from "@/widgets/MainLayout/MainLayout";
 import Tag from "@/shared/ui/Tag/Tag";
@@ -33,6 +34,7 @@ export async function getServerSideProps(context: any) {
 const Id = () => {
   const router = useRouter();
   const id: any = router.query?.id;
+  const {t} = useTranslation();
 
   const onError = () => {
     router.push({
@@ -54,6 +56,7 @@ const Id = () => {
       }
       : null;
   }, [data])
+  console.log(course)
 
   const onSuccess = async () => {
     await refetch();
@@ -110,10 +113,10 @@ const Id = () => {
           separator=">"
           items={[
             {
-              title: <Link href={"/"}>Главная</Link>,
+              title: <Link href={"/"}>{t('breadcrumb.0')}</Link>,
             },
             {
-              title: <Link href={"/courses"}>Курсы</Link>,
+              title: <Link href={"/courses"}>{t('breadcrumb.1')}</Link>,
             },
             {
               title: <span>{course?.title}</span>,
@@ -175,12 +178,12 @@ const Id = () => {
                   </div>
 
                   <div className={"px-3 md:px-0"}>
-                    <h2 className={"font-medium text-2xl mb-4"}>Прогресс прохождения курса</h2>
+                    <h2 className={"font-medium text-2xl mb-4"}>{t('course.item.progress')}</h2>
                     <div className={"flex justify-center md:justify-start mb-8 md:mb-10"}>
                       <ProgressBar current={process?.finished} total={process?.total}/>
                     </div>
 
-                    <h2 className={"font-medium text-2xl mb-4"}>Уроки курса</h2>
+                    <h2 className={"font-medium text-2xl mb-4"}>{t('course.item.lesson.title')}</h2>
                     <div className={"mb-8 md:mb-10"}>
                       <div className={"grid gap-4"}>
                         {course?.lessons ? course?.lessons.map((lesson: any, idx: number) => (
@@ -194,13 +197,13 @@ const Id = () => {
                             ) ? (
                               <div className={"mb-4"}>
                                 {lesson?.status === lessonStatus.started ?
-                                  <Status type={"red"} text={"В процессе"}/> : null}
+                                  <Status type={"red"} text={t('course.item.lesson.status.0')}/> : null}
                                 {lesson?.status === lessonStatus.completed ?
-                                  <Status type={"green"} text={"Завершен"}/> : null}
+                                  <Status type={"green"} text={t('course.item.lesson.status.1')}/> : null}
                               </div>
                             ) : null}
 
-                            <p className={"mb-4"}>Урок {lesson?.lessonNumber}</p>
+                            <p className={"mb-4"}>{t('course.item.lesson.number')} {lesson?.lessonNumber}</p>
                             <p className={"text-lg font-semibold mb-4"}>{lesson?.title}</p>
 
                             {lesson.status && lesson.status === lessonStatus.started ? (
@@ -238,7 +241,7 @@ const Id = () => {
                               }
                               onClick={() => onStartLesson(idx, lesson)}
                             >
-                              Начать
+                              {t('course.item.lesson.button.0')}
                             </Button>
                             <Button
                               type={"primary"}
@@ -251,14 +254,14 @@ const Id = () => {
                               disabled={lessonFinishMutate.isLoading}
                               onClick={() => onFinishLesson(lesson)}
                             >
-                              Завершить
+                              {t('course.item.lesson.button.1')}
                             </Button>
                           </div>
                         )) : null}
                       </div>
                     </div>
 
-                    <h2 className={"font-medium text-2xl mb-4"}>Тестирование</h2>
+                    <h2 className={"font-medium text-2xl mb-4"}>{t('course.item.test.title')}</h2>
                     <div>
                       <div className={"grid gap-4"}>
                         <div
@@ -266,7 +269,7 @@ const Id = () => {
                         >
                           {course?.test?.state === testStatus.completed ? (
                             <div className={"mb-4"}>
-                              <Status type={"green"} text={"Завершен"}/>
+                              <Status type={"green"} text={t('course.item.test.status.0')}/>
                             </div>
                           ) : null}
 
@@ -278,7 +281,7 @@ const Id = () => {
                             disabled={!isCompletedLessons(course?.lessons || []) && course?.test?.state !== testStatus.active}
                             onClick={() => onStartTest(course?.test)}
                           >
-                            Начать
+                            {t('course.item.test.button.0')}
                           </Button>
                         </div>
                       </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Pagination, Skeleton} from "antd";
 import {useRouter} from "next/router";
+import {useTranslation} from "next-i18next";
 
 import MainLayout from "@/widgets/MainLayout/MainLayout";
 import Tabs from "@/shared/ui/Tabs/Tabs";
@@ -23,6 +24,7 @@ const tabs = [
 
 const Forum = () => {
   const router = useRouter();
+  const {t} = useTranslation();
 
   const [active, setActive] = React.useState("popular");
   const [page, setPage] = React.useState(1);
@@ -39,8 +41,8 @@ const Forum = () => {
       <MainLayout>
         <div className={"flex justify-center text-center bg-gray-100 p-10 mb-5 md:mb-10"}>
           <div className={"w-full max-w-[640px] flex flex-col items-center"}>
-            <h1 className={"text-xl md:text-3xl font-medium mb-6"}>Форум</h1>
-            <p className={"text-dark-400 text-base md:text-xl"}>Задавайте вопросы и получайте ответы</p>
+            <h1 className={"text-xl md:text-3xl font-medium mb-6"}>{t('forum.title')}</h1>
+            <p className={"text-dark-400 text-base md:text-xl"}>{t('forum.description')}</p>
           </div>
         </div>
         <div className={"px-3 md:px-5 mb-10"}>
@@ -49,7 +51,7 @@ const Forum = () => {
               <h2
                 className={"font-medium text-2xl md:text-[30px] mb-8"
               }>
-                Категории {response?.data && response?.data.length ? response?.data.length : 0}
+                {t('forum.category')} {response?.data && response?.data.length ? response?.data.length : 0}
               </h2>
 
               <div className={"flex flex-col md:flex-row md:items-center gap-4 mb-10"}>
@@ -72,11 +74,11 @@ const Forum = () => {
                 </Skeleton>
               </div>
               <div className={"flex items-center justify-between mb-4"}>
-                <h2 className={"font-medium text-2xl md:text-[30px]"}>Вопросы</h2>
-                <Tabs
-                  tabs={tabs}
-                  onToggle={(value: string) => setActive(value)}
-                />
+                <h2 className={"font-medium text-2xl md:text-[30px]"}>{t('forum.question')}</h2>
+                {/*<Tabs*/}
+                {/*  tabs={tabs}*/}
+                {/*  onToggle={(value: string) => setActive(value)}*/}
+                {/*/>*/}
               </div>
               <div className={"grid gap-4"}>
                 <Skeleton

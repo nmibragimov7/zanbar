@@ -35,10 +35,10 @@ const Id = () => {
           separator=">"
           items={[
             {
-              title: <Link href={"/"}>Главная</Link>,
+              title: <Link href={"/"}>{t('breadcrumb.0')}</Link>,
             },
             {
-              title: <Link href={`/faq`}>FAQ</Link>,
+              title: <Link href={`/faq`}>{t('breadcrumb.6')}</Link>,
             },
             {
               title: <span>{t(item?.title || "")}</span>,

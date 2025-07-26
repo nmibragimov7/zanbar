@@ -2,6 +2,7 @@ import React from 'react';
 import Image from "next/image";
 import {useRouter} from "next/router";
 import {Button} from "antd";
+import {useTranslation} from "next-i18next";
 
 import AuthDenied from "@/widgets/AuthDenied/AuthDenied";
 
@@ -34,6 +35,7 @@ const Question: React.FC<QuestionProps> = ({
 }) => {
   const router = useRouter();
   const {isAuth} = useAuth();
+  const {t} = useTranslation();
 
   const [visible, setVisible] = React.useState(false);
 
@@ -57,7 +59,7 @@ const Question: React.FC<QuestionProps> = ({
                 <img src={authorImage} alt={""} className={"w-full h-full object-contain"}/>
               ) : (
                 <div
-                  className={"bg-green-100 w-full h-full flex items-center justify-center text-green-900 font-medium text-2xl"}>A</div>
+                  className={"bg-green-100 w-full h-full flex items-center justify-center text-green-900 font-medium text-2xl"}>П</div>
               )}
             </div>
             <div className={"flex items-center gap-1"}>
@@ -66,7 +68,7 @@ const Question: React.FC<QuestionProps> = ({
             </div>
             <div className={"flex items-center gap-1"}>
               <Image src={chatIcon} alt={""}/>
-              <span className={"text-gray-600 text-sm"}>Ответы {answerCount || 0}</span>
+              <span className={"text-gray-600 text-sm"}>{t('forum.item.answer')} {answerCount || 0}</span>
             </div>
           </div>
 
@@ -74,7 +76,7 @@ const Question: React.FC<QuestionProps> = ({
             className={"w-full md:w-auto !h-9 shadow-none border border-gray-200 bg-white text-dark-500 font-semibold !rounded-lg transition-all"}
             onClick={() => onNavigate(`/forum/questions/${questionId}`)}
           >
-            <span>Посмотреть</span>
+            <span>{t('forum.item.button.0')}</span>
           </Button>
         </div>
       </div>

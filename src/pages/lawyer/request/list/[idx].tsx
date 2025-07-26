@@ -3,6 +3,7 @@ import Link from "next/link";
 import {Breadcrumb, Skeleton} from "antd";
 import {useRouter} from "next/router";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {useTranslation} from "next-i18next";
 
 import MainLayout from "@/widgets/MainLayout/MainLayout";
 import Status from "@/shared/ui/Status/Status";
@@ -22,6 +23,7 @@ export async function getServerSideProps(context: any) {
 const Idx = () => {
   const router = useRouter();
   const idx = parseInt(String(router.query?.idx));
+  const {t} = useTranslation();
 
   const {data, isFetching} = useLawyers();
   const lawyer: any = useMemo(() => {
@@ -51,16 +53,16 @@ const Idx = () => {
           separator=">"
           items={[
             {
-              title: <Link href={"/"}>Главная</Link>,
+              title: <Link href={"/"}>{t('breadcrumb.0')}</Link>,
             },
             {
-              title: <Link href={`/lawyer`}>Найти юриста</Link>,
+              title: <Link href={`/lawyer`}>{t('breadcrumb.7')}</Link>,
             },
             {
-              title: <Link href={`/lawyer/request`}>Поиск юриста</Link>,
+              title: <Link href={`/lawyer/request`}>{t('breadcrumb.9')}</Link>,
             },
             {
-              title: <Link href={`/lawyer/request/list`}>Список юристов</Link>,
+              title: <Link href={`/lawyer/request/list`}>{t('breadcrumb.11')}</Link>,
             },
             {
               title: <span>{lawyer?.firstName} {lawyer?.lastName}</span>,

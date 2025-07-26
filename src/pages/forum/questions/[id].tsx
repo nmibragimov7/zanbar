@@ -4,6 +4,7 @@ import Image from "next/image";
 import {Breadcrumb, Button, Form, Input, Skeleton} from "antd";
 import {useRouter} from "next/router";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {useTranslation} from "next-i18next";
 
 import MainLayout from "@/widgets/MainLayout/MainLayout";
 import Answer from "@/shared/ui/Answer/Answer";
@@ -32,6 +33,7 @@ export async function getServerSideProps(context: any) {
 const Id = () => {
   const router = useRouter();
   const id: any = router.query?.id;
+  const {t} = useTranslation();
 
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -75,10 +77,10 @@ const Id = () => {
           separator=">"
           items={[
             {
-              title: <Link href={"/"}>Главная</Link>,
+              title: <Link href={"/"}>{t('breadcrumb.0')}</Link>,
             },
             {
-              title: <Link href={`/forum`}>Форум</Link>,
+              title: <Link href={`/forum`}>{t('breadcrumb.3')}</Link>,
             },
             {
               title: <span>{data?.data?.forumTitle}</span>,
@@ -111,7 +113,7 @@ const Id = () => {
                           <img src={data?.data?.authorImage} alt={""} className={"w-full h-full object-contain"}/>
                         ) : (
                           <div
-                            className={"bg-green-100 w-full h-full flex items-center justify-center text-green-900 font-medium text-2xl"}>A</div>
+                            className={"bg-green-100 w-full h-full flex items-center justify-center text-green-900 font-medium text-2xl"}>П</div>
                         )}
                       </div>
                       <p className={"text-lg font-semibold"}>{data?.data?.authorName}</p>
@@ -123,7 +125,7 @@ const Id = () => {
                       </div>
                       <div className={"flex items-center gap-1"}>
                         <Image src={chatIcon} alt={""}/>
-                        <span className={"text-gray-600 text-sm"}>Ответы {data?.data?.answerCount || 0}</span>
+                        <span className={"text-gray-600 text-sm"}>{t('forum.question-page.answer')} {data?.data?.answerCount || 0}</span>
                       </div>
                     </div>
                   </div>
@@ -141,14 +143,14 @@ const Id = () => {
                       onClick={() => likeMutate.mutate(id)}
                     >
                       <Image src={likeIcon} alt={""}/>
-                      <p>{data?.data?.likes || 0} <span className={"hidden md:inline-block"}>Нравится</span></p>
+                      <p>{data?.data?.likes || 0} <span className={"hidden md:inline-block"}>{t('forum.question-page.button.0')}</span></p>
                     </Button>
                     <Button
                       className={"w-full md:w-auto flex items-center gap-2 text-sm font-medium !h-12 shadow-none border border-gray-200 !rounded-lg text-dark-500"}
                       onClick={() => window.scroll({top: ref.current?.offsetTop, behavior: "smooth"})}
                     >
                       <Image src={chatBlackIcon} alt={""}/>
-                      <span>Ответить на вопрос</span>
+                      <span>{t('forum.question-page.button.0')}</span>
                     </Button>
                   </div>
                 </div>
@@ -157,7 +159,7 @@ const Id = () => {
             <div className={"bg-gray-400 py-10 px-3 md:px-5 mb-10"}>
               <div className={"flex justify-center"}>
                 <div className={"w-full max-w-[790px]"}>
-                  <p className={"text-xl font-semibold mb-4"}>Ответы {data?.data?.answerCount || 0}</p>
+                  <p className={"text-xl font-semibold mb-4"}>{t('forum.question-page.answer')} {data?.data?.answerCount || 0}</p>
                   <div className={"grid gap-2 mb-10"}>
                     {data?.data?.answerCount ? (
                       <>
@@ -172,7 +174,7 @@ const Id = () => {
                     ) : null}
                   </div>
                   <div ref={ref} className={"bg-white rounded-2xl p-4 md:p-6"}>
-                    <p className={"text-2xl font-medium mb-6"}>Ответить на вопрос</p>
+                    <p className={"text-2xl font-medium mb-6"}>{t('forum.question-page.form.title')}</p>
                     <Form
                       size={"large"}
                       layout={"vertical"}
@@ -188,7 +190,7 @@ const Id = () => {
                         rules={[{required: true, message: validation.REQUIRED}]}
                       >
                         <Input.TextArea
-                          placeholder={"Введите текст"}
+                          placeholder={t('forum.question-page.form.answer.placeholder')}
                           rows={6}
                           maxLength={5000}
                           style={{height: 120, resize: 'none'}}
@@ -199,11 +201,11 @@ const Id = () => {
                         <Button
                           htmlType={"submit"}
                           type={"primary"}
-                          className={"flex items-center gap-2 text-base font-medium !h-12 shadow-none border-none !rounded-lg text-white px-5"}
+                          className={"bg-primary flex items-center gap-2 text-base font-medium !h-12 shadow-none border-none !rounded-lg text-white px-5"}
                           disabled={answerMutate.isLoading}
                         >
                           <Image src={sendIcon} alt={""}/>
-                          <span>Отправить</span>
+                          <span>{t('forum.question-page.form.button.0')}</span>
                         </Button>
                       </Form.Item>
                     </Form>
