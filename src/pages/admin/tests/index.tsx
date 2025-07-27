@@ -7,6 +7,7 @@ import {useRouter} from "next/router";
 import AdminLayout from "@/widgets/AdminLayout/AdminLayout";
 
 import {useTestsByAdmin} from "@/entities/Test/Test.module";
+import {useCoursesByAdmin} from "@/entities/Course/Course.module";
 
 import {formatDate} from "@/shared/lib/date";
 import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
@@ -20,6 +21,7 @@ const Tests = () => {
 
   const [page, setPage] = React.useState(1);
 
+  const {data: courses} = useCoursesByAdmin({page: page - 1, size: 1000});
   const {data, isFetching} = useTestsByAdmin({page: page - 1, size: 10});
 
   const columns: ColumnsType = [
@@ -35,7 +37,7 @@ const Tests = () => {
     {
       title: "Курс",
       dataIndex: "courseId",
-      render: (data) => <div className={"text-sm"}>{data}</div>
+      render: (data) => <div className={"text-sm"}>{course(data)}</div>
     },
     {
       title: "Дата создания",
@@ -60,6 +62,9 @@ const Tests = () => {
     return data?.data?.content || [];
   }, [data]);
 
+  const course = (id: number) => {
+    return (courses?.data?.content || []).find((c: any) => c.id === id)?.title || id;
+  }
   const onChange = async (current: number) => {
     setPage(current);
   }
@@ -70,18 +75,18 @@ const Tests = () => {
         <div className={"flex flex-col md:flex-row md:items-center justify-between gap-6 md:gap-0 mb-10"}>
           <p className={"text-[30px] font-medium"}>Тесты</p>
           <div className={"flex items-center gap-4"}>
-            <Button
-              className={"flex items-center gap-2 text-sm font-semibold !h-10 shadow-none border border-gray-200 !rounded-lg text-dark-500"}
-            >
-              <Image src={filterIcon} alt={""}/>
-              <span className={"hidden md:inline-block"}>Фильтры</span>
-            </Button>
-            <Button
-              className={"flex items-center gap-2 text-sm font-semibold !h-10 shadow-none border border-gray-200 !rounded-lg text-dark-500"}
-            >
-              <Image src={dotsIcon} alt={""}/>
-              <span className={"hidden md:inline-block"}>Еще</span>
-            </Button>
+            {/*<Button*/}
+            {/*  className={"flex items-center gap-2 text-sm font-semibold !h-10 shadow-none border border-gray-200 !rounded-lg text-dark-500"}*/}
+            {/*>*/}
+            {/*  <Image src={filterIcon} alt={""}/>*/}
+            {/*  <span className={"hidden md:inline-block"}>Фильтры</span>*/}
+            {/*</Button>*/}
+            {/*<Button*/}
+            {/*  className={"flex items-center gap-2 text-sm font-semibold !h-10 shadow-none border border-gray-200 !rounded-lg text-dark-500"}*/}
+            {/*>*/}
+            {/*  <Image src={dotsIcon} alt={""}/>*/}
+            {/*  <span className={"hidden md:inline-block"}>Еще</span>*/}
+            {/*</Button>*/}
             <Button
               className={"flex items-center gap-2 text-sm font-semibold w-full md:w-auto !h-10 shadow-none border border-gray-200 !rounded-lg text-dark-500"}
               onClick={() => router.push("/admin/tests/create")}

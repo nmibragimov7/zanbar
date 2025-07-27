@@ -21,10 +21,10 @@ const tabs = [
     label: "Форум",
     value: "/admin/forum",
   },
-  {
-    label: "Пользователи",
-    value: "/admin/users",
-  },
+  // {
+  //   label: "Пользователи",
+  //   value: "/admin/users",
+  // },
 ]
 
 const AdminLayout: React.FC<PropsWithChildren> = ({children}) => {

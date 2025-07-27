@@ -1,7 +1,9 @@
 import React from 'react';
-import Image from "next/image";
+import {useTranslation} from "next-i18next";
 
 const Footer = () => {
+  const {t} = useTranslation();
+
   return (
     <>
       <div className={"bg-gray-400 flex flex-col md:flex-row items-center justify-center md:justify-between py-[5vh] px-3 md:px-5"}>
@@ -12,9 +14,9 @@ const Footer = () => {
 
         <div className={"md:w-1/2 flex flex-col items-center justify-center md:block md:text-end px-3 md:px-6 mt-10 md:mt-0"}>
           <p className={"md:text-xs"}>
-            Проект реализован в рамках реализации программы № BR24993166 «Разработка комплексной инновационной онлайн-платформы, автоматизированной системы юридической помощи и единой системы автоматизации работы юристов»
+            {t('footer.description.0')}
           </p>
-          <p className={"text-gray-600 md:text-xs mt-2"}>Научный руководитель: PhD, профессор Ахмедиярова Айнур Танатаровна</p>
+          <p className={"text-gray-600 md:text-xs mt-2"}>{t('footer.description.1')}</p>
         </div>
       </div>
     </>

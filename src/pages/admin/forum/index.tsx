@@ -43,11 +43,6 @@ const Index = () => {
         >{data?.forumTitle}</div>
     },
     {
-      title: "Категория",
-      dataIndex: "category",
-      render: (data) => <div className={"text-sm"}>{data}</div>
-    },
-    {
       title: "Ответы",
       dataIndex: "answerCount",
       render: (data) => <div className={"text-sm"}>{data}</div>
@@ -119,20 +114,20 @@ const Index = () => {
       <AdminLayout>
         <div className={"flex items-center justify-between mb-10"}>
           <p className={"text-[30px] font-medium"}>Форум</p>
-          <div className={"flex items-center gap-4"}>
-            <Button
-              className={"flex items-center gap-2 text-sm font-semibold !h-10 shadow-none border border-gray-200 !rounded-lg text-dark-500"}
-            >
-              <Image src={filterIcon} alt={""}/>
-              <span className={"hidden md:inline-block"}>Фильтры</span>
-            </Button>
-            <Button
-              className={"flex items-center gap-2 text-sm font-semibold !h-10 shadow-none border border-gray-200 !rounded-lg text-dark-500"}
-            >
-              <Image src={dotsIcon} alt={""}/>
-              <span className={"hidden md:inline-block"}>Еще</span>
-            </Button>
-          </div>
+          {/*<div className={"flex items-center gap-4"}>*/}
+          {/*  <Button*/}
+          {/*    className={"flex items-center gap-2 text-sm font-semibold !h-10 shadow-none border border-gray-200 !rounded-lg text-dark-500"}*/}
+          {/*  >*/}
+          {/*    <Image src={filterIcon} alt={""}/>*/}
+          {/*    <span className={"hidden md:inline-block"}>Фильтры</span>*/}
+          {/*  </Button>*/}
+          {/*  <Button*/}
+          {/*    className={"flex items-center gap-2 text-sm font-semibold !h-10 shadow-none border border-gray-200 !rounded-lg text-dark-500"}*/}
+          {/*  >*/}
+          {/*    <Image src={dotsIcon} alt={""}/>*/}
+          {/*    <span className={"hidden md:inline-block"}>Еще</span>*/}
+          {/*  </Button>*/}
+          {/*</div>*/}
         </div>
         <div className={"w-full mb-10"}>
           <div className={"border border-gray-200 rounded-xl overflow-hidden"}>

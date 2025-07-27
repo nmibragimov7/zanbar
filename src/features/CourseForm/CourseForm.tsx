@@ -52,15 +52,19 @@ const CourseForm: React.FC<CourseFormProps> = ({data, isFetching, isLoading, onS
   const [lessons, setLessons] = useState<any[]>([
     {
       title: "",
+      titleKz: "",
       videoUrl: "",
       bodyText: "",
+      bodyTextKz: "",
     },
   ]);
 
   const initial: TCourse = {
     title: "",
+    titleKz: "",
     tags: [],
     description: "",
+    descriptionKz: "",
     image: "",
   };
   const [form] = Form.useForm<TCourse>();
@@ -95,8 +99,10 @@ const CourseForm: React.FC<CourseFormProps> = ({data, isFetching, isLoading, onS
   const onAdd = () => {
     setLessons([...lessons, {
       title: "",
+      titleKz: "",
       videoUrl: "",
       bodyText: "",
+      bodyTextKz: "",
     }]);
   }
   const onSave = (values: TCourse) => {
@@ -105,7 +111,7 @@ const CourseForm: React.FC<CourseFormProps> = ({data, isFetching, isLoading, onS
       return
     }
 
-    if (lessons.some((item: any) => !item?.title || (!item?.bodyText && !item?.videoUrl))) {
+    if (lessons.some((item: any) => (!item?.title && !item?.titleKz)|| (!item?.bodyText && !item?.bodyTextKz && !item?.videoUrl))) {
       notification.warning({message: "Заполните обязательные поля уроков: Наименование и Полное описание"})
       return
     }
@@ -121,8 +127,10 @@ const CourseForm: React.FC<CourseFormProps> = ({data, isFetching, isLoading, onS
   useEffect(() => {
     if (data) {
       form.setFieldValue("title", data?.title || "")
+      form.setFieldValue("titleKz", data?.titleKz || "")
       form.setFieldValue("tags", data?.tags || [])
       form.setFieldValue("description", data?.description || "")
+      form.setFieldValue("descriptionKz", data?.descriptionKz || "")
       form.setFieldValue("image", data?.image || "")
 
       if (data?.image) {
@@ -134,7 +142,16 @@ const CourseForm: React.FC<CourseFormProps> = ({data, isFetching, isLoading, onS
       }
 
       if (data?.lessons && data?.lessons.length) {
-        setLessons(data?.lessons.map((item: any) => ({id: item?.id, title: item?.title, videoUrl: item?.videoUrl, bodyText: item?.bodyText})));
+        setLessons(data?.lessons.map((item: any) => (
+          {
+            id: item?.id,
+            title: item?.title,
+            titleKz: item?.titleKz,
+            videoUrl: item?.videoUrl,
+            bodyText: item?.bodyText,
+            bodyTextKz: item?.bodyTextKz,
+          }
+        )));
       }
     }
   }, [data])
@@ -198,16 +215,22 @@ const CourseForm: React.FC<CourseFormProps> = ({data, isFetching, isLoading, onS
               <div className={"bg-gray-100 w-full h-[69px]"}></div>
               <div className={"bg-gray-100 w-full h-[69px]"}></div>
             </div>
+            <div className={"bg-gray-100 w-full h-[69px] mb-6"}></div>
             <div className={"bg-gray-100 w-[229px] h-[48px] mb-6"}></div>
-            <div className={"bg-gray-100 w-full h-[144px] mb-14"}></div>
+            <div className={"bg-gray-100 w-full h-[174px] mb-14"}></div>
+
             <div className={"bg-gray-100 w-full h-[28px] mb-6"}></div>
             <div className={"grid md:grid-cols-2 gap-4 mb-6"}>
+              <div className={"bg-gray-100 w-full h-[69px]"}></div>
               <div className={"bg-gray-100 w-full h-[69px]"}></div>
             </div>
             <div className={"grid md:grid-cols-2 gap-4 mb-6"}>
               <div className={"bg-gray-100 w-full h-[44px]"}></div>
             </div>
-            <div className={"bg-gray-100 w-full h-[144px] mb-10"}></div>
+            <div className={"grid md:grid-cols-2 gap-4 mb-10"}>
+              <div className={"bg-gray-100 w-full h-[144px]"}></div>
+              <div className={"bg-gray-100 w-full h-[144px]"}></div>
+            </div>
             <div className={"bg-gray-100 w-[220px] h-[48px]"}></div>
           </>
         ) : (
@@ -220,40 +243,40 @@ const CourseForm: React.FC<CourseFormProps> = ({data, isFetching, isLoading, onS
                 rules={[{required: true, message: validation.REQUIRED}]}
               >
                 <Field
-                  label={"Наименование"}
+                  label={"Наименование (RU)"}
                   placeholder={"Введите текст"}
                 />
               </Form.Item>
-              <Skeleton
-                loading={isFetchingTags}
-                active
-                paragraph={false}
-                className={"h-[68px] mb-6"}
+              <Form.Item
+                name="titleKz"
+                className={"w-full mb-6"}
+                rules={[{required: true, message: validation.REQUIRED}]}
               >
-                <Form.Item
-                  name="tags"
-                  label={"Теги"}
-                  className={"w-full mb-6"}
-                >
-                  <Select
-                    mode="multiple"
-                    className={"w-full !h-[44px] !rounded-none"}
-                    placeholder={"Выберите из списка"}
-                    options={options}
-                  />
-                </Form.Item>
-              </Skeleton>
+                <Field
+                  label={"Наименование (KZ)"}
+                  placeholder={"Введите текст"}
+                />
+              </Form.Item>
             </div>
-            {/*<Form.Item*/}
-            {/*  name="description"*/}
-            {/*  className={"w-full mb-6"}*/}
-            {/*  rules={[{required: true, message: validation.REQUIRED}]}*/}
-            {/*>*/}
-            {/*  <Field*/}
-            {/*    label={"Краткое описание"}*/}
-            {/*    placeholder={"Введите текст"}*/}
-            {/*  />*/}
-            {/*</Form.Item>*/}
+            <Skeleton
+              loading={isFetchingTags}
+              active
+              paragraph={false}
+              className={"h-[68px] mb-6"}
+            >
+              <Form.Item
+                name="tags"
+                label={"Теги"}
+                className={"w-full mb-6"}
+              >
+                <Select
+                  mode="multiple"
+                  className={"w-full !h-[44px] !rounded-none"}
+                  placeholder={"Выберите из списка"}
+                  options={options}
+                />
+              </Form.Item>
+            </Skeleton>
             <div className={"mb-6"}>
               <Upload
                 beforeUpload={() => false}
@@ -304,25 +327,43 @@ const CourseForm: React.FC<CourseFormProps> = ({data, isFetching, isLoading, onS
                 )}
               </Upload>
             </div>
-            <div className={"mb-14"}>
-              <p className={"text-sm text-dark-500 mb-1"}>Полное описание</p>
-              <Form.Item
-                name="description"
-                className={"mb-0"}
-                rules={[{required: true, message: validation.REQUIRED}]}
-              >
-                <Input.TextArea
-                  placeholder={"Введите текст"}
-                  rows={6}
-                  maxLength={5000}
-                  style={{height: 120, resize: 'none'}}
-                  className={"border border-gray-200 !rounded-lg !shadow-none transition-all duration-300 placeholder:!text-gray-600 !p-4"}
-                />
-              </Form.Item>
+            <div className={"grid md:grid-cols-2 md:gap-4 mb-14"}>
+              <div>
+                <p className={"text-sm text-dark-500 mb-1"}>Полное описание (RU)</p>
+                <Form.Item
+                  name="description"
+                  className={"mb-0"}
+                  rules={[{required: true, message: validation.REQUIRED}]}
+                >
+                  <Input.TextArea
+                    placeholder={"Введите текст"}
+                    rows={6}
+                    maxLength={5000}
+                    style={{height: 150, resize: 'none'}}
+                    className={"border border-gray-200 !rounded-lg !shadow-none transition-all duration-300 placeholder:!text-gray-600 !p-4"}
+                  />
+                </Form.Item>
+              </div>
+              <div>
+                <p className={"text-sm text-dark-500 mb-1"}>Полное описание (KZ)</p>
+                <Form.Item
+                  name="descriptionKz"
+                  className={"mb-0"}
+                  rules={[{required: true, message: validation.REQUIRED}]}
+                >
+                  <Input.TextArea
+                    placeholder={"Введите текст"}
+                    rows={6}
+                    maxLength={5000}
+                    style={{height: 150, resize: 'none'}}
+                    className={"border border-gray-200 !rounded-lg !shadow-none transition-all duration-300 placeholder:!text-gray-600 !p-4"}
+                  />
+                </Form.Item>
+              </div>
             </div>
             <div>
               {lessons.map((lesson: any, idx: number) => (
-                <div key={idx} className={"mb-10"}>
+                <div key={idx} className={"border-b border-gray-300 pb-10 mb-10"}>
                   <div className={"flex items-center justify-between mb-6"}>
                     <p className={"text-xl"}>Урок {idx + 1}</p>
                     {idx ? (
@@ -330,16 +371,22 @@ const CourseForm: React.FC<CourseFormProps> = ({data, isFetching, isLoading, onS
                         className={"w-9 h-9 bg-gray-400 flex items-center gap-3 font-medium text-sm shadow-none !border-none !rounded-lg text-dark-500 disabled:bg-gray-100 transition-all !px-2"}
                         onClick={() => onRemoveLesson(idx)}
                       >
-                        <Image src={removeIcon} alt={""} className={"w-4 h-4"}/>
+                      <Image src={removeIcon} alt={""} className={"w-4 h-4"}/>
                       </Button>
                     ) : null}
                   </div>
                   <div className={"grid md:grid-cols-2 gap-4 mb-6"}>
                     <Field
-                      label={"Наименование"}
+                      label={"Наименование (RU)"}
                       placeholder={"Введите текст"}
                       value={lesson?.title}
                       onChange={(event: any) => onChange(idx, "title", event.target.value)}
+                    />
+                    <Field
+                      label={"Наименование (KZ)"}
+                      placeholder={"Введите текст"}
+                      value={lesson?.titleKz}
+                      onChange={(event: any) => onChange(idx, "titleKz", event.target.value)}
                     />
                   </div>
                   <div className={"grid md:grid-cols-2 gap-4 mb-6"}>
@@ -353,17 +400,31 @@ const CourseForm: React.FC<CourseFormProps> = ({data, isFetching, isLoading, onS
                       />
                     </div>
                   </div>
-                  <div>
-                    <p className={"text-sm text-dark-500 mb-1"}>Полное описание</p>
-                    <Input.TextArea
-                      placeholder={"Введите текст"}
-                      rows={6}
-                      maxLength={5000}
-                      style={{height: 120, resize: 'none'}}
-                      className={"border border-gray-200 !rounded-lg !shadow-none transition-all duration-300 placeholder:!text-gray-600 !p-4"}
-                      value={lesson?.bodyText}
-                      onChange={(event: any) => onChange(idx, "bodyText", event.target.value)}
-                    />
+                  <div className={"grid md:grid-cols-2 gap-4"}>
+                    <div>
+                      <p className={"text-sm text-dark-500 mb-1"}>Полное описание (RU)</p>
+                      <Input.TextArea
+                        placeholder={"Введите текст"}
+                        rows={6}
+                        maxLength={5000}
+                        style={{height: 120, resize: 'none'}}
+                        className={"border border-gray-200 !rounded-lg !shadow-none transition-all duration-300 placeholder:!text-gray-600 !p-4"}
+                        value={lesson?.bodyText}
+                        onChange={(event: any) => onChange(idx, "bodyText", event.target.value)}
+                      />
+                    </div>
+                    <div>
+                      <p className={"text-sm text-dark-500 mb-1"}>Полное описание (KZ)</p>
+                      <Input.TextArea
+                        placeholder={"Введите текст"}
+                        rows={6}
+                        maxLength={5000}
+                        style={{height: 120, resize: 'none'}}
+                        className={"border border-gray-200 !rounded-lg !shadow-none transition-all duration-300 placeholder:!text-gray-600 !p-4"}
+                        value={lesson?.bodyTextKz}
+                        onChange={(event: any) => onChange(idx, "bodyTextKz", event.target.value)}
+                      />
+                    </div>
                   </div>
                 </div>
               ))}

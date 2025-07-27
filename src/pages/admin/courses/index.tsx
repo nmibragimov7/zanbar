@@ -108,18 +108,18 @@ const Courses = () => {
         <div className={"flex flex-col md:flex-row md:items-center justify-between gap-6 md:gap-0 mb-10"}>
           <p className={"text-[30px] font-medium"}>Курсы</p>
           <div className={"flex items-center gap-4"}>
-            <Button
-              className={"flex items-center gap-2 text-sm font-semibold !h-10 shadow-none border border-gray-200 !rounded-lg text-dark-500"}
-            >
-              <Image src={filterIcon} alt={""}/>
-              <span className={"hidden md:inline-block"}>Фильтры</span>
-            </Button>
-            <Button
-              className={"flex items-center gap-2 text-sm font-semibold !h-10 shadow-none border border-gray-200 !rounded-lg text-dark-500"}
-            >
-              <Image src={dotsIcon} alt={""}/>
-              <span className={"hidden md:inline-block"}>Еще</span>
-            </Button>
+            {/*<Button*/}
+            {/*  className={"flex items-center gap-2 text-sm font-semibold !h-10 shadow-none border border-gray-200 !rounded-lg text-dark-500"}*/}
+            {/*>*/}
+            {/*  <Image src={filterIcon} alt={""}/>*/}
+            {/*  <span className={"hidden md:inline-block"}>Фильтры</span>*/}
+            {/*</Button>*/}
+            {/*<Button*/}
+            {/*  className={"flex items-center gap-2 text-sm font-semibold !h-10 shadow-none border border-gray-200 !rounded-lg text-dark-500"}*/}
+            {/*>*/}
+            {/*  <Image src={dotsIcon} alt={""}/>*/}
+            {/*  <span className={"hidden md:inline-block"}>Еще</span>*/}
+            {/*</Button>*/}
             <Button
               className={"flex items-center gap-2 text-sm font-semibold w-full md:w-auto !h-10 shadow-none border border-gray-200 !rounded-lg text-dark-500"}
               onClick={() => router.push("/admin/courses/create")}

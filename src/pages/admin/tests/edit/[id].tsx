@@ -42,10 +42,10 @@ const Id = () => {
   const removeMutate = useTestRemove({onSuccess})
 
   const onSubmit = (data: any) => {
-    console.log(data)
     editMutate.mutate({
       id: parseInt(id),
       title: data.values.title,
+      titleKz: data.values.titleKz,
       courseId: data.values.courseId,
       type: data.values.type,
       questions: (data?.questions || []).map((item: any, idx: number) => ({...item, questionNumber: idx + 1})),

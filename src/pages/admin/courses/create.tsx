@@ -21,8 +21,10 @@ const Create = () => {
   const onSubmit = (data: any) => {
     createMutate.mutate({
       title: data.values.title,
+      titleKz: data.values.titleKz,
       tags: data.values.tags,
       description: data.values.description,
+      descriptionKz: data.values.descriptionKz,
       // status: data?.checked ? "ACTIVE" : "NOT_ACTIVE",
       image: data?.image,
       lessons: (data?.lessons || []).map((item: any, idx: number) => ({...item, lessonNumber: idx + 1})),

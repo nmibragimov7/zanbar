@@ -37,9 +37,11 @@ const TestForm: React.FC<TestFormProps> = ({data, isLoading, isFetching, onSubmi
   const [questions, setQuestions] = useState<any[]>([
     {
       text: "",
+      textKz: "",
       answers: [
         {
           text: "",
+          textKz: "",
           correct: false,
         },
       ],
@@ -48,6 +50,7 @@ const TestForm: React.FC<TestFormProps> = ({data, isLoading, isFetching, onSubmi
 
   const initial: TTest = {
     title: "",
+    titleKz: "",
     type: "",
     courseId: undefined,
   };
@@ -103,6 +106,7 @@ const TestForm: React.FC<TestFormProps> = ({data, isLoading, isFetching, onSubmi
       if (idy === idx) {
         question.answers = [...question.answers, {
           text: "",
+          textKz: "",
           correct: false,
         }];
       }
@@ -114,9 +118,11 @@ const TestForm: React.FC<TestFormProps> = ({data, isLoading, isFetching, onSubmi
     setQuestions([...questions,
       {
         text: "",
+        textKz: "",
         answers: [
           {
             text: "",
+            textKz: "",
             correct: false,
           },
         ],
@@ -124,7 +130,7 @@ const TestForm: React.FC<TestFormProps> = ({data, isLoading, isFetching, onSubmi
     ]);
   }
   const onSave = (values: TTest) => {
-    if (questions.some((item: any) => !item?.text)) {
+    if (questions.some((item: any) => !item?.text && !item?.textKz)) {
       notification.warning({message: "Заполните обязательные поля вопросов: Текст вопроса и Ответы"})
       return
     }
@@ -138,11 +144,19 @@ const TestForm: React.FC<TestFormProps> = ({data, isLoading, isFetching, onSubmi
   useEffect(() => {
     if (data) {
       form.setFieldValue("title", data?.title || "")
+      form.setFieldValue("titleKz", data?.titleKz || "")
       form.setFieldValue("type", data?.type || "")
       form.setFieldValue("courseId", data?.courseId)
 
       if (data?.questions && data?.questions.length) {
-        setQuestions(data?.questions.map((item: any) => ({id: item?.id, text: item?.text, answers: item?.answers || []})));
+        setQuestions(data?.questions.map((item: any) => (
+          {
+            id: item?.id,
+            text: item?.text,
+            textKz: item?.textKz,
+            answers: item?.answers || []
+          }
+        )));
       }
     }
   }, [data]);
@@ -196,9 +210,11 @@ const TestForm: React.FC<TestFormProps> = ({data, isLoading, isFetching, onSubmi
               <div className={"bg-gray-100 w-full h-[69px]"}></div>
               <div className={"bg-gray-100 w-full h-[69px]"}></div>
             </div>
+            <div className={"bg-gray-100 w-full h-[69px] mb-6"}></div>
             <div className={"bg-gray-100 w-full h-[144px] mb-14"}></div>
             <div className={"bg-gray-100 w-full h-[28px] mb-6"}></div>
             <div className={"grid md:grid-cols-2 gap-4 mb-4"}>
+              <div className={"bg-gray-100 w-full h-[69px]"}></div>
               <div className={"bg-gray-100 w-full h-[69px]"}></div>
             </div>
             <div className={"bg-gray-100 w-full h-[186px] mb-10"}></div>
@@ -214,31 +230,41 @@ const TestForm: React.FC<TestFormProps> = ({data, isLoading, isFetching, onSubmi
                 rules={[{required: true, message: validation.REQUIRED}]}
               >
                 <Field
-                  label={"Наименование"}
+                  label={"Наименование (RU)"}
                   placeholder={"Введите текст"}
                 />
               </Form.Item>
-              <Skeleton
-                loading={isFetchingCourses}
-                active
-                paragraph={false}
-                className={"h-[68px] mb-6"}
+              <Form.Item
+                name="titleKz"
+                className={"w-full mb-6"}
+                rules={[{required: true, message: validation.REQUIRED}]}
               >
-                <Form.Item
-                  name="courseId"
-                  label={"Курс"}
-                  className={"mb-6"}
-                >
-                  <Select
-                    className={"!h-[44px] !rounded-none"}
-                    placeholder={"Выберите из списка"}
-                    options={options}
-                  />
-                </Form.Item>
-              </Skeleton>
+                <Field
+                  label={"Наименование (KZ)"}
+                  placeholder={"Введите текст"}
+                />
+              </Form.Item>
             </div>
+            <Skeleton
+              loading={isFetchingCourses}
+              active
+              paragraph={false}
+              className={"h-[68px] mb-6"}
+            >
+              <Form.Item
+                name="courseId"
+                label={"Курс"}
+                className={"mb-6"}
+              >
+                <Select
+                  className={"!h-[44px] !rounded-none"}
+                  placeholder={"Выберите из списка"}
+                  options={options}
+                />
+              </Form.Item>
+            </Skeleton>
             <div className={"mb-14"}>
-              <p className={"text-sm text-dark-500 mb-1"}>Полное описание</p>
+              <p className={"text-sm text-dark-500 mb-1"}>Описание</p>
               <Form.Item
                 name="type"
                 className={"mb-0"}
@@ -269,10 +295,16 @@ const TestForm: React.FC<TestFormProps> = ({data, isLoading, isFetching, onSubmi
                   </div>
                   <div className={"grid md:grid-cols-2 gap-4 mb-4"}>
                     <Field
-                      label={"Текст вопроса"}
+                      label={"Текст вопроса (RU)"}
                       placeholder={"Введите текст"}
                       value={question?.text}
                       onChange={(event: any) => onChangeQuestion(idx, "text", event.target.value)}
+                    />
+                    <Field
+                      label={"Текст вопроса (KZ)"}
+                      placeholder={"Введите текст"}
+                      value={question?.textKz}
+                      onChange={(event: any) => onChangeQuestion(idx, "textKz", event.target.value)}
                     />
                   </div>
                   <div className={"w-full rounded-xl border border-gray-300 overflow-x-auto"}>
@@ -289,11 +321,18 @@ const TestForm: React.FC<TestFormProps> = ({data, isLoading, isFetching, onSubmi
                         <tr key={`answer-${idx}-${idy}`}
                             className={classNames("border-b border-gray-300", {"bg-gray-100": idy % 2 !== 0})}>
                           <td className={"py-4 px-3 md:px-6"}>
-                            <Field
-                              placeholder={"Введите текст"}
-                              value={answer?.text}
-                              onChange={(event: any) => onChangeAnswer(idx, idy, "text", event.target.value)}
-                            />
+                            <div className={"grid gap-4"}>
+                              <Field
+                                placeholder={"Введите текст (RU)"}
+                                value={answer?.text}
+                                onChange={(event: any) => onChangeAnswer(idx, idy, "text", event.target.value)}
+                              />
+                              <Field
+                                placeholder={"Введите текст (KZ)"}
+                                value={answer?.textKz}
+                                onChange={(event: any) => onChangeAnswer(idx, idy, "textKz", event.target.value)}
+                              />
+                            </div>
                           </td>
                           <td className={"py-4 px-3 md:px-6"}>
                             <Switch

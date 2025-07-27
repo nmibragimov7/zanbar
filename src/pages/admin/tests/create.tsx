@@ -21,6 +21,7 @@ const Create = () => {
   const onSubmit = (data: any) => {
     createMutate.mutate({
       title: data.values.title,
+      titleKz: data.values.titleKz,
       courseId: data.values.courseId,
       type: data.values.type,
       questions: (data?.questions || []).map((item: any, idx: number) => ({...item, questionNumber: idx + 1})),
