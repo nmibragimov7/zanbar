@@ -3,6 +3,7 @@ import Image from "next/image";
 import {Button, Skeleton, Table} from "antd";
 import {ColumnsType} from "antd/es/table";
 import {useRouter} from "next/router";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 import FormLayout from "@/widgets/FormLayout/FormLayout";
 import Tabs from "@/shared/ui/Tabs/Tabs";
@@ -10,7 +11,6 @@ import Tabs from "@/shared/ui/Tabs/Tabs";
 import {useQuestionById} from "@/entities/Forum/Forum.module";
 
 import {formatDate} from "@/shared/lib/date";
-import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
 
 import closeIcon from "@/shared/assets/images/svg/close.svg";
 
@@ -24,6 +24,15 @@ const tabs = [
     value: "users"
   },
 ]
+
+export async function getServerSideProps(context: any) {
+  const {locale} = context;
+  return {
+    props: {
+      ...(await serverSideTranslations(locale || 'ru')),
+    }
+  }
+}
 
 const Id = () => {
   const router  = useRouter();
@@ -162,4 +171,3 @@ const Id = () => {
 };
 
 export default Id;
-export const getStaticProps = getDefaultStaticProps;

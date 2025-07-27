@@ -1,13 +1,21 @@
 import React from 'react';
 import {notification} from "antd";
 import {useRouter} from "next/router";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 import FormLayout from "@/widgets/FormLayout/FormLayout";
 import TestForm from "@/features/TestForm/TestForm";
 
 import {useTestByIdByAdmin, useTestEdit, useTestRemove} from "@/entities/Test/Test.module";
 
-import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
+export async function getServerSideProps(context: any) {
+  const {locale} = context;
+  return {
+    props: {
+      ...(await serverSideTranslations(locale || 'ru')),
+    }
+  }
+}
 
 const Id = () => {
   const router = useRouter();
@@ -63,4 +71,3 @@ const Id = () => {
 };
 
 export default Id;
-export const getStaticProps = getDefaultStaticProps;

@@ -2,14 +2,13 @@ import React from 'react';
 import Image from "next/image";
 import {Button, Pagination, Skeleton, Table} from "antd";
 import {useRouter} from "next/router";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 import FormLayout from "@/widgets/FormLayout/FormLayout";
 import Tabs from "@/shared/ui/Tabs/Tabs";
 import Tag from "@/shared/ui/Tag/Tag";
 
 import {useCourseByIdByAdmin} from "@/entities/Course/Course.module";
-
-import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
 
 import closeIcon from "@/shared/assets/images/svg/close.svg";
 import {ColumnsType} from "antd/es/table";
@@ -25,6 +24,15 @@ const tabs = [
     value: "users"
   },
 ]
+
+export async function getServerSideProps(context: any) {
+  const {locale} = context;
+  return {
+    props: {
+      ...(await serverSideTranslations(locale || 'ru')),
+    }
+  }
+}
 
 const Id = () => {
   const router  = useRouter();
@@ -215,4 +223,3 @@ const Id = () => {
 };
 
 export default Id;
-export const getStaticProps = getDefaultStaticProps;
