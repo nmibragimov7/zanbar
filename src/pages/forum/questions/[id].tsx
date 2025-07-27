@@ -89,7 +89,7 @@ const Id = () => {
         />
 
         {isFetching ? (
-          <div className={"px-3 md:px-5 mb-10"}>
+          <div className={"px-3 md:px-5 my-10"}>
             <div className={"flex justify-center"}>
               <div className={"w-full max-w-[790px]"}>
                 <Skeleton
@@ -103,7 +103,7 @@ const Id = () => {
           </div>
         ) : (
           <>
-            <div className={"px-3 md:mx-5 mb-10"}>
+            <div className={"px-3 md:mx-5 my-10"}>
               <div className={"flex justify-center"}>
                 <div className={"w-full max-w-[790px] md:border-t border-gray-300 md:pt-6"}>
                   <div className={"flex items-center justify-between mb-10"}>
