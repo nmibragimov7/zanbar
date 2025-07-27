@@ -1,13 +1,15 @@
 import React, {useState} from 'react';
 import Image from "next/image";
 import Link from "next/link";
-import {Breadcrumb, Button, Input} from "antd";
+import {Breadcrumb, Button, Input, Skeleton} from "antd";
 import {useTranslation} from "next-i18next";
 
 import MainLayout from "@/widgets/MainLayout/MainLayout";
 import Field from "@/shared/ui/Field/Field";
+import Status from "@/shared/ui/Status/Status";
 
 import {useRequestCreate} from "@/entities/Request/Request.module";
+import {useDictionaries} from "@/entities/Lawyer/Lawyer.module";
 
 import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
 import {classNames} from "@/shared/lib/classNames";
@@ -30,6 +32,7 @@ const Create = () => {
     number: ""
   });
 
+  const {data, isFetching} = useDictionaries();
   const onSuccess = () => {
     setStage(7);
   }
@@ -74,7 +77,7 @@ const Create = () => {
 
         <div className={"flex justify-center text-center bg-gray-100 p-10 mb-5 md:mb-10"}>
           <div className={"w-full max-w-[640px] flex flex-col items-center"}>
-            <h1 className={"text-xl md:text-3xl font-medium"}>Поиск юриста</h1>
+            <h1 className={"text-xl md:text-3xl font-medium"}>{t('lawyer.create-page.title')}</h1>
           </div>
         </div>
         <div className={"flex justify-center"}>
@@ -88,13 +91,13 @@ const Create = () => {
                     {stage}
                   </div>
                   <div>
-                    <p className={"text-xs mb-2"}>Шаг {stage} из 6</p>
+                    <p className={"text-xs mb-2"}>{t('lawyer.create-page.text', {n: stage})}</p>
                     <p className={"font-semibold text-2xl"}>
-                      {stage === 1 ? "Категория" : null}
-                      {stage === 2 ? "Суть дела" : null}
-                      {stage === 3 ? "Формат и срочность" : null}
-                      {stage === 4 ? "Ожидание по стоимости" : null}
-                      {stage === 5 ? "Подтверждение заявки" : null}
+                      {stage === 1 ? t('lawyer.create-page.step.0') : null}
+                      {stage === 2 ? t('lawyer.create-page.step.1') : null}
+                      {stage === 3 ? t('lawyer.create-page.step.2') : null}
+                      {stage === 4 ? t('lawyer.create-page.step.3') : null}
+                      {stage === 5 ? t('lawyer.create-page.step.4') : null}
                     </p>
                   </div>
                 </div>
@@ -107,52 +110,76 @@ const Create = () => {
 
                 {stage === 1 ? (
                   <>
-                    <p className={"font-medium mb-4"}>Выберите категорию дела</p>
-                    <div className={"flex flex-col md:grid md:grid-cols-2 gap-4"}>
-                      <div
-                        className={
-                          classNames(
-                            "cursor-pointer transition-all hover:bg-purple-1000/10 bg-gray--100 rounded-xl flex items-center justify-between gap-4 px-4 py-6",
-                            {"bg-purple-1000/10 shadow-100": request.category === "Публичное"}
-                          )
-                        }
-                        onClick={() => onSelect("category", "Публичное")}
-                      >
-                        <div>
-                          <p className={"font-semibold text-purple-1000 mb-2"}>Публичное</p>
-                          <p className={"text-xs"}>
-                            Регулирует отношения, в которых государство выступает как субъект власти, например,
-                            конституционное,
-                            административное, уголовное
-                          </p>
-                        </div>
-                        <Image src={categoryIcon} alt={""} className={"w-30 h-30 object-contain"}/>
+                    <p className={"font-medium mb-4"}>{t('lawyer.create-page.form.category.label')}</p>
+                    <Skeleton
+                      loading={isFetching}
+                      active
+                      paragraph={false}
+                      className={"w-full h-[200px]"}
+                    >
+                      <div className={"flex flex-wrap items-center gap-2 mt-4"}>
+                        {data?.data && data?.data.length ? data?.data.map((d: any, idx: number) => (
+                          <Status
+                            key={idx}
+                            type={"gray"}
+                            text={d}
+                            className={
+                              classNames(
+                                "whitespace-nowrap cursor-pointer transition-all hover:bg-purple-1000/10",
+                                {"!bg-purple-1000 !text-white": request.category === d}
+                              )
+                            }
+                            onClick={() => onSelect("category", d)}
+                          />
+                        )) : null}
                       </div>
-                      <div
-                        className={
-                          classNames(
-                            "cursor-pointer transition-all hover:bg-purple-1000/10 bg-gray--100 rounded-xl flex items-center justify-between gap-4 px-4 py-6",
-                            {"bg-purple-1000/10 shadow-100": request.category === "Частное"}
-                          )
-                        }
-                        onClick={() => onSelect("category", "Частное")}
-                      >
-                        <div>
-                          <p className={"font-semibold text-purple-1000 mb-2"}>Частное</p>
-                          <p className={"text-xs"}>
-                            Регулирует отношения между частными лицами, например, гражданское, семейное, трудовое право
-                          </p>
-                        </div>
-                        <Image src={categoryIcon} alt={""} className={"w-30 h-30 object-contain"}/>
-                      </div>
-                    </div>
+                    </Skeleton>
+
+                    {/*<div className={"flex flex-col md:grid md:grid-cols-2 gap-4"}>*/}
+                    {/*  <div*/}
+                    {/*    className={*/}
+                    {/*      classNames(*/}
+                    {/*        "cursor-pointer transition-all hover:bg-purple-1000/10 bg-gray--100 rounded-xl flex items-center justify-between gap-4 px-4 py-6",*/}
+                    {/*        {"bg-purple-1000/10 shadow-100": request.category === "Публичное"}*/}
+                    {/*      )*/}
+                    {/*    }*/}
+                    {/*    onClick={() => onSelect("category", "Публичное")}*/}
+                    {/*  >*/}
+                    {/*    <div>*/}
+                    {/*      <p className={"font-semibold text-purple-1000 mb-2"}>Публичное</p>*/}
+                    {/*      <p className={"text-xs"}>*/}
+                    {/*        Регулирует отношения, в которых государство выступает как субъект власти, например,*/}
+                    {/*        конституционное,*/}
+                    {/*        административное, уголовное*/}
+                    {/*      </p>*/}
+                    {/*    </div>*/}
+                    {/*    <Image src={categoryIcon} alt={""} className={"w-30 h-30 object-contain"}/>*/}
+                    {/*  </div>*/}
+                    {/*  <div*/}
+                    {/*    className={*/}
+                    {/*      classNames(*/}
+                    {/*        "cursor-pointer transition-all hover:bg-purple-1000/10 bg-gray--100 rounded-xl flex items-center justify-between gap-4 px-4 py-6",*/}
+                    {/*        {"bg-purple-1000/10 shadow-100": request.category === "Частное"}*/}
+                    {/*      )*/}
+                    {/*    }*/}
+                    {/*    onClick={() => onSelect("category", "Частное")}*/}
+                    {/*  >*/}
+                    {/*    <div>*/}
+                    {/*      <p className={"font-semibold text-purple-1000 mb-2"}>Частное</p>*/}
+                    {/*      <p className={"text-xs"}>*/}
+                    {/*        Регулирует отношения между частными лицами, например, гражданское, семейное, трудовое право*/}
+                    {/*      </p>*/}
+                    {/*    </div>*/}
+                    {/*    <Image src={categoryIcon} alt={""} className={"w-30 h-30 object-contain"}/>*/}
+                    {/*  </div>*/}
+                    {/*</div>*/}
                   </>
                 ) : null}
                 {stage === 2 ? (
                   <>
-                    <p className={"font-medium mb-4"}>Опишите ситуацию в свободной форме</p>
+                    <p className={"font-medium mb-4"}>{t('lawyer.create-page.form.description.label')}</p>
                     <Input.TextArea
-                      placeholder={"Описание..."}
+                      placeholder={t('lawyer.create-page.form.description.placeholder')}
                       rows={6}
                       maxLength={5000}
                       style={{height: 200, resize: 'none'}}
@@ -164,34 +191,34 @@ const Create = () => {
                 ) : null}
                 {stage === 3 ? (
                   <>
-                    <p className={"font-medium mb-4"}>Выберите формат консультации</p>
+                    <p className={"font-medium mb-4"}>{t('lawyer.create-page.form.format.label')}</p>
                     <div className={"flex justify-center"}>
                       <div className={"w-full grid grid-cols-2 gap-4"}>
-                        <div className={"flex flex-col gap-2"} onClick={() => onSelect("format", "Онлайн чат")}>
+                        <div className={"flex flex-col gap-2"} onClick={() => onSelect("format", t('lawyer.create-page.form.format.value.0'))}>
                           <div
                             className={
                               classNames(
                                 "cursor-pointer transition-all hover:bg-purple-1000/10 bg-gray--100 rounded-xl flex items-center justify-center py-6",
-                                {"bg-purple-1000/10 shadow-100": request.format === "Онлайн чат"}
+                                {"bg-purple-1000/10 shadow-100": request.format === t('lawyer.create-page.form.format.value.0')}
                               )
                             }
                           >
                             <Image src={chatIcon} alt={""} className={"w-20 h-20 object-contain"}/>
                           </div>
-                          <span className={"font-medium text-sm"}>Онлайн чат</span>
+                          <span className={"font-medium text-sm"}>{t('lawyer.create-page.form.format.value.0')}</span>
                         </div>
-                        <div className={"flex flex-col gap-2"} onClick={() => onSelect("format", "Аудиозвонок")}>
+                        <div className={"flex flex-col gap-2"} onClick={() => onSelect("format", t('lawyer.create-page.form.format.value.1'))}>
                           <div
                             className={
                               classNames(
                                 "cursor-pointer transition-all hover:bg-purple-1000/10 bg-gray--100 rounded-xl flex items-center justify-center py-6",
-                                {"bg-purple-1000/10 shadow-100": request.format === "Аудиозвонок"}
+                                {"bg-purple-1000/10 shadow-100": request.format === t('lawyer.create-page.form.format.value.1')}
                               )
                             }
                           >
                             <Image src={callIcon} alt={""} className={"w-20 h-20 object-contain"}/>
                           </div>
-                          <span className={"font-medium text-sm"}>Аудиозвонок</span>
+                          <span className={"font-medium text-sm"}>{t('lawyer.create-page.form.format.value.1')}</span>
                         </div>
                       </div>
                     </div>
@@ -199,7 +226,7 @@ const Create = () => {
                 ) : null}
                 {stage === 4 ? (
                   <>
-                    <p className={"font-medium mb-4"}>Укажите бюджет</p>
+                    <p className={"font-medium mb-4"}>{t('lawyer.create-page.form.amount.label')}</p>
                     <div className={"relative"}>
                     <span
                       className={"z-[100] absolute top-1/2 left-4 -translate-y-1/2 text-purple-1000 text-6xl font-bold"}>₸</span>
@@ -215,7 +242,7 @@ const Create = () => {
                 ) : null}
                 {stage === 5 ? (
                   <>
-                    <p className={"font-medium mb-4"}>Укажите Ваш номер телефона</p>
+                    <p className={"font-medium mb-4"}>{t('lawyer.create-page.form.number.label')}</p>
                     <Field
                       placeholder={"+7 (---) --- ----"}
                       value={request.number}
@@ -229,7 +256,7 @@ const Create = () => {
                     <div className={"grid gap-4"}>
                       <div className={"bg-gray--100 rounded-xl p-4"}>
                         <div className={"flex items-center justify-between mb-2"}>
-                          <p className={"font-semibold"}>Общая информация</p>
+                          <p className={"font-semibold"}>{t('lawyer.create-page.form.total.0.title')}</p>
                           <Image
                             src={editIcon}
                             alt={""}
@@ -238,17 +265,17 @@ const Create = () => {
                           />
                         </div>
                         <div className={"mb-2"}>
-                          <p className={"text-black/50 text-xs"}>Категория</p>
+                          <p className={"text-black/50 text-xs"}>{t('lawyer.create-page.form.total.0.label.0')}</p>
                           <p className={"font-medium text-sm"}>{request.category}</p>
                         </div>
                         <div>
-                          <p className={"text-black/50 text-xs"}>Описание ситуации</p>
+                          <p className={"text-black/50 text-xs"}>{t('lawyer.create-page.form.total.0.label.1')}</p>
                           <p className={"font-medium text-sm"}>{request.description}</p>
                         </div>
                       </div>
                       <div className={"bg-gray--100 rounded-xl p-4"}>
                         <div className={"flex items-center justify-between mb-2"}>
-                          <p className={"font-semibold"}>Формат и срочность</p>
+                          <p className={"font-semibold"}>{t('lawyer.create-page.form.total.1.title')}</p>
                           <Image
                             src={editIcon}
                             alt={""}
@@ -257,13 +284,13 @@ const Create = () => {
                           />
                         </div>
                         <div>
-                          <p className={"text-black/50 text-xs"}>Формат консультации</p>
+                          <p className={"text-black/50 text-xs"}>{t('lawyer.create-page.form.total.1.label.0')}</p>
                           <p className={"font-medium text-sm"}>{request.format}</p>
                         </div>
                       </div>
                       <div className={"bg-gray--100 rounded-xl p-4"}>
                         <div className={"flex items-center justify-between mb-2"}>
-                          <p className={"font-semibold"}>Ожидание по стоимости</p>
+                          <p className={"font-semibold"}>{t('lawyer.create-page.form.total.2.title')}</p>
                           <Image
                             src={editIcon}
                             alt={""}
@@ -272,13 +299,13 @@ const Create = () => {
                           />
                         </div>
                         <div>
-                          <p className={"text-black/50 text-xs"}>Бюджет</p>
+                          <p className={"text-black/50 text-xs"}>{t('lawyer.create-page.form.total.2.label.0')}</p>
                           <p className={"font-medium text-sm"}>{request.amount} ₸</p>
                         </div>
                       </div>
                       <div className={"bg-gray--100 rounded-xl p-4"}>
                         <div className={"flex items-center justify-between mb-2"}>
-                          <p className={"font-semibold"}>Контактные данные</p>
+                          <p className={"font-semibold"}>{t('lawyer.create-page.form.total.3.title')}</p>
                           <Image
                             src={editIcon}
                             alt={""}
@@ -287,7 +314,7 @@ const Create = () => {
                           />
                         </div>
                         <div>
-                          <p className={"text-black/50 text-xs"}>Ваш номер телефона</p>
+                          <p className={"text-black/50 text-xs"}>{t('lawyer.create-page.form.total.3.label.0')}</p>
                           <p className={"font-medium text-sm"}>{request.number}</p>
                         </div>
                       </div>
@@ -309,7 +336,7 @@ const Create = () => {
                     }
                     onClick={onNext}
                   >
-                    {stage < 6 ? "Дальше" : "Подтвердить"}
+                    {stage < 6 ? t('lawyer.create-page.form.button.0') : t('lawyer.create-page.form.button.1')}
                   </Button>
                 </div>
               </>
@@ -319,10 +346,10 @@ const Create = () => {
                   <div className={"w-full max-w-sm flex flex-col items-center text-center"}>
                     <Image src={approvedIcon} alt={""} className={"w-[200px] h-[200px] object-contain mb-8"}/>
                     <p className={"font-semibold text-xl"}>
-                      Ваша заявка успешно принята!
+                      {t('lawyer.create-page.form.finish.title')}
                       <br/>
                       <br/>
-                      Подходящий для Ваших задач юрист свяжется с Вами.
+                      {t('lawyer.create-page.form.finish.description')}
                     </p>
 
                     <div className={"w-full flex justify-center my-10"}>
@@ -331,7 +358,7 @@ const Create = () => {
                           type={"primary"}
                           className={"w-full md:w-[300px] !h-[44px] shadow-none bg-purple-1000 text-white !rounded-[100px] transition-all"}
                         >
-                          Перейти в личный кабинет
+                          {t('lawyer.create-page.form.button.2')}
                         </Button>
                       </Link>
                     </div>

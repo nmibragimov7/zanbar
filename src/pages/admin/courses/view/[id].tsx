@@ -9,6 +9,8 @@ import Tag from "@/shared/ui/Tag/Tag";
 
 import {useCourseByIdByAdmin} from "@/entities/Course/Course.module";
 
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
+
 import closeIcon from "@/shared/assets/images/svg/close.svg";
 import {ColumnsType} from "antd/es/table";
 import avatarIcon from "@/shared/assets/images/png/avatar.png";
@@ -213,3 +215,4 @@ const Id = () => {
 };
 
 export default Id;
+export const getStaticProps = getDefaultStaticProps;

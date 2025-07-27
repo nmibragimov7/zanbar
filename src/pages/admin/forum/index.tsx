@@ -10,6 +10,7 @@ import Status from "@/shared/ui/Status/Status";
 import {useQuestionApprove, useQuestionRevoke, useQuestionsByAdmin} from "@/entities/Forum/Forum.module";
 
 import {formatDate} from "@/shared/lib/date";
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
 
 import {forumStatus} from "@/shared/constants/status";
 
@@ -172,3 +173,4 @@ const Index = () => {
 };
 
 export default Index;
+export const getStaticProps = getDefaultStaticProps;

@@ -5,6 +5,8 @@ import {ColumnsType} from "antd/es/table";
 
 import AdminLayout from "@/widgets/AdminLayout/AdminLayout";
 
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
+
 import filterIcon from "@/shared/assets/images/svg/filter.svg";
 import dotsIcon from "@/shared/assets/images/svg/dots.svg";
 import avatarIcon from "@/shared/assets/images/png/avatar.png";
@@ -122,3 +124,4 @@ const Users = () => {
 };
 
 export default Users;
+export const getStaticProps = getDefaultStaticProps;

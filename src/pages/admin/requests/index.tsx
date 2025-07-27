@@ -11,6 +11,7 @@ import Tag from "@/shared/ui/Tag/Tag";
 import {useRequestApproveByAdmin, useRequestsByAdmin} from "@/entities/Lawyer/Lawyer.module";
 
 import {formatDate} from "@/shared/lib/date";
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
 
 import {lawyerRequestStatus} from "@/shared/constants/status";
 
@@ -225,3 +226,4 @@ const Index = () => {
 };
 
 export default Index;
+export const getStaticProps = getDefaultStaticProps;

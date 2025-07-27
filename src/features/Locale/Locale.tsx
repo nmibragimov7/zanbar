@@ -10,8 +10,8 @@ const Locale = () => {
   const router = useRouter();
 
   const onToggle = async (locale: string) => {
-    console.log(locale)
     await router.replace(router.asPath, router.asPath, {locale});
+    window.location.reload();
   };
 
   return (

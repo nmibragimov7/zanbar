@@ -9,6 +9,7 @@ import AdminLayout from "@/widgets/AdminLayout/AdminLayout";
 import {useTestsByAdmin} from "@/entities/Test/Test.module";
 
 import {formatDate} from "@/shared/lib/date";
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
 
 import filterIcon from "@/shared/assets/images/svg/filter.svg";
 import dotsIcon from "@/shared/assets/images/svg/dots.svg";
@@ -130,3 +131,4 @@ const Tests = () => {
 };
 
 export default Tests;
+export const getStaticProps = getDefaultStaticProps;

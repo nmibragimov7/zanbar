@@ -45,7 +45,7 @@ const Index = () => {
 
         <div className={"flex justify-center text-center bg-gray-100 p-10 mb-5 md:mb-10"}>
           <div className={"w-full max-w-[640px] flex flex-col items-center"}>
-            <h1 className={"text-xl md:text-3xl font-medium"}>Список юристов</h1>
+            <h1 className={"text-xl md:text-3xl font-medium"}>{t('lawyer.list-page.title')}</h1>
           </div>
         </div>
         <div className={"flex justify-center"}>

@@ -1,11 +1,13 @@
 import React from 'react';
 import {useRouter} from "next/router";
+import {notification} from "antd";
 
 import FormLayout from "@/widgets/FormLayout/FormLayout";
 import CourseForm from "@/features/CourseForm/CourseForm";
 
 import {useCourseByIdByAdmin, useCourseEdit, useCourseRemove} from "@/entities/Course/Course.module";
-import {notification} from "antd";
+
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
 
 const Id = () => {
   const router = useRouter();
@@ -62,3 +64,4 @@ const Id = () => {
 };
 
 export default Id;
+export const getStaticProps = getDefaultStaticProps;

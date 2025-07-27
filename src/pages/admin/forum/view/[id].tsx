@@ -10,6 +10,7 @@ import Tabs from "@/shared/ui/Tabs/Tabs";
 import {useQuestionById} from "@/entities/Forum/Forum.module";
 
 import {formatDate} from "@/shared/lib/date";
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
 
 import closeIcon from "@/shared/assets/images/svg/close.svg";
 
@@ -161,3 +162,4 @@ const Id = () => {
 };
 
 export default Id;
+export const getStaticProps = getDefaultStaticProps;

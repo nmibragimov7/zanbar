@@ -7,6 +7,8 @@ import TestForm from "@/features/TestForm/TestForm";
 
 import {useTestCreate} from "@/entities/Test/Test.module";
 
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
+
 const Create = () => {
   const router = useRouter();
 
@@ -39,3 +41,4 @@ const Create = () => {
 };
 
 export default Create;
+export const getStaticProps = getDefaultStaticProps;

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { i18n } from 'next-i18next';
 
 // import {authService} from "@/entities/Auth/Auth.module";
 import {accessTokenStorage, refreshTokenStorage, userStorage} from './lsStorage';
@@ -13,6 +14,7 @@ axios.interceptors.request.use(request => {
 fetcher.interceptors.request.use((config: any) => {
   if (accessTokenStorage.get() && !config.url.includes('refresh') && !config.url.includes('login')) {
     config.headers.Authorization = `Bearer ${accessTokenStorage.get()}`
+    config.headers['Accept-Language'] = i18n?.language === 'ru' ? 'ru' : 'kk'
   }
 
   return config;

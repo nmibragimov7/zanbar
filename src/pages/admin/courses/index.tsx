@@ -11,6 +11,8 @@ import Status from "@/shared/ui/Status/Status";
 import {useCoursesByAdmin} from "@/entities/Course/Course.module";
 
 import {formatDate} from "@/shared/lib/date";
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
+
 import {courseStatus} from "@/shared/constants/status";
 
 import filterIcon from "@/shared/assets/images/svg/filter.svg";
@@ -167,3 +169,4 @@ const Courses = () => {
 };
 
 export default Courses;
+export const getStaticProps = getDefaultStaticProps;

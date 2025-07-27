@@ -7,6 +7,8 @@ import TestForm from "@/features/TestForm/TestForm";
 
 import {useTestByIdByAdmin, useTestEdit, useTestRemove} from "@/entities/Test/Test.module";
 
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
+
 const Id = () => {
   const router = useRouter();
   const id: any = router.query?.id;
@@ -61,3 +63,4 @@ const Id = () => {
 };
 
 export default Id;
+export const getStaticProps = getDefaultStaticProps;

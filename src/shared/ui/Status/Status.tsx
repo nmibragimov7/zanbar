@@ -20,7 +20,7 @@ const Status: React.FC<StatusProps> = ({type, text, className, onClick}) => {
             {"!bg-blue-300 !text-blue-500": type === "blue"},
             {"!bg-orange-300 !text-orange-500": type === "orange"},
             {"!bg-red-100 !text-red-500": type === "red"},
-            {"!bg-white !text-purple-1000": type === "purple"},
+            {"!bg-purple-300 !text-purple-1000": type === "purple"},
             {"!bg-gray-400 !text-dark-500": type === "gray"},
             className
           )

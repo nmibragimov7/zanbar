@@ -159,7 +159,7 @@ const Index = () => {
 
         <div className={"flex justify-center text-center bg-gray-100 p-10 mb-5 md:mb-10"}>
           <div className={"w-full max-w-[640px] flex flex-col items-center"}>
-            <h1 className={"text-xl md:text-3xl font-medium"}>Регистрация юриста</h1>
+            <h1 className={"text-xl md:text-3xl font-medium"}>{t('lawyer.register-page.title')}</h1>
           </div>
         </div>
         <div className={"flex justify-center"}>
@@ -175,11 +175,11 @@ const Index = () => {
                         {stage}
                       </div>
                       <div>
-                        <p className={"text-xs mb-2"}>Шаг {stage} из 3</p>
+                        <p className={"text-xs mb-2"}>{t('lawyer.register-page.text', {n: stage})}</p>
                         <p className={"font-semibold text-2xl"}>
-                          {stage === 1 ? "Контактные данные" : null}
-                          {stage === 2 ? "Профессиональная информация" : null}
-                          {stage === 3 ? "Документы" : null}
+                          {stage === 1 ? t('lawyer.register-page.step.0') : null}
+                          {stage === 2 ? t('lawyer.register-page.step.1') : null}
+                          {stage === 3 ? t('lawyer.register-page.step.2') : null}
                         </p>
                       </div>
                     </div>
@@ -198,7 +198,7 @@ const Index = () => {
                       <div className={"w-full max-w-sm flex flex-col items-center"}>
                         <Image src={registerIcon} alt={""} className={"w-[200px] h-[200px] object-contain mb-8"}/>
                         <p className={"text-center font-semibold text-3xl"}>
-                          Зарегистрируйтесь и начните зарабатывать
+                          {t('lawyer.register-page.banner.title')}
                         </p>
                       </div>
                     </div>
@@ -206,22 +206,22 @@ const Index = () => {
                       <div className={"flex items-center gap-4 bg-gray--100/50 rounded-lg p-4"}>
                         <Image src={checkboxIcon} alt={""} className={"shrink-0"}/>
                         <div>
-                          <p className={"font-semibold mb-1"}>Получать заявки</p>
-                          <p className={"text-xs"}>Откликайтесь на запросы пользователей и берите дела в работу.</p>
+                          <p className={"font-semibold mb-1"}>{t('lawyer.register-page.banner.label.0')}</p>
+                          <p className={"text-xs"}>{t('lawyer.register-page.banner.label.1')}</p>
                         </div>
                       </div>
                       <div className={"flex items-center gap-4 bg-gray--100/50 rounded-lg p-4"}>
                         <Image src={checkboxIcon} alt={""} className={"shrink-0"}/>
                         <div>
-                          <p className={"font-semibold mb-1"}>Получать заявки</p>
-                          <p className={"text-xs"}>Откликайтесь на запросы пользователей и берите дела в работу.</p>
+                          <p className={"font-semibold mb-1"}>{t('lawyer.register-page.banner.label.2')}</p>
+                          <p className={"text-xs"}>{t('lawyer.register-page.banner.label.3')}</p>
                         </div>
                       </div>
                       <div className={"flex items-center gap-4 bg-gray--100/50 rounded-lg p-4"}>
                         <Image src={checkboxIcon} alt={""} className={"shrink-0"}/>
                         <div>
-                          <p className={"font-semibold mb-1"}>Получать заявки</p>
-                          <p className={"text-xs"}>Откликайтесь на запросы пользователей и берите дела в работу.</p>
+                          <p className={"font-semibold mb-1"}>{t('lawyer.register-page.banner.label.4')}</p>
+                          <p className={"text-xs"}>{t('lawyer.register-page.banner.label.5')}</p>
                         </div>
                       </div>
                     </div>
@@ -243,8 +243,8 @@ const Index = () => {
                       rules={[{required: true, message: validation.REQUIRED}]}
                     >
                       <Field
-                        label={"Фамилия*"}
-                        placeholder={"Введите вашу фамилию как в уд. личности"}
+                        label={t('lawyer.register-page.form.lastName.label')}
+                        placeholder={t('lawyer.register-page.form.lastName.placeholder')}
                       />
                     </Form.Item>
                     <Form.Item
@@ -253,8 +253,8 @@ const Index = () => {
                       rules={[{required: true, message: validation.REQUIRED}]}
                     >
                       <Field
-                        label={"Имя*"}
-                        placeholder={"Введите ваше имя как в уд. личности"}
+                        label={t('lawyer.register-page.form.firstName.label')}
+                        placeholder={t('lawyer.register-page.form.firstName.placeholder')}
                       />
                     </Form.Item>
                     <Form.Item
@@ -262,8 +262,8 @@ const Index = () => {
                       className={"w-full mb-6"}
                     >
                       <Field
-                        label={"Отчество"}
-                        placeholder={"Введите ваше отчество как в уд. личности"}
+                        label={t('lawyer.register-page.form.patronymic.label')}
+                        placeholder={t('lawyer.register-page.form.patronymic.placeholder')}
                       />
                     </Form.Item>
                     <Form.Item
@@ -272,7 +272,7 @@ const Index = () => {
                       rules={[{required: true, message: validation.REQUIRED}]}
                     >
                       <Field
-                        label={"Номер телефона*"}
+                        label={t('lawyer.register-page.form.phoneNumber.label')}
                         placeholder={"+7 (---) --- ----"}
                       />
                     </Form.Item>
@@ -282,8 +282,8 @@ const Index = () => {
                       rules={[{required: true, message: validation.REQUIRED}]}
                     >
                       <Field
-                        label={"E-mail*"}
-                        placeholder={"Введите рабочую почту"}
+                        label={t('lawyer.register-page.form.email.label')}
+                        placeholder={t('lawyer.register-page.form.email.placeholder')}
                       />
                     </Form.Item>
                     <Form.Item
@@ -292,19 +292,19 @@ const Index = () => {
                       rules={[{required: true, message: validation.REQUIRED}]}
                     >
                       <Field
-                        label={"Telegram аккаунт*"}
-                        placeholder={"Введите Telegram аккаунт без @"}
+                        label={t('lawyer.register-page.form.telegramAccount.label')}
+                        placeholder={t('lawyer.register-page.form.telegramAccount.placeholder')}
                       />
                     </Form.Item>
                     <Form.Item
                       name="city"
-                      label={"Выберите город Вашей деятельности*"}
+                      label={t('lawyer.register-page.form.city.label')}
                       className={"w-full"}
                       rules={[{required: true, message: validation.REQUIRED}]}
                     >
                       <Select
                         className={"w-full !h-[44px] !rounded-none"}
-                        placeholder={"Не выбрано"}
+                        placeholder={t('lawyer.register-page.form.city.placeholder')}
                         options={[
                           {label: "Астана", value: "Астана"},
                           {label: "Алматы", value: "Алматы"},
@@ -315,7 +315,7 @@ const Index = () => {
                   <div className={classNames("hidden", {"!block": stage === 2})}>
                     <Form.Item
                       name="specials"
-                      label={"Выберите Вашу специализацию (можно выбрать несколько)*"}
+                      label={t('lawyer.register-page.form.specials.label')}
                       className={"w-full"}
                       rules={[{required: true, message: validation.REQUIRED}]}
                     >
@@ -351,7 +351,7 @@ const Index = () => {
                       rules={[{required: true, message: validation.REQUIRED}]}
                     >
                       <p className={"font-medium text-lg mb-2"}>
-                        Загрузите удостоверение личности в формате PDF или PGN
+                        {t('lawyer.register-page.form.udostakBase64.label')}
                       </p>
                       <input
                         id={"udostakBase64"}
@@ -366,7 +366,7 @@ const Index = () => {
                       >
                         <Image src={uploadIcon} alt={""}/>
                         <p className={"text-purple-1000 font-semibold"}>
-                          {files?.udostakBase64 ? files?.udostakBase64?.name : "Загрузить"}
+                          {files?.udostakBase64 ? files?.udostakBase64?.name : t('lawyer.register-page.form.button.3')}
                         </p>
                         {files?.udostakBase64 ? (
                           <Image
@@ -384,7 +384,7 @@ const Index = () => {
                       rules={[{required: true, message: validation.REQUIRED}]}
                     >
                       <p className={"font-medium text-lg mb-2"}>
-                        Загрузите диплом образования в формате PDF или PNG
+                        {t('lawyer.register-page.form.diplomBase64.label')}
                       </p>
                       <input
                         id={"diplomBase64"}
@@ -399,7 +399,7 @@ const Index = () => {
                       >
                         <Image src={uploadIcon} alt={""}/>
                         <p className={"text-purple-1000 font-semibold"}>
-                          {files?.diplomBase64 ? files?.diplomBase64?.name : "Загрузить"}
+                          {files?.diplomBase64 ? files?.diplomBase64?.name : t('lawyer.register-page.form.button.3')}
                         </p>
                         {files?.diplomBase64 ? (
                           <Image
@@ -417,7 +417,7 @@ const Index = () => {
                       rules={[{required: true, message: validation.REQUIRED}]}
                     >
                       <p className={"font-medium text-lg mb-2"}>
-                        Загрузите лицензию (если есть) в формате PDF или PNG
+                        {t('lawyer.register-page.form.licenceBase64.label')}
                       </p>
                       <input
                         id={"licenceBase64"}
@@ -432,7 +432,7 @@ const Index = () => {
                       >
                         <Image src={uploadIcon} alt={""}/>
                         <p className={"text-purple-1000 font-semibold"}>
-                          {files?.licenceBase64 ? files?.licenceBase64?.name : "Загрузить"}
+                          {files?.licenceBase64 ? files?.licenceBase64?.name : t('lawyer.register-page.form.button.3')}
                         </p>
                         {files?.licenceBase64 ? (
                           <Image
@@ -450,7 +450,7 @@ const Index = () => {
                       rules={[{required: true, message: validation.REQUIRED}]}
                     >
                       <p className={"font-medium text-lg mb-2"}>
-                        Загрузите фото для профиля
+                        {t('lawyer.register-page.form.profilePictureBase64.label')}
                       </p>
                       <input
                         id={"profilePictureBase64"}
@@ -465,7 +465,7 @@ const Index = () => {
                       >
                         <Image src={uploadIcon} alt={""}/>
                         <p className={"text-purple-1000 font-semibold"}>
-                          {files?.profilePictureBase64 ? files?.profilePictureBase64?.name : "Загрузить"}
+                          {files?.profilePictureBase64 ? files?.profilePictureBase64?.name : t('lawyer.register-page.form.button.3')}
                         </p>
                         {files?.profilePictureBase64 ? (
                           <Image
@@ -487,7 +487,7 @@ const Index = () => {
                         disabled={isValidate()}
                         onClick={onNext}
                       >
-                        {stage === 0 ? "Начать регистрацию" : "Дальше"}
+                        {stage === 0 ? t('lawyer.register-page.form.button.0') : t('lawyer.register-page.form.button.1')}
                       </Button>
                     </div>
                   ) : null}
@@ -503,12 +503,10 @@ const Index = () => {
                       }
                       disabled={isValidate() || createMutate.isLoading}
                     >
-                      Дальше
+                      {t('lawyer.register-page.form.button.1')}
                     </Button>
                   </div>
                 </Form>
-
-
               </>
             ) : (
               <>
@@ -516,10 +514,10 @@ const Index = () => {
                   <div className={"w-full max-w-sm flex flex-col items-center text-center"}>
                     <Image src={updateIcon} alt={""} className={"w-[200px] h-[200px] object-contain mb-8"}/>
                     <p className={"font-semibold text-xl"}>
-                      Ваша заявка успешно принята!
+                      {t('lawyer.register-page.form.finish.title')}
                       <br/>
                       <br/>
-                      Вы получите уведомление о результате Вашей заявки.
+                      {t('lawyer.register-page.form.finish.description')}
                     </p>
 
                     <div className={"w-full flex justify-center my-10"}>
@@ -528,7 +526,7 @@ const Index = () => {
                           type={"primary"}
                           className={"w-full md:w-[300px] !h-[44px] shadow-none bg-purple-1000 text-white !rounded-[100px] transition-all"}
                         >
-                          Перейти в личный кабинет
+                          {t('lawyer.register-page.form.button.2')}
                         </Button>
                       </Link>
                     </div>

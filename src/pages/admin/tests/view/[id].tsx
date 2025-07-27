@@ -4,10 +4,12 @@ import {Button, Pagination, Skeleton, Table} from "antd";
 import {useRouter} from "next/router";
 import {ColumnsType} from "antd/es/table";
 
-import {useTestByIdByAdmin} from "@/entities/Test/Test.module";
-
 import FormLayout from "@/widgets/FormLayout/FormLayout";
 import Tabs from "@/shared/ui/Tabs/Tabs";
+
+import {useTestByIdByAdmin} from "@/entities/Test/Test.module";
+
+import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
 
 import closeIcon from "@/shared/assets/images/svg/close.svg";
 import avatarIcon from "@/shared/assets/images/png/avatar.png";
@@ -191,3 +193,4 @@ const Id = () => {
 };
 
 export default Id;
+export const getStaticProps = getDefaultStaticProps;

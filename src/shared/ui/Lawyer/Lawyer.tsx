@@ -1,4 +1,5 @@
 import React, {FC, useMemo} from 'react';
+import {useTranslation} from "next-i18next";
 
 import Status from "@/shared/ui/Status/Status";
 
@@ -11,8 +12,10 @@ interface LawyerProps {
 }
 
 const Lawyer: FC<LawyerProps> = ({firstName, lastName, profilePictureBase64, specials, onClick}) => {
+  const {t} = useTranslation();
+
   const name = useMemo(() => {
-    if (!firstName) return "Ю";
+    if (!firstName) return "П";
     return firstName.substr(0, 1);
   }, [firstName]);
   const shown = useMemo(() => {
@@ -49,7 +52,7 @@ const Lawyer: FC<LawyerProps> = ({firstName, lastName, profilePictureBase64, spe
         </div>
         <div>
           <p className={"font-semibold text-lg text-primary mb-2"}>{firstName} {lastName}</p>
-          <p className={"text-purple-1000 mb-2"}>Надежный партнер</p>
+          <p className={"text-purple-1000 mb-2"}>{t('lawyer.list-page.item.tag.0')}</p>
           <div className={"flex flex-wrap items-center gap-1"}>
             {shown.length ? (
               <>

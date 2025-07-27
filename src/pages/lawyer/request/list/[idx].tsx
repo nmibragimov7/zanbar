@@ -34,7 +34,7 @@ const Idx = () => {
     return null;
   }, [data, idx]);
   const name = useMemo(() => {
-    if (!lawyer?.firstName) return "Ю";
+    if (!lawyer?.firstName) return "П";
     return lawyer?.firstName.substr(0, 1);
   }, [lawyer]);
   const phone = useMemo(() => {
@@ -72,7 +72,7 @@ const Idx = () => {
 
         <div className={"flex justify-center text-center bg-gray-100 p-10 mb-5 md:mb-10"}>
           <div className={"w-full max-w-[640px] flex flex-col items-center"}>
-            <h1 className={"text-xl md:text-3xl font-medium"}>Список юристов</h1>
+            <h1 className={"text-xl md:text-3xl font-medium"}>{t('lawyer.list-page.title')}</h1>
           </div>
         </div>
         <div className={"flex justify-center"}>
@@ -103,50 +103,54 @@ const Idx = () => {
                     </div>
                   </div>
                   <div>
-                    <Status type={"purple"} text={"Партнер"} className={"!bg-gray-0 mb-2"}/>
+                    <Status type={"purple"} text={t('lawyer.list-page.idx-page.tag.0')} className={"!bg-gray-0 mb-2"}/>
                     <p className={"font-semibold text-2xl mb-2"}>{lawyer?.firstName} {lawyer?.lastName}</p>
                     <p className={"text-dark-400 text-lg"}>{lawyer?.city}</p>
                   </div>
                 </div>
                 <div className={"bg-gray-100/50 p-4 mb-4"}>
                   <p className={"font-semibold mb-2"}>{lawyer?.phoneNumber || "-"}</p>
-                  <p className={"text-dark-400 text-sm mb-2"}>Номер телефона</p>
-                  <Navigate title={"Позвонить"} href={`tel:${phone}`}/>
+                  <p className={"text-dark-400 text-sm mb-2"}>{t('lawyer.list-page.idx-page.label.0')}</p>
+                  <Navigate title={t('lawyer.list-page.idx-page.button.0')} href={`tel:${phone}`}/>
                 </div>
                 <div className={"bg-gray-100/50 p-4 mb-4"}>
                   <p className={"font-semibold mb-2"}>{lawyer?.email || "-"}</p>
-                  <p className={"text-dark-400 text-sm mb-2"}>Рабочая почта</p>
-                  <Navigate title={"Написать"} href={`mailto:${lawyer?.email}`}/>
+                  <p className={"text-dark-400 text-sm mb-2"}>{t('lawyer.list-page.idx-page.label.1')}</p>
+                  <Navigate title={t('lawyer.list-page.idx-page.button.1')} href={`mailto:${lawyer?.email}`}/>
                 </div>
                 <div className={"bg-gray-100/50 p-4 mb-4"}>
                   <p className={"font-semibold mb-2"}>@{lawyer?.telegramAccount || "-"}</p>
-                  <p className={"text-dark-400 text-sm mb-2"}>Telegram аккаунт</p>
-                  <Navigate title={"Связаться"} href={`https://t.me/${lawyer?.telegramAccount}`}/>
+                  <p className={"text-dark-400 text-sm mb-2"}>{t('lawyer.list-page.idx-page.label.2')}</p>
+                  <Navigate title={t('lawyer.list-page.idx-page.button.2')} href={`https://t.me/${lawyer?.telegramAccount}`}/>
                 </div>
                 <div className={"bg-gray-100/50 p-4 mb-4"}>
-                  <p className={"font-semibold mb-2"}>Специализация</p>
+                  <p className={"font-semibold mb-2"}>{t('lawyer.list-page.idx-page.label.3')}</p>
                   <div className={"flex flex-wrap items-center gap-1"}>
                     {lawyer?.specials && lawyer?.specials.length ? (
                       <>
                         {lawyer?.specials.map((s: string, idx: number) => (
-                          <Status key={idx} type={"purple"} text={s}
-                                  className={"text-xs !bg-gray-0 whitespace-nowrap"}/>
+                          <Status
+                            key={idx}
+                            type={"purple"}
+                            text={s}
+                            className={"text-xs !bg-gray-0 whitespace-nowrap"}
+                          />
                         ))}
                       </>
                     ) : null}
                   </div>
                 </div>
                 <div className={"bg-gray-100/50 p-4 mb-4"}>
-                  <p className={"font-semibold mb-2"}>Удостоверение личности</p>
-                  <Navigate title={"Посмотреть"} href={lawyer?.udostakBase64}/>
+                  <p className={"font-semibold mb-2"}>{t('lawyer.list-page.idx-page.label.4')}</p>
+                  <Navigate title={t('lawyer.list-page.idx-page.button.3')} href={lawyer?.udostakBase64}/>
                 </div>
                 <div className={"bg-gray-100 p-4 mb-4"}>
-                  <p className={"font-semibold mb-2"}>Диплом об образовании</p>
-                  <Navigate title={"Посмотреть"} href={lawyer?.diplomBase64}/>
+                  <p className={"font-semibold mb-2"}>{t('lawyer.list-page.idx-page.label.5')}</p>
+                  <Navigate title={t('lawyer.list-page.idx-page.button.3')} href={lawyer?.diplomBase64}/>
                 </div>
                 <div className={"bg-gray-100/50 p-4"}>
-                  <p className={"font-semibold mb-2"}>Лицензия</p>
-                  <Navigate title={"Посмотреть"} href={lawyer?.licenceBase64}/>
+                  <p className={"font-semibold mb-2"}>{t('lawyer.list-page.idx-page.label.6')}</p>
+                  <Navigate title={t('lawyer.list-page.idx-page.button.3')} href={lawyer?.licenceBase64}/>
                 </div>
               </div>
             </Skeleton>

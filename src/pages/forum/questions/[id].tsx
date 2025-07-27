@@ -150,7 +150,7 @@ const Id = () => {
                       onClick={() => window.scroll({top: ref.current?.offsetTop, behavior: "smooth"})}
                     >
                       <Image src={chatBlackIcon} alt={""}/>
-                      <span>{t('forum.question-page.button.0')}</span>
+                      <span>{t('forum.question-page.button.1')}</span>
                     </Button>
                   </div>
                 </div>
