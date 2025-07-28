@@ -37,6 +37,9 @@ const Instructions = () => {
         <div className={"flex justify-center text-center bg-gray-100 p-10 mb-5 md:mb-10"}>
           <h1 className={"text-xl md:text-3xl font-medium"}>{t(knowledge?.title || "")}</h1>
         </div>
+        <div className={"flex justify-center"}>
+          <div dangerouslySetInnerHTML={{__html: t('knowledges.instructions.text')}} className={"w-full max-w-[790px] px-3 md:px-5 mt-10 md:mt-0 mb-10"}/>
+        </div>
       </MainLayout>
     </>
   );

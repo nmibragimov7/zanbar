@@ -279,8 +279,8 @@ const Id = () => {
                   <p className={"text-2xl mb-6"}>
                     {
                       isSuccess
-                        ? t('test.item.finish.description.0')
-                        : t('test.item.finish.description.1')
+                        ? t('test.item.finish.description.0', {d: data?.data?.title})
+                        : t('test.item.finish.description.1', {d: data?.data?.title})
                     }
                   </p>
                   <div className={"flex justify-center"}>

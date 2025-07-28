@@ -66,7 +66,6 @@ export const knowledges = [
   {
     id: "instructions",
     title: 'knowledges.block.2',
-    children: []
   },
   {
     id: "useful-information",
@@ -74,15 +73,18 @@ export const knowledges = [
     children: [
       {
         title: "knowledges.useful-information.links.0",
-        link: "https://aisoip.adilet.gov.kz/useful-info/legal-advisers"
+        link: "https://aisoip.adilet.gov.kz/useful-info/legal-advisers",
+        isLink: true,
       },
       {
         title: "knowledges.useful-information.links.1",
-        link: "https://eup.adilet.gov.kz/#/lawyers/advocate"
+        link: "https://eup.adilet.gov.kz/#/lawyers/advocate",
+        isLink: true,
       },
       {
         title: "knowledges.useful-information.links.2",
-        link: "https://aisoip.adilet.gov.kz/debtors"
+        link: "https://aisoip.adilet.gov.kz/debtors",
+        isLink: true,
       },
       {
         title: "knowledges.useful-information.links.3",
