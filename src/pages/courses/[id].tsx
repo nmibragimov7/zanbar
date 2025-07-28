@@ -19,7 +19,8 @@ import {lessonStatus, testStatus} from "@/shared/constants/status";
 const order = {
   [lessonStatus.completed]: 0,
   [lessonStatus.started]: 1,
-  [lessonStatus.active]: 2
+  [lessonStatus.active]: 2,
+  null: 4,
 };
 
 export async function getServerSideProps(context: any) {

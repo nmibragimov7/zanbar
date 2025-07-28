@@ -64,7 +64,6 @@ const Index = () => {
   const onSuccess = () => {
     setStage(4);
   }
-
   const {data, isFetching} = useDictionaries();
   const createMutate = useLawyerCreate({onSuccess})
 
@@ -227,6 +226,7 @@ const Index = () => {
                     </div>
                   </>
                 ) : null}
+
                 <Form
                   size={"large"}
                   layout={"vertical"}

@@ -12,6 +12,7 @@ const config: Config = {
       colors: {
         primary: "#181D27",
         gray: {
+          "-300": "#F8F8FB",
           "-200": "#EFEFEF",
           "-100": "#F2F2F7",
           0: "#F9F5FF",
@@ -69,6 +70,7 @@ const config: Config = {
       100: "0px 0px 24px 0px #6941C626 inset",
       200: "0px 4px 4px 0px #E9EAEB",
       300: "0px 4px 6px -2px #0A0D1208",
+      400: "0px 4px 16px 0px #0000001A"
     }
   },
   plugins: [],
