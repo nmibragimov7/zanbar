@@ -357,7 +357,7 @@ const Index = () => {
                         id={"udostakBase64"}
                         type="file"
                         className={"!hidden"}
-                        accept={".png, .pdf"}
+                        accept={".images, .pdf"}
                         onChange={(event: any) => onChange("udostakBase64", event)}
                       />
                       <label
@@ -390,7 +390,7 @@ const Index = () => {
                         id={"diplomBase64"}
                         type="file"
                         className={"!hidden"}
-                        accept={".png, .pdf"}
+                        accept={".images, .pdf"}
                         onChange={(event: any) => onChange("diplomBase64", event)}
                       />
                       <label
@@ -423,7 +423,7 @@ const Index = () => {
                         id={"licenceBase64"}
                         type="file"
                         className={"!hidden"}
-                        accept={".png, .pdf"}
+                        accept={".images, .pdf"}
                         onChange={(event: any) => onChange("licenceBase64", event)}
                       />
                       <label
@@ -456,7 +456,7 @@ const Index = () => {
                         id={"profilePictureBase64"}
                         type="file"
                         className={"!hidden"}
-                        accept={".jpg, .jpeg, .png"}
+                        accept={".jpg, .jpeg, .images"}
                         onChange={(event: any) => onChange("profilePictureBase64", event)}
                       />
                       <label

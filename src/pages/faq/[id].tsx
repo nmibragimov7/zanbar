@@ -20,12 +20,13 @@ export async function getServerSideProps(context: any) {
 }
 
 const Id = () => {
-  const {t} = useTranslation();
+  const {t, i18n} = useTranslation();
   const router = useRouter();
   const id = !isNaN(Number(router.query.id)) ? Number(router.query.id) : 0;
   const item = useMemo(() => {
     return faq.find(f => f?.id === id);
-  }, [id])
+  }, [id]);
+  console.log(item)
 
   return (
     <>
@@ -54,7 +55,14 @@ const Id = () => {
             {item?.children && item?.children.length ? (
               <>
                 {item?.children.map((f: any, idx: number) => (
-                  <Faq key={idx} question={t(f?.question)} answer={t(f?.answer)} />
+                  <div key={idx}>
+                    {f?.question && f?.answer ? (
+                      <Faq question={t(f?.question)} answer={t(f?.answer)} />
+                    ) : null}
+                    {f?.image_ru && f?.image_kz ? (
+                      <img src={i18n.language === "ru" ? f?.image_ru : f?.image_kz} alt=""/>
+                    ) : null}
+                  </div>
                 ))}
               </>
             ) : null}

@@ -26,7 +26,12 @@ export const faq = [
     id: 2,
     title: 'faq.how.title',
     isFavorite: false,
-    children: []
+    children: [
+      {
+        image_ru: '/images/jpeg/faq-2-ru.jpeg',
+        image_kz: '/images/jpeg/faq-2-kz.jpeg',
+      },
+    ]
   },
   {
     id: 3,
