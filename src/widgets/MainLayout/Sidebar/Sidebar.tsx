@@ -32,6 +32,18 @@ const menu = [
     icon: homeIcon,
   },
   {
+    pathname: "/lawyer",
+    title: "menu.7",
+    icon: searchIcon,
+    isAuth: true,
+  },
+  {
+    pathname: "/forecasting",
+    title: "menu.5",
+    icon: legislatorIcon,
+    isAuth: true,
+  },
+  {
     pathname: "/courses",
     title: "menu.1",
     icon: courseIcon,
@@ -55,21 +67,9 @@ const menu = [
     icon: knowledgeIcon,
   },
   {
-    pathname: "/forecasting",
-    title: "menu.5",
-    icon: legislatorIcon,
-    isAuth: true,
-  },
-  {
     pathname: "/faq",
     title: "menu.6",
     icon: faqIcon,
-  },
-  {
-    pathname: "/lawyer",
-    title: "menu.7",
-    icon: searchIcon,
-    isAuth: true,
   },
   {
     pathname: "/notifications",

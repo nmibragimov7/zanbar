@@ -15,6 +15,7 @@ import arrowIcon from "@/shared/assets/images/svg/arrow_right.svg";
 
 const Index = () => {
   const {t} = useTranslation();
+
   return (
     <>
       <MainLayout>

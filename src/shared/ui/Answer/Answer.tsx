@@ -55,7 +55,7 @@ const Answer: React.FC<AnswerProps> = ({
                 </div>
                 <div className={"flex items-center gap-1"}>
                   <Image src={chatIcon} alt={""}/>
-                  <span className={"text-gray-600 text-sm"}>Ответы {forum?.answerCount || 0}</span>
+                  <span className={"text-gray-600 text-sm"}>{t('cabinet.answer.item.0')} {forum?.answerCount || 0}</span>
                 </div>
               </div>
             </div>

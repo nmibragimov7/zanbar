@@ -57,8 +57,9 @@ const Card: React.FC<CardProps> = ({className, index = 0, icon, title, pathname 
             ))}
           </div>
         ) : null}
+        <div className={"absolute top-0 left-0 w-full h-full bg-black/30"}></div>
         <div className={"absolute bottom-0 left-0 w-full p-4"}>
-          <p className={"text-xl font-semibold text-white mb-2"}>
+          <p className={"text-lg leading-6 font-semibold text-white mb-2"}>
             {title}
           </p>
           <Button

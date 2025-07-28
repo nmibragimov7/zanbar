@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {useRouter} from "next/router";
 import {Pagination, Skeleton} from "antd";
+import {useTranslation} from "next-i18next";
 
 import CabinetLayout from "@/widgets/CabinetLayout/CabinetLayout";
 import Answer from "@/shared/ui/Answer/Answer";
@@ -15,6 +16,7 @@ import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
 const Answers = () => {
   const router = useRouter();
   const {user} = useAuth();
+  const {t} = useTranslation();
 
   const [page, setPage] = useState(1);
 
@@ -28,7 +30,7 @@ const Answers = () => {
     <>
       <CabinetLayout>
         {!isFetching && data?.data?.content && data?.data?.content.length ? (
-          <h2 className={"font-medium text-2xl md:text-[30px] mb-8"}>Мои ответы {data?.data?.content.length}</h2>
+          <h2 className={"font-medium text-2xl md:text-[30px] mb-8"}>{t('cabinet.answer.title')} {data?.data?.content.length}</h2>
         ) : null}
         <div className={"mb-10"}>
           <Skeleton
@@ -62,9 +64,9 @@ const Answers = () => {
               </div>
             ) : (
               <NotStarted
-                title={`${user?.firstname}, вы еще не ответили ни на один вопрос.`}
-                description={"Начните делиться уже сегодня"}
-                button={"Перейти к форуму"}
+                title={`${user?.firstname}, ${t('cabinet.answer.notfound.text.0')}`}
+                description={t('cabinet.answer.notfound.text.1')}
+                button={t('cabinet.answer.notfound.button.0')}
                 onClick={async () => router.push("/forum")}
               />
             )}

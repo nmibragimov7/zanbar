@@ -54,6 +54,7 @@ const CourseForm: React.FC<CourseFormProps> = ({data, isFetching, isLoading, onS
       title: "",
       titleKz: "",
       videoUrl: "",
+      videoUrlKz: "",
       bodyText: "",
       bodyTextKz: "",
     },
@@ -101,6 +102,7 @@ const CourseForm: React.FC<CourseFormProps> = ({data, isFetching, isLoading, onS
       title: "",
       titleKz: "",
       videoUrl: "",
+      videoUrlKz: "",
       bodyText: "",
       bodyTextKz: "",
     }]);
@@ -111,7 +113,10 @@ const CourseForm: React.FC<CourseFormProps> = ({data, isFetching, isLoading, onS
       return
     }
 
-    if (lessons.some((item: any) => (!item?.title && !item?.titleKz)|| (!item?.bodyText && !item?.bodyTextKz && !item?.videoUrl))) {
+    if (lessons.some((item: any) =>
+      (!item?.title && !item?.titleKz)
+      || (!item?.bodyText && !item?.bodyTextKz && !item?.videoUrl && !item?.videoUrlKz))
+    ) {
       notification.warning({message: "Заполните обязательные поля уроков: Наименование и Полное описание"})
       return
     }
@@ -148,6 +153,7 @@ const CourseForm: React.FC<CourseFormProps> = ({data, isFetching, isLoading, onS
             title: item?.title,
             titleKz: item?.titleKz,
             videoUrl: item?.videoUrl,
+            videoUrlKz: item?.videoUrlKz,
             bodyText: item?.bodyText,
             bodyTextKz: item?.bodyTextKz,
           }
@@ -393,10 +399,19 @@ const CourseForm: React.FC<CourseFormProps> = ({data, isFetching, isLoading, onS
                     <div className={"relative"}>
                       <Image src={youtubeIcon} alt={""} className={"z-10 absolute top-1/2 left-4 -translate-y-1/2"}/>
                       <Field
-                        placeholder={"Ссылка на видео"}
+                        placeholder={"Ссылка на видео (RU)"}
                         className={"!pl-12"}
                         value={lesson?.videoUrl}
                         onChange={(event: any) => onChange(idx, "videoUrl", event.target.value)}
+                      />
+                    </div>
+                    <div className={"relative"}>
+                      <Image src={youtubeIcon} alt={""} className={"z-10 absolute top-1/2 left-4 -translate-y-1/2"}/>
+                      <Field
+                        placeholder={"Ссылка на видео (KZ)"}
+                        className={"!pl-12"}
+                        value={lesson?.videoUrlKz}
+                        onChange={(event: any) => onChange(idx, "videoUrlKz", event.target.value)}
                       />
                     </div>
                   </div>

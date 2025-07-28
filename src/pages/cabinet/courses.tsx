@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Pagination, Skeleton} from "antd";
 import {useRouter} from "next/router";
+import {useTranslation} from "next-i18next";
 
 import CabinetLayout from "@/widgets/CabinetLayout/CabinetLayout";
 import Card from "@/shared/ui/Card/Card";
@@ -15,6 +16,7 @@ import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
 const Courses = () => {
   const router = useRouter();
   const {user} = useAuth();
+  const {t} = useTranslation();
 
   const [page, setPage] = useState(1);
 
@@ -28,7 +30,7 @@ const Courses = () => {
     <>
       <CabinetLayout>
         {!isFetching && data?.data?.content && data?.data?.content.length ? (
-          <h2 className={"font-medium text-2xl md:text-[30px] mb-8"}>Пройденные курсы {data?.data?.content.length}</h2>
+          <h2 className={"font-medium text-2xl md:text-[30px] mb-8"}>{t('cabinet.course.title')} {data?.data?.content.length}</h2>
         ) : null}
         <div className={"mb-10"}>
           <Skeleton
@@ -64,9 +66,9 @@ const Courses = () => {
               </div>
             ) : (
               <NotStarted
-                title={`${user?.firstname}, вы еще не прошли ни одного курса.`}
-                description={"Начните учиться уже сегодня"}
-                button={"Перейти к курсам"}
+                title={`${user?.firstname}, ${t('cabinet.course.notfound.text.0')}`}
+                description={t('cabinet.course.notfound.text.1')}
+                button={t('cabinet.course.notfound.button.0')}
                 onClick={async () => router.push("/courses")}
               />
             )}

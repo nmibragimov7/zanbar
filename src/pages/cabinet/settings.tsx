@@ -1,6 +1,7 @@
 import React, {useMemo, useState} from 'react';
 import Image from "next/image";
 import {Button, Form, notification, Upload, UploadFile} from "antd";
+import {useTranslation} from "next-i18next";
 
 import CabinetLayout from "@/widgets/CabinetLayout/CabinetLayout";
 import Field from "@/shared/ui/Field/Field";
@@ -24,6 +25,7 @@ import plusIcon from "@/shared/assets/images/svg/plus.svg";
 
 const Settings = () => {
   const {user} = useAuth();
+  const {t} = useTranslation();
 
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
@@ -117,7 +119,7 @@ const Settings = () => {
             </Upload>
           </div>
           <div className={"w-full"}>
-            <p className={"text-2xl md:text-[30px] font-medium mb-6"}>Личные данные</p>
+            <p className={"text-2xl md:text-[30px] font-medium mb-6"}>{t('cabinet.setting.title')}</p>
             <Form
               size={"large"}
               layout={"vertical"}
@@ -134,8 +136,8 @@ const Settings = () => {
                   rules={[{required: true, message: validation.REQUIRED}]}
                 >
                   <Field
-                    label={"Имя"}
-                    placeholder={"Введите имя"}
+                    label={t('cabinet.setting.form.firstname.label')}
+                    placeholder={t('cabinet.setting.form.firstname.placeholder')}
                   />
                 </Form.Item>
                 <Form.Item
@@ -143,8 +145,8 @@ const Settings = () => {
                   className={"w-full mb-6"}
                 >
                   <Field
-                    label={"Фамилия"}
-                    placeholder={"Введите фамилию"}
+                    label={t('cabinet.setting.form.lastname.label')}
+                    placeholder={t('cabinet.setting.form.lastname.placeholder')}
                   />
                 </Form.Item>
               </div>
@@ -154,7 +156,7 @@ const Settings = () => {
                   className={"w-full md:w-auto !h-[44px] shadow-none border border-gray-200 !rounded-lg text-dark-500 disabled:bg-gray-100 transition-all"}
                   disabled={imageUpdateMutate.isLoading || profileUpdateMutate.isLoading || profileMutate.isLoading}
                 >
-                  Сохранить
+                  {t('cabinet.setting.form.button.0')}
                 </Button>
               </Form.Item>
             </Form>
@@ -167,7 +169,7 @@ const Settings = () => {
               validateTrigger={["onSubmit"]}
               onFinish={onChange}
             >
-              <p className={"text-xl font-medium mb-4"}>Изменить пароль</p>
+              <p className={"text-xl font-medium mb-4"}>{t('cabinet.setting.text.0')}</p>
               <div className={"w-full grid md:grid-cols-2 md:gap-4"}>
                 <Form.Item
                   name="oldPassword"
@@ -175,9 +177,9 @@ const Settings = () => {
                   rules={[{required: true, message: validation.REQUIRED}]}
                 >
                   <Field
-                    label={"Текущий пароль"}
+                    label={t('cabinet.setting.form.oldPassword.label')}
+                    placeholder={t('cabinet.setting.form.oldPassword.placeholder')}
                     inputType={"password"}
-                    placeholder={"Введите пароль"}
                     autoComplete={"new-password"}
                   />
                 </Form.Item>
@@ -190,13 +192,13 @@ const Settings = () => {
                     rules={[{required: true, message: validation.REQUIRED}]}
                   >
                     <Field
-                      label={"Новый пароль"}
+                      label={t('cabinet.setting.form.newPassword.label')}
+                      placeholder={t('cabinet.setting.form.newPassword.placeholder')}
                       inputType={"password"}
-                      placeholder={"Придумайте пароль"}
                       autoComplete={"new-password"}
                     />
                   </Form.Item>
-                  <p className={"text-dark-400 text-sm"}>Минимум 8, заглавная, строчная и спецсимвол</p>
+                  <p className={"text-dark-400 text-sm"}>{t('cabinet.setting.text.1')}</p>
                 </div>
 
                 <Form.Item
@@ -205,9 +207,9 @@ const Settings = () => {
                   rules={[{required: true, message: validation.REQUIRED}]}
                 >
                   <Field
-                    label={"Повторите пароль"}
+                    label={t('cabinet.setting.form.newPasswordConfirmation.label')}
+                    placeholder={t('cabinet.setting.form.newPasswordConfirmation.placeholder')}
                     inputType={"password"}
-                    placeholder={"Введите пароль"}
                     autoComplete={"new-password"}
                   />
                 </Form.Item>
@@ -218,7 +220,7 @@ const Settings = () => {
                   className={"w-full md:w-auto !h-[44px] shadow-none border border-gray-200 !rounded-lg text-dark-500 disabled:bg-gray-100 transition-all"}
                   disabled={passwordUpdateMutate.isLoading}
                 >
-                  Сохранить
+                  {t('cabinet.setting.form.button.0')}
                 </Button>
               </Form.Item>
             </Form>

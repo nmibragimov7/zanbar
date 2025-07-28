@@ -62,6 +62,9 @@ const Id = () => {
                     {f?.image_ru && f?.image_kz ? (
                       <img src={i18n.language === "ru" ? f?.image_ru : f?.image_kz} alt=""/>
                     ) : null}
+                    {f?.text ? (
+                      <div dangerouslySetInnerHTML={{__html: t(f?.text)}}/>
+                    ) : null}
                   </div>
                 ))}
               </>

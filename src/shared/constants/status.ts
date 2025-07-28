@@ -27,3 +27,7 @@ export const lawyerRequestStatus = {
   approved: "Approved",
   revoked: "Revoked",
 }
+export const notificationStatus = {
+  approved: "Approved",
+  revoked: "Revoked",
+}

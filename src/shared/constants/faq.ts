@@ -37,42 +37,20 @@ export const faq = [
     id: 3,
     title: 'faq.about.title',
     isFavorite: false,
-    children: []
-  },
-  {
-    id: 4,
-    title: 'faq.communication.title',
-    isFavorite: false,
-    children: []
+    children: [
+      {
+        text: "faq.about.text"
+      }
+    ]
   },
   {
     id: 5,
     title: 'faq.payment-security.title',
     isFavorite: false,
-    children: []
-  },
-  {
-    id: 6,
-    title: 'faq.create.title',
-    isFavorite: false,
-    children: []
-  },
-  {
-    id: 7,
-    title: 'faq.category.title',
-    isFavorite: false,
-    children: []
-  },
-  {
-    id: 8,
-    title: 'faq.profile.title',
-    isFavorite: false,
-    children: []
-  },
-  {
-    id: 9,
-    title: 'faq.support.title',
-    isFavorite: false,
-    children: []
+    children: [
+      {
+        text: "faq.payment-security.text"
+      }
+    ]
   },
 ]

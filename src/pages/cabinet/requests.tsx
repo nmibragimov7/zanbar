@@ -1,6 +1,7 @@
 import React from 'react';
 import {useRouter} from "next/router";
 import {Skeleton} from "antd";
+import {useTranslation} from "next-i18next";
 
 import CabinetLayout from "@/widgets/CabinetLayout/CabinetLayout";
 import NotStarted from "@/widgets/NotStarted/NotStarted";
@@ -15,6 +16,7 @@ import {getDefaultStaticProps} from "@/shared/lib/getStaticProps";
 const Requests = () => {
   const router = useRouter();
   const {user} = useAuth();
+  const {t} = useTranslation();
 
   const {data, isFetching} = useRequests();
 
@@ -22,7 +24,7 @@ const Requests = () => {
     <>
       <CabinetLayout>
         {!isFetching && data?.data?.content && data?.data?.content.length ? (
-          <h2 className={"font-medium text-2xl md:text-[30px] mb-8"}>Ваши заявки {data?.data?.content.length}</h2>
+          <h2 className={"font-medium text-2xl md:text-[30px] mb-8"}>{t('cabinet.request.title')} {data?.data?.content.length}</h2>
         ) : null}
         <div className={"mb-10"}>
           <Skeleton
@@ -47,9 +49,9 @@ const Requests = () => {
               </div>
             ) : (
               <NotStarted
-                title={`${user?.firstname}, вы еще не отправили ни одного заявки.`}
-                description={"Начните учиться уже сегодня"}
-                button={"Найти юриста"}
+                title={`${user?.firstname}, ${t('cabinet.request.notfound.text.0')}`}
+                description={t('cabinet.request.notfound.text.1')}
+                button={t('cabinet.request.notfound.button.0')}
                 onClick={async () => router.push("/lawyer")}
               />
             )}
@@ -57,7 +59,7 @@ const Requests = () => {
         </div>
       </CabinetLayout>
     </>
-);
+  );
 };
 
 export default Requests;

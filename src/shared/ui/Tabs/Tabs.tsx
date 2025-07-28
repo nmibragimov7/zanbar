@@ -1,4 +1,5 @@
 import React from 'react';
+import {useTranslation} from "next-i18next";
 
 import {classNames} from "@/shared/lib/classNames";
 
@@ -15,6 +16,8 @@ interface TabsProps {
 }
 
 const Tabs: React.FC<TabsProps> = ({className, activeTab, tabs, onToggle}) => {
+  const {t} = useTranslation();
+
   const [active, setActive] = React.useState(activeTab ? activeTab : tabs[0].value);
 
   const onClick = (value: string) => {
@@ -36,7 +39,7 @@ const Tabs: React.FC<TabsProps> = ({className, activeTab, tabs, onToggle}) => {
             }
             onClick={() => onClick(tab.value)}
           >
-            {tab.label}
+            {t(tab.label)}
           </div>
         ))}
       </div>

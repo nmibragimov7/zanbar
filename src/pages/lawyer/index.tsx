@@ -18,7 +18,7 @@ import complaintIcon from "@/shared/assets/images/svg/complaint.svg";
 import adviceIcon from "@/shared/assets/images/svg/advice.svg";
 
 const Index = () => {
-  const {t} = useTranslation();
+  const {t, i18n} = useTranslation();
 
   return (
     <MainLayout>
@@ -36,63 +36,92 @@ const Index = () => {
         <div className={"w-full max-w-[790px] text-black px-3 md:px-5"}>
           <h2 className={"font-semibold text-2xl mb-4"}>{t('lawyer.block.title')}</h2>
           <div className={"grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 mb-8"}>
-            <div className={"flex flex-col gap-2"}>
+            <Link
+              href={`/documents/популярные кейсы/${i18n.language}/4.docx`}
+              download
+              locale={false}
+              className={"flex flex-col gap-2 cursor-pointer transition-all hover:opacity-70"}
+            >
               <div
-                className={"relative bg-gray--200 rounded-xl flex items-center justify-center cursor-not-allowed py-6"}>
+                className={"relative bg-gray--200 rounded-xl flex items-center justify-center py-6"}>
                 <Image src={fineIcon} alt={""} className={"w-20 h-20 object-contain"}/>
-                <Status type={"red"} text={t('lawyer.block.tag.0')} className={"absolute top-1 left-1 !text-xs !py-0.5 !px-2"}/>
+                {/*<Status type={"red"} text={t('lawyer.block.tag.0')} className={"absolute top-1 left-1 !text-xs !py-0.5 !px-2"}/>*/}
               </div>
               <span className={"font-medium text-sm"}>{t('lawyer.block.text.0')}</span>
-            </div>
-            <div className={"flex flex-col gap-2"}>
+            </Link>
+            <Link
+              href={`/documents/популярные кейсы/${i18n.language}/1.docx`}
+              download
+              locale={false}
+              className={"flex flex-col gap-2 cursor-pointer transition-all hover:opacity-70"}
+            >
               <div
-                className={"relative bg-gray--200 rounded-xl flex items-center justify-center cursor-not-allowed py-6"}>
+                className={"relative bg-gray--200 rounded-xl flex items-center justify-center py-6"}>
                 <Image src={evictionIcon} alt={""} className={"w-20 h-20 object-contain"}/>
-                <Status type={"red"} text={t('lawyer.block.tag.0')} className={"absolute top-1 left-1 !text-xs !py-0.5 !px-2"}/>
               </div>
               <span className={"font-medium text-sm"}>{t('lawyer.block.text.1')}</span>
-            </div>
-            <div className={"flex flex-col gap-2"}>
+            </Link>
+            <Link
+              href={`/documents/популярные кейсы/${i18n.language}/3.docx`}
+              download
+              locale={false}
+              className={"flex flex-col gap-2 cursor-pointer transition-all hover:opacity-70"}
+            >
               <div
-                className={"relative bg-gray--200 rounded-xl flex items-center justify-center cursor-not-allowed py-6"}>
+                className={"relative bg-gray--200 rounded-xl flex items-center justify-center py-6"}>
                 <Image src={trespassingIcon} alt={""} className={"w-20 h-20 object-contain"}/>
-                <Status type={"red"} text={t('lawyer.block.tag.0')} className={"absolute top-1 left-1 !text-xs !py-0.5 !px-2"}/>
               </div>
               <span className={"font-medium text-sm"}>{t('lawyer.block.text.2')}</span>
-            </div>
-            <div className={"flex flex-col gap-2"}>
+            </Link>
+            <Link
+              href={`/documents/популярные кейсы/${i18n.language}/6.docx`}
+              download
+              locale={false}
+              className={"flex flex-col gap-2 cursor-pointer transition-all hover:opacity-70"}
+            >
               <div
-                className={"relative bg-gray--200 rounded-xl flex items-center justify-center cursor-not-allowed py-6"}>
+                className={"relative bg-gray--200 rounded-xl flex items-center justify-center py-6"}>
                 <Image src={collectionIcon} alt={""} className={"w-20 h-20 object-contain"}/>
-                <Status type={"red"} text={t('lawyer.block.tag.0')} className={"absolute top-1 left-1 !text-xs !py-0.5 !px-2"}/>
               </div>
               <span className={"font-medium text-sm"}>{t('lawyer.block.text.3')}</span>
-            </div>
-            <div className={"flex flex-col gap-2"}>
+            </Link>
+            <Link
+              href={`/documents/популярные кейсы/${i18n.language}/2.docx`}
+              download
+              locale={false}
+              className={"flex flex-col gap-2 cursor-pointer transition-all hover:opacity-70"}
+            >
               <div
-                className={"relative bg-gray--200 rounded-xl flex items-center justify-center cursor-not-allowed py-6"}>
+                className={"relative bg-gray--200 rounded-xl flex items-center justify-center py-6"}>
                 <Image src={complaintIcon} alt={""} className={"w-20 h-20 object-contain"}/>
-                <Status type={"red"} text={t('lawyer.block.tag.0')} className={"absolute top-1 left-1 !text-xs !py-0.5 !px-2"}/>
               </div>
               <span className={"font-medium text-sm"}>{t('lawyer.block.text.4')}</span>
-            </div>
-            <div className={"flex flex-col gap-2"}>
+            </Link>
+            <Link
+              href={`/documents/популярные кейсы/${i18n.language}/7.docx`}
+              download
+              locale={false}
+              className={"flex flex-col gap-2 cursor-pointer transition-all hover:opacity-70"}
+            >
               <div
-                className={"relative bg-gray--200 rounded-xl flex items-center justify-center cursor-not-allowed py-6"}>
+                className={"relative bg-gray--200 rounded-xl flex items-center justify-center py-6"}>
                 <Image src={adviceIcon} alt={""} className={"w-20 h-20 object-contain"}/>
-                <Status type={"red"} text={t('lawyer.block.tag.0')} className={"absolute top-1 left-1 !text-xs !py-0.5 !px-2"}/>
               </div>
               <span className={"font-medium text-sm"}>{t('lawyer.block.text.5')}</span>
-            </div>
+            </Link>
             <div className={"hidden md:block"}></div>
-            <div className={"col-span-2 md:col-span-1 flex flex-col gap-2"}>
+            <Link
+              href={`/documents/популярные кейсы/${i18n.language}/5.docx`}
+              download
+              locale={false}
+              className={"col-span-2 md:col-span-1 flex flex-col gap-2 cursor-pointer transition-all hover:opacity-70"}
+            >
               <div
-                className={"relative bg-gray--200 rounded-xl flex items-center justify-center cursor-not-allowed py-6"}>
+                className={"relative bg-gray--200 rounded-xl flex items-center justify-center py-6"}>
                 <Image src={adviceIcon} alt={""} className={"w-20 h-20 object-contain"}/>
-                <Status type={"red"} text={t('lawyer.block.tag.0')} className={"absolute top-1 left-1 !text-xs !py-0.5 !px-2"}/>
               </div>
               <span className={"font-medium text-sm"}>{t('lawyer.block.text.6')}</span>
-            </div>
+            </Link>
             <div className={"hidden md:block"}></div>
           </div>
         </div>
