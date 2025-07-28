@@ -12,9 +12,10 @@ axios.interceptors.request.use(request => {
 });
 
 fetcher.interceptors.request.use((config: any) => {
+  config.headers['Accept-Language'] = i18n?.language === 'ru' ? 'ru' : 'kk'
+
   if (accessTokenStorage.get() && !config.url.includes('refresh') && !config.url.includes('login')) {
     config.headers.Authorization = `Bearer ${accessTokenStorage.get()}`
-    config.headers['Accept-Language'] = i18n?.language === 'ru' ? 'ru' : 'kk'
   }
 
   return config;

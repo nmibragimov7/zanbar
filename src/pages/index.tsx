@@ -29,13 +29,18 @@ import juristIcon from "@/shared/assets/images/svg/jurist.svg";
 
 export default function Index() {
   const router = useRouter();
-  const {isAuth} = useAuth();
+  const {isAuth, onLogout} = useAuth();
   const {t} = useTranslation();
 
   const [visible, setVisible] = React.useState(false);
 
-  const {data: courses, isFetching: isFetchingCourses} = useCourses({isAuth: false, page: 0, size: 4});
-  const {data: forum, isFetching: isFetchingForum} = useQuestions({page: 0, size: 3});
+  const onError = async () => {
+    onLogout?.();
+    await refetchCourses();
+    await refetchForum();
+  }
+  const {data: courses, isFetching: isFetchingCourses, refetch: refetchCourses} = useCourses({isAuth: false, page: 0, size: 4, onError});
+  const {data: forum, isFetching: isFetchingForum, refetch: refetchForum} = useQuestions({page: 0, size: 3});
 
   const onNavigate = async (pathname: string) => {
     if (!isAuth) {
